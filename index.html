@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja" data-lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>常奥株式会社 ToWhats Inc.</title>
+<meta name="description" content="常奥株式会社（とわつ / ToWhats Inc.）は、宮城県名取市を拠点に設立準備中の会社です。全員がエンジニア。不満と「面白そう」を、そのままにしません。">
+<meta property="og:title" content="常奥株式会社 ToWhats Inc.">
+<meta property="og:description" content="常陸・陸奥から笑顔を届ける。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#12131a">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><span class="progress__bar" id="progressBar"></span></div>
+
+<a class="skip-link" href="#main" data-en="Skip to content">本文へスキップ</a>
+
+<header class="header" id="header">
+  <div class="header__inner">
+    <a class="logo" href="#top" aria-label="常奥株式会社 ToWhats Inc.">
+      <img class="logo__mark" src="assets/logo-placeholder.svg" alt="" width="36" height="36">
+      <span class="logo__text">
+        <span class="logo__ja">常奥株式会社</span>
+        <span class="logo__en">ToWhats Inc.</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="メインナビゲーション">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#about"><span class="nav__num">01</span><span data-en="About">About</span></a></li>
+        <li><a class="nav__link" href="#philosophy"><span class="nav__num">02</span><span data-en="Philosophy">Philosophy</span></a></li>
+        <li><a class="nav__link" href="#works"><span class="nav__num">03</span><span data-en="Works">Works</span></a></li>
+        <li><a class="nav__link" href="#members"><span class="nav__num">04</span><span data-en="Members">Members</span></a></li>
+        <li><a class="nav__link" href="#company"><span class="nav__num">05</span><span data-en="Company">Company</span></a></li>
+        <li><a class="nav__link" href="#contact"><span class="nav__num">06</span><span data-en="Contact">Contact</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="header__tools">
+      <button class="tool tool--lang" id="langToggle" type="button" aria-label="Switch to English">
+        <span class="tool__lang-on">JA</span><span class="tool__sep">/</span><span class="tool__lang-off">EN</span>
+      </button>
+
+      <button class="tool tool--theme" id="themeToggle" type="button" aria-label="テーマを切り替える">
+        <svg class="icon icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.4 5.4l1.9 1.9M16.7 16.7l1.9 1.9M18.6 5.4l-1.9 1.9M7.3 16.7l-1.9 1.9"/>
+        </svg>
+        <svg class="icon icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.2 14.4A8.6 8.6 0 0 1 9.6 3.8a8.6 8.6 0 1 0 10.6 10.6z"/>
+        </svg>
+      </button>
+
+      <button class="burger" id="burger" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="hero__bg" aria-hidden="true">
+      <svg class="hero__grid" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1.2"/>
+          </pattern>
+        </defs>
+        <rect width="1200" height="800" fill="url(#dots)"/>
+      </svg>
+      <span class="hero__glow hero__glow--a"></span>
+      <span class="hero__glow hero__glow--b"></span>
+    </div>
+
+    <div class="hero__inner">
+      <p class="hero__eyebrow">
+        <span class="hero__eyebrow-line" aria-hidden="true"></span>
+        <span data-en="ToWhats Inc. &mdash; Natori, Miyagi">常奥株式会社 &mdash; 宮城県名取市</span>
+      </p>
+
+      <h1 class="hero__title" id="heroTitle" data-en="Delivering smiles from Hitachi and Mutsu.">常陸・陸奥から笑顔を届ける。</h1>
+
+      <p class="hero__lead" data-en="We never leave a frustration &mdash; or an idea that looks fun &mdash; untouched. The first user is always us.">不満も、「面白そう」も、そのままにしない。<br>最初のユーザーは、いつも自分たち。</p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#about" data-en="About us">常奥について</a>
+        <a class="btn btn--ghost" href="#works" data-en="See our work">つくっているもの</a>
+      </div>
+    </div>
+
+    <a class="scroll-cue" href="#about" aria-hidden="true" tabindex="-1">
+      <span class="scroll-cue__label">SCROLL</span>
+      <span class="scroll-cue__line"></span>
+    </a>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section section--about" id="about">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-head__num">01</p>
+        <h2 class="sec-head__title" data-en="About">常奥株式会社について</h2>
+        <p class="sec-head__sub" data-en="A company being built, by people who build.">つくる人たちが、つくっている会社です。</p>
+      </header>
+
+      <div class="about">
+        <div class="about__body reveal">
+          <p class="about__lead" data-en="ToWhats Inc. is a company currently in preparation. Centred on app development, we take on anything we find interesting.">常奥株式会社は、いま設立準備中の会社です。アプリ開発を軸に、面白いと思ったことを幅広くやっていきます。</p>
+
+          <p data-en="We make things for ourselves first. A small frustration in daily life, or a sudden &ldquo;that looks fun&rdquo; &mdash; we turn those into something real instead of letting them pass. Because the first user is us, we know exactly when it is not good enough yet.">私たちがつくるものの最初のユーザーは、いつも自分たち自身です。日々のなかで感じた不満や、ふと浮かんだ「面白そう」を、そのままにせず形にしていきます。自分が使う人だからこそ、まだ足りていないところがはっきりわかります。</p>
+
+          <p data-en="Every member is an engineer, trained at a KOSEN (National Institute of Technology). We can go from an idea to a working thing without handing it to anyone else &mdash; that speed is what we are building the company on.">メンバーは全員がエンジニアです。高専で技術を学んできた人間だけで構成されているので、思いついたものを誰かに渡さずに、そのまま動くところまで持っていけます。その速さを、会社の土台にします。</p>
+        </div>
+
+        <aside class="about__name reveal">
+          <h3 class="about__name-title" data-en="Where the name comes from">社名の由来</h3>
+          <p class="about__name-formula" aria-hidden="true">
+            <span class="about__kanji">常</span><span class="about__ruby">ひたち</span>
+            <span class="about__plus">+</span>
+            <span class="about__kanji">奥</span><span class="about__ruby">むつ</span>
+          </p>
+          <p class="about__name-text" data-en="&ldquo;Hitachi&rdquo; and &ldquo;Mutsu&rdquo; &mdash; the old names of the provinces we come from. One character from each makes ToWhats: the places that made us, carried in the name.">常陸（ひたち）と陸奥（むつ）。私たちのルーツにある土地の古い呼び名から、一文字ずつを取って「常奥」としました。自分たちをつくった場所を、名前に入れています。</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PHILOSOPHY ============ -->
+  <section class="section section--philosophy" id="philosophy">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-head__num">02</p>
+        <h2 class="sec-head__title" data-en="Philosophy">大切にしていること</h2>
+        <p class="sec-head__sub" data-en="Three things that decide what we build.">つくるものを決める、三つの軸。</p>
+      </header>
+
+      <ul class="cards">
+        <li class="card reveal">
+          <span class="card__index" aria-hidden="true">01</span>
+          <span class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 6v18M24 32v2"/><circle cx="24" cy="24" r="18"/></svg>
+          </span>
+          <h3 class="card__title" data-en="Frustration is a reason to build.">不満を、つくる理由に。</h3>
+          <p class="card__text" data-en="&ldquo;Someone should fix this.&rdquo; We are that someone. Every product starts from something that bothered us first.">「誰かが直してくれないかな」の、その誰かになる。私たちのプロダクトは全部、自分が困ったところから始まります。</p>
+        </li>
+
+        <li class="card reveal">
+          <span class="card__index" aria-hidden="true">02</span>
+          <span class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M17 17 9 24l8 7M31 17l8 7-8 7M27 12l-6 24"/></svg>
+          </span>
+          <h3 class="card__title" data-en="Everyone here is an engineer.">全員が、エンジニア。</h3>
+          <p class="card__text" data-en="No translation layer between the idea and the code. Anyone can say &ldquo;let me just build it&rdquo; &mdash; and then build it.">アイデアとコードのあいだに、翻訳する人がいません。「じゃあ作ってみる」と言った人が、そのまま作れます。</p>
+        </li>
+
+        <li class="card reveal">
+          <span class="card__index" aria-hidden="true">03</span>
+          <span class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M24 38V14M24 14l-8 8M24 14l8 8M10 40h28"/></svg>
+          </span>
+          <h3 class="card__title" data-en="Toward a world that cheers for engineers.">エンジニア万歳な社会へ。</h3>
+          <p class="card__text" data-en="We want a world where making things is celebrated, and where being an engineer is something to be glad about. We start by being one ourselves.">つくることが讃えられて、エンジニアであることが嬉しい社会にしたい。まずは自分たちが、そういう存在になります。</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ WORKS ============ -->
+  <section class="section section--works" id="works">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-head__num">03</p>
+        <h2 class="sec-head__title" data-en="Works">つくっているもの</h2>
+        <p class="sec-head__sub" data-en="In development, and what comes next.">開発中のもの、そしてこれから。</p>
+      </header>
+
+      <ul class="works">
+        <li class="work reveal">
+          <a class="work__link" href="https://najoshiteai.pages.dev/" target="_blank" rel="noopener noreferrer">
+            <div class="work__thumb">
+              <img src="assets/placeholder-work.svg" alt="" loading="lazy" width="800" height="500">
+              <span class="work__status" data-en="In development">開発中</span>
+            </div>
+            <div class="work__body">
+              <h3 class="work__title">NajoshiteAI</h3>
+              <p class="work__text" data-en="Currently in development. Details coming soon.">現在開発中のプロダクトです。詳細は準備中です。</p>
+              <span class="work__url">
+                najoshiteai.pages.dev
+                <svg class="icon icon--arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="work work--empty reveal">
+          <div class="work__link">
+            <div class="work__thumb work__thumb--empty">
+              <span class="work__soon">Coming Soon</span>
+            </div>
+            <div class="work__body">
+              <h3 class="work__title" data-en="In preparation">準備中</h3>
+              <p class="work__text" data-en="The next one is already in our heads.">次につくるものは、もう頭のなかにあります。</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="work work--empty reveal">
+          <div class="work__link">
+            <div class="work__thumb work__thumb--empty">
+              <span class="work__soon">Coming Soon</span>
+            </div>
+            <div class="work__body">
+              <h3 class="work__title" data-en="In preparation">準備中</h3>
+              <p class="work__text" data-en="Got a frustration of your own? Tell us about it.">あなたの「不満」も、よければ聞かせてください。</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ MEMBERS ============ -->
+  <section class="section section--members" id="members">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-head__num">04</p>
+        <h2 class="sec-head__title" data-en="Members">メンバー</h2>
+        <p class="sec-head__sub" data-en="Four engineers.">四人のエンジニア。</p>
+      </header>
+
+      <ul class="members">
+        <li class="member reveal">
+          <div class="member__photo"><img src="assets/placeholder-member.svg" alt="" loading="lazy" width="400" height="400"></div>
+          <p class="member__role">CEO</p>
+          <h3 class="member__name">上原 貫太</h3>
+        </li>
+        <li class="member reveal">
+          <div class="member__photo"><img src="assets/placeholder-member.svg" alt="" loading="lazy" width="400" height="400"></div>
+          <p class="member__role">CFO</p>
+          <h3 class="member__name">安齋 隼</h3>
+        </li>
+        <li class="member reveal">
+          <div class="member__photo"><img src="assets/placeholder-member.svg" alt="" loading="lazy" width="400" height="400"></div>
+          <p class="member__role">CDO</p>
+          <h3 class="member__name">小林 壮志</h3>
+        </li>
+        <li class="member reveal">
+          <div class="member__photo"><img src="assets/placeholder-member.svg" alt="" loading="lazy" width="400" height="400"></div>
+          <p class="member__role">CSO</p>
+          <h3 class="member__name">結城 敬蔵</h3>
+        </li>
+      </ul>
+
+      <p class="members__note reveal" data-en="Profiles and portraits are in preparation.">プロフィールと写真は準備中です。</p>
+    </div>
+  </section>
+
+  <!-- ============ COMPANY ============ -->
+  <section class="section section--company" id="company">
+    <div class="container">
+      <header class="sec-head reveal">
+        <p class="sec-head__num">05</p>
+        <h2 class="sec-head__title" data-en="Company">会社概要</h2>
+        <p class="sec-head__sub" data-en="Currently in preparation for incorporation.">現在、設立準備中です。</p>
+      </header>
+
+      <dl class="table reveal">
+        <div class="table__row">
+          <dt data-en="Name">商号</dt>
+          <dd data-en="ToWhats Inc.">常奥株式会社</dd>
+        </div>
+        <div class="table__row">
+          <dt data-en="Reading">読み</dt>
+          <dd data-en="towatsu">とわつ / ToWhats</dd>
+        </div>
+        <div class="table__row">
+          <dt data-en="Location">所在地</dt>
+          <dd data-en="Natori, Miyagi, Japan">宮城県名取市</dd>
+        </div>
+        <div class="table__row">
+          <dt data-en="Founded">設立</dt>
+          <dd><span class="tag" data-en="In preparation">準備中</span></dd>
+        </div>
+        <div class="table__row">
+          <dt data-en="Representative">代表者</dt>
+          <dd data-en="Kanta Uehara, CEO">代表取締役 CEO 上原 貫太</dd>
+        </div>
+        <div class="table__row">
+          <dt data-en="Business">事業内容</dt>
+          <dd data-en="Planning and development of applications. Further details in preparation.">アプリケーションの企画・開発<br><span class="tag" data-en="Further details in preparation">その他は準備中</span></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section section--contact" id="contact">
+    <div class="container">
+      <div class="contact reveal">
+        <p class="contact__eyebrow">06 &mdash; Contact</p>
+        <h2 class="contact__title" data-en="Get in touch">お問い合わせ</h2>
+        <p class="contact__text" data-en="Contact details are in preparation. We will publish them here as soon as they are ready.">連絡先は準備中です。整い次第、こちらに掲載します。</p>
+        <p class="contact__badge"><span class="tag tag--lg" data-en="In preparation">準備中</span></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="footer__logo">
+      <span class="footer__ja">常奥株式会社</span>
+      <span class="footer__en">ToWhats Inc.</span>
+    </p>
+    <p class="footer__copy" data-en="Delivering smiles from Hitachi and Mutsu.">常陸・陸奥から笑顔を届ける。</p>
+    <p class="footer__small">&copy; <span id="year">2026</span> ToWhats Inc.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

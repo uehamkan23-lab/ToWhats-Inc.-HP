@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Screenshot placeholder">
+  <defs>
+    <pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0H0v20" fill="none" stroke="#9aa0ae" stroke-width="1" opacity=".3"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="#e7e5df"/>
+  <rect width="800" height="500" fill="url(#g)"/>
+  <rect x="150" y="120" width="500" height="230" rx="6" fill="none" stroke="#8b919f" stroke-width="3"/>
+  <path d="M150 178h500" stroke="#8b919f" stroke-width="3"/>
+  <circle cx="176" cy="149" r="7" fill="#8b919f"/>
+  <circle cx="200" cy="149" r="7" fill="#8b919f"/>
+  <circle cx="224" cy="149" r="7" fill="#8b919f"/>
+  <path d="M200 232h300M200 268h220M200 304h260" stroke="#8b919f" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+  <text x="400" y="410" font-family="ui-monospace,Menlo,monospace" font-size="18" letter-spacing="4" text-anchor="middle" fill="#8b919f">SCREENSHOT</text>
+</svg>

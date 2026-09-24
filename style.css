@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* =========================================================
-   常奥株式会社 ToWhats Inc. — style.css
+   常奥 ToWhats — style.css
    テーマ：ポップな日の出
    藍の夜明け空から朝日が昇る。太い藍の枠線と、ずらした影で全体を揃える。
    ========================================================= */
@@ -12,7 +12,7 @@
   --navy-3:  #3a3f95;
   --sun:     #ffc83d;
   --orange:  #ff8f3f;
-  --coral:   #f0645f;
+  --red:     #d70009;   /* the logo red */
   --sky:     #7fc8f0;
   --cream:   #fff7e8;
   --cream-2: #fdeccd;
@@ -75,7 +75,7 @@ ol, ul { list-style: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 mark { background: none; color: inherit; }
 
-:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
+:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; border-radius: 6px; }
 
 /* bold body text: Morisawa's bold is its own family (A1ゴシック B) */
 .nav a, .pill, .hero__eyebrow, .label, .about__sub, .card__text, .product__text,
@@ -106,8 +106,8 @@ main { overflow-x: clip; }
   z-index: 300;
   display: grid;
   place-items: center;
-  background: var(--navy);
-  color: var(--cream);
+  background: var(--cream);
+  color: var(--navy);
   cursor: pointer;
 }
 .is-opening body { overflow: hidden; }
@@ -122,69 +122,35 @@ main { overflow-x: clip; }
   left: 0;
   width: 100%;
   height: 48px;
-  fill: var(--navy);
+  fill: var(--cream);
   margin-top: -1px;
 }
 
-.opening__stage { display: grid; justify-items: center; text-align: center; }
+.opening__stage { display: grid; justify-items: center; }
 
-/* the slot: sun rising over a horizon, logo popping in front */
-.opening__art {
-  position: relative;
-  width: 200px;
-  height: 130px;
-  overflow: hidden;
-  border-bottom: 4px solid var(--cream);
-  margin-bottom: 26px;
-}
-.opening__sun {
-  position: absolute;
-  left: 50%;
-  bottom: -70px;
-  width: 170px;
-  height: 170px;
-  margin-left: -85px;
-  border-radius: 50%;
-  background: var(--sun);
-  animation: opening-sun 2s cubic-bezier(.45, 0, .55, 1) .15s both;
-}
-/* peek, peek, pause, then rise with a bounce (rhythm taken from shishi-w.com) */
-@keyframes opening-sun {
-  0%   { transform: translateY(170px); }
-  14%  { transform: translateY(60px); }
-  26%  { transform: translateY(170px); }
-  40%  { transform: translateY(60px); }
-  52%  { transform: translateY(170px); }
-  68%  { transform: translateY(170px); animation-timing-function: var(--spring); }
-  100% { transform: translateY(0); }
-}
+/* The logo in three pieces, laid out exactly as in the original artwork:
+   the red mark on top, then 常 and 奥 (gap = 28/3227 of the width). */
+.opening__logo { width: min(72vw, 380px); }
+.opening__mark { width: 100%; transform-origin: 37% 100%; }
+.opening__kanji { display: flex; margin-top: .87%; }
+.opening__jo  { width: 52.1%; }
+.opening__oku { width: 47.9%; }
 
-.opening__logo {
-  position: absolute;
-  left: 50%;
-  bottom: 12px;
-  width: 84px;
-  height: 84px;
-  margin-left: -42px;
-  animation: opening-pop .7s var(--spring) 2s both;
+/* The mark drops in, then snaps twice around the tip of its V like a jaw,
+   and 常・奥 pop in after a pause (rhythm taken from shishi-w.com). */
+.opening__mark { animation: opening-mark 1.6s cubic-bezier(.45, 0, .55, 1) .1s both; }
+@keyframes opening-mark {
+  0%   { opacity: 0; transform: translateY(-70%); animation-timing-function: var(--spring); }
+  25%  { opacity: 1; transform: none; }
+  37%  { transform: rotate(-8deg); }
+  50%  { transform: none; }
+  62%  { transform: rotate(-8deg); }
+  75%  { transform: none; }
+  100% { transform: none; }
 }
-@keyframes opening-pop { from { opacity: 0; transform: scale(.2) rotate(-40deg); } }
-
-.opening__name {
-  font-family: var(--display);
-  font-size: clamp(26px, 5vw, 40px);
-  letter-spacing: .12em;
-  line-height: 1.3;
-  animation: opening-up .7s var(--out) 2.25s both;
-}
-.opening__en {
-  font-family: var(--body-bold);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: .3em;
-  color: var(--sun);
-  animation: opening-up .7s var(--out) 2.4s both;
-}
+.opening__jo  { animation: opening-pop .7s var(--spring) 1.8s both; }
+.opening__oku { animation: opening-pop .7s var(--spring) 1.95s both; }
+@keyframes opening-pop { from { opacity: 0; transform: translateY(35%) scale(.4); } }
 @keyframes opening-up { from { opacity: 0; transform: translateY(16px); } }
 
 .opening__hint {
@@ -232,10 +198,9 @@ main { overflow-x: clip; }
   pointer-events: auto;
 }
 
-.logo { display: flex; align-items: center; gap: 10px; margin-right: auto; }
-.logo__mark { width: 36px; height: 36px; flex: none; transition: rotate .5s var(--spring); }
-.logo:hover .logo__mark { rotate: -12deg; }
-.logo__name { font-family: var(--display); font-size: 15px; letter-spacing: .06em; }
+.logo { display: flex; align-items: center; margin-right: auto; padding-left: 8px; }
+.logo img { height: 40px; width: auto; transform-origin: 37% 90%; transition: rotate .5s var(--spring); }
+.logo:hover img { rotate: -6deg; }
 
 .nav { display: flex; gap: 4px; }
 .nav a {
@@ -348,7 +313,7 @@ main { overflow-x: clip; }
   letter-spacing: .02em;
   -webkit-text-stroke: .09em var(--navy);
   paint-order: stroke fill;
-  text-shadow: .07em .07em 0 var(--coral);
+  text-shadow: .07em .07em 0 var(--red);
 }
 .hero__line { display: block; animation: pop .9s var(--spring) both; }
 .hero__line:nth-child(1) { animation-delay: .5s; }
@@ -397,7 +362,7 @@ main { overflow-x: clip; }
   right: 24px;
   width: 92px;
   font-size: 17px;
-  background: var(--coral);
+  background: var(--red);
   color: var(--cream);
   rotate: 12deg;
 }
@@ -429,7 +394,7 @@ main { overflow-x: clip; }
   white-space: nowrap;
   padding-left: 28px;
 }
-.ticker .star { width: 22px; height: 22px; fill: var(--coral); flex: none; }
+.ticker .star { width: 22px; height: 22px; fill: var(--red); flex: none; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* =========================================================
@@ -501,10 +466,10 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   box-shadow: 8px 8px 0 var(--navy);
 }
 .card--sun   { background: var(--sun);   rotate: -2.5deg; }
-.card--coral { background: var(--coral); rotate: 1.8deg;  color: var(--cream); }
+.card--red { background: var(--red); rotate: 1.8deg;  color: var(--cream); }
 .card--navy  { background: var(--navy);  rotate: -1.2deg; color: var(--cream); box-shadow: 8px 8px 0 var(--sun); }
 .card:hover  { rotate: 0deg; scale: 1.03; box-shadow: 12px 12px 0 var(--navy); }
-.card--navy:hover { box-shadow: 12px 12px 0 var(--coral); }
+.card--navy:hover { box-shadow: 12px 12px 0 var(--red); }
 
 .card__num {
   display: block;
@@ -513,8 +478,8 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   line-height: 1;
   margin-bottom: 22px;
 }
-.card--sun   .card__num { color: var(--coral); }
-.card--coral .card__num { color: var(--navy); }
+.card--sun   .card__num { color: var(--red); }
+.card--red .card__num { color: var(--navy); }
 .card--navy  .card__num { color: var(--sun); }
 
 .card__title {
@@ -582,13 +547,13 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   background: var(--navy);
   color: var(--cream);
   font-weight: 900;
-  box-shadow: 4px 4px 0 var(--coral);
+  box-shadow: 4px 4px 0 var(--red);
   transition: translate .15s ease, box-shadow .15s ease;
 }
 .btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; transition: translate .3s var(--spring); }
-.btn:hover  { translate: -2px -2px; box-shadow: 6px 6px 0 var(--coral); }
+.btn:hover  { translate: -2px -2px; box-shadow: 6px 6px 0 var(--red); }
 .btn:hover svg { translate: 4px 0; }
-.btn:active { translate: 3px 3px; box-shadow: 0 0 0 var(--coral); }
+.btn:active { translate: 3px 3px; box-shadow: 0 0 0 var(--red); }
 
 /* =========================================================
    Team
@@ -614,7 +579,7 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
 }
 .member:hover .member__photo { rotate: -6deg; scale: 1.05; }
 .member--sun    .member__photo { background: var(--sun); }
-.member--coral  .member__photo { background: var(--coral); }
+.member--red  .member__photo { background: var(--red); }
 .member--orange .member__photo { background: var(--orange); }
 .member--sky    .member__photo { background: var(--sky); }
 .member__photo img { width: 100%; height: 100%; object-fit: cover; }
@@ -660,7 +625,7 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   display: inline-block;
   padding: 0 14px;
   border-radius: 999px;
-  background: var(--coral);
+  background: var(--red);
   color: var(--cream);
   font-size: 14px;
   font-weight: 900;
@@ -754,7 +719,7 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
 }
 
 @media (max-width: 600px) {
-  .logo__name { font-size: 13px; }
+  .logo img { height: 34px; }
   .hero__content { padding-top: calc(130px + env(safe-area-inset-top, 0px)); }
   .sticker--hero { position: relative; top: auto; right: auto; margin: 28px auto 0; width: 96px; font-size: 15px; }
   .about { text-align: left; }

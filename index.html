@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>常奥株式会社 ToWhats Inc.</title>
-<meta name="description" content="常陸・陸奥から笑顔を届ける。常奥株式会社（とわつ）は、宮城県名取市で設立準備中の、全員がエンジニアの会社です。">
-<meta property="og:title" content="常奥株式会社 ToWhats Inc.">
+<title>常奥 ToWhats</title>
+<meta name="description" content="常陸・陸奥から笑顔を届ける。常奥（とわつ / ToWhats）は、仙台高専の有志団体です。メンバーは全員がエンジニア。">
+<meta property="og:title" content="常奥 ToWhats">
 <meta property="og:description" content="常陸・陸奥から笑顔を届ける。">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#1a2456">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <!-- Morisawa Fonts: 管理画面で発行される Web フォントの埋め込みコードを、この下に貼り付けてください -->
 <!-- MORISAWA_EMBED_CODE -->
 
@@ -36,15 +37,16 @@
 
 <!-- ============ Opening screen ============
      サイトを開いたときに一度だけ出る画面。
-     .opening__art の中身が差し替え用のスロットです（assets/README.md 参照）。 -->
+     ロゴを「赤いマーク」「常」「奥」の3つに分けて動かしています（assets/README.md 参照）。 -->
 <div class="opening" id="opening" aria-hidden="true">
   <div class="opening__stage">
-    <div class="opening__art">
-      <span class="opening__sun"></span>
-      <img class="opening__logo" src="assets/logo-placeholder.svg" alt="" width="96" height="96">
+    <div class="opening__logo">
+      <img class="opening__mark" src="assets/logo-mark.png" alt="" width="1000" height="453">
+      <div class="opening__kanji">
+        <img class="opening__jo" src="assets/logo-kanji-jo.png" alt="" width="521" height="260">
+        <img class="opening__oku" src="assets/logo-kanji-oku.png" alt="" width="479" height="260">
+      </div>
     </div>
-    <p class="opening__name">常奥株式会社</p>
-    <p class="opening__en">ToWhats Inc.</p>
   </div>
   <p class="opening__hint">TAP TO SKIP</p>
   <svg class="opening__edge" viewBox="0 0 2880 48" preserveAspectRatio="none"><path d="M0 26 Q60 38 120 26 T240 26 T360 26 T480 26 T600 26 T720 26 T840 26 T960 26 T1080 26 T1200 26 T1320 26 T1440 26 T1560 26 T1680 26 T1800 26 T1920 26 T2040 26 T2160 26 T2280 26 T2400 26 T2520 26 T2640 26 T2760 26 T2880 26 V0 H0Z"/></svg>
@@ -53,9 +55,8 @@
 <!-- ============ Header ============ -->
 <header class="header" id="header">
   <div class="header__bar">
-    <a class="logo" href="#top" aria-label="常奥株式会社 ToWhats Inc.">
-      <img class="logo__mark" src="assets/logo-placeholder.svg" alt="" width="36" height="36">
-      <span class="logo__name" data-en="ToWhats Inc.">常奥株式会社</span>
+    <a class="logo" href="#top">
+      <img src="assets/logo-header.png" alt="常奥 ToWhats" width="800" height="394">
     </a>
 
     <nav class="nav" id="nav" aria-label="メニュー">
@@ -63,7 +64,7 @@
       <a href="#philosophy" data-en="Philosophy">大切なこと</a>
       <a href="#works" data-en="Works">つくるもの</a>
       <a href="#team" data-en="Team">メンバー</a>
-      <a href="#company" data-en="Company">会社概要</a>
+      <a href="#company" data-en="Profile">団体概要</a>
     </nav>
 
     <button class="pill pill--lang" id="langToggle" type="button" data-en="日本語">EN</button>
@@ -105,13 +106,13 @@
     </svg>
 
     <div class="hero__content">
-      <p class="hero__eyebrow" data-en="ToWhats Inc. &middot; Natori, Miyagi">常奥株式会社 &middot; 宮城県名取市</p>
+      <p class="hero__eyebrow" data-en="A student group at NIT, Sendai College">仙台高専の有志団体</p>
       <h1 class="hero__title">
         <span class="hero__line" data-en="Delivering smiles">常陸・陸奥から</span>
         <span class="hero__line" data-en="from Hitachi &amp; Mutsu.">笑顔を届ける。</span>
       </h1>
-      <p class="sticker sticker--hero" aria-label="設立準備中">
-        <span data-en="Coming<br>soon!">設立<br>準備中！</span>
+      <p class="sticker sticker--hero">
+        <span>Since<br>2026</span>
       </p>
     </div>
   </section>
@@ -119,7 +120,7 @@
   <!-- ============ Ticker ============ -->
   <div class="ticker" aria-hidden="true">
     <div class="ticker__track">
-      <span data-en="Delivering smiles from Hitachi and Mutsu.">常陸・陸奥から笑顔を届ける。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span>ToWhats Inc.</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Everyone is an engineer.">全員がエンジニア。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Hooray for engineers!">エンジニア万歳！</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Delivering smiles from Hitachi and Mutsu.">常陸・陸奥から笑顔を届ける。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span>ToWhats Inc.</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Everyone is an engineer.">全員がエンジニア。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Hooray for engineers!">エンジニア万歳！</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg>
+      <span data-en="Delivering smiles from Hitachi and Mutsu.">常陸・陸奥から笑顔を届ける。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span>ToWhats</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Everyone is an engineer.">全員がエンジニア。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Hooray for engineers!">エンジニア万歳！</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Delivering smiles from Hitachi and Mutsu.">常陸・陸奥から笑顔を届ける。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span>ToWhats</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Everyone is an engineer.">全員がエンジニア。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Hooray for engineers!">エンジニア万歳！</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg>
     </div>
   </div>
 
@@ -127,8 +128,8 @@
   <section class="section about" id="about">
     <div class="container">
       <p class="label reveal" data-en="About us">私たち</p>
-      <p class="about__lead reveal" data-en="We build apps &mdash; and <mark>anything else we find fun.</mark>">アプリ開発を軸に、<br><mark>面白いと思ったものを</mark><br>何でもつくる会社です。</p>
-      <p class="about__sub reveal" data-en="Every one of us is an engineer. Right now, we are getting ready to launch.">メンバーは全員がエンジニア。いまは、設立に向けて準備中です。</p>
+      <p class="about__lead reveal" data-en="We build apps &mdash; and <mark>anything else we find fun.</mark>">アプリ開発を軸に、<br><mark>面白いと思ったものを</mark><br>何でもつくるチームです。</p>
+      <p class="about__sub reveal" data-en="We are a volunteer student group at NIT, Sendai College, and every one of us is an engineer.">仙台高専の有志団体として活動しています。メンバーは全員がエンジニアです。</p>
     </div>
   </section>
 
@@ -144,7 +145,7 @@
           <h3 class="card__title" data-en="We are our own first user.">自分が、<br>最初のユーザー。</h3>
           <p class="card__text" data-en="Everything starts from a frustration, or from &ldquo;that looks fun!&rdquo;">不満と「面白そう！」から、すべてが始まる。</p>
         </li>
-        <li class="card card--coral reveal">
+        <li class="card card--red reveal">
           <span class="card__num">02</span>
           <h3 class="card__title" data-en="Everyone is an engineer.">全員が、<br>エンジニア。</h3>
           <p class="card__text" data-en="Trained at KOSEN. When we think of it, we build it.">高専で学んだ技術で、思いついたら形にする。</p>
@@ -195,7 +196,7 @@
           <p class="member__role">CEO</p>
           <h3 class="member__name">上原 貫太</h3>
         </li>
-        <li class="member member--coral reveal">
+        <li class="member member--red reveal">
           <div class="member__photo"><img src="assets/placeholder-member.svg" alt="" width="400" height="400" loading="lazy"></div>
           <p class="member__role">CFO</p>
           <h3 class="member__name">安齋 隼</h3>
@@ -214,32 +215,32 @@
     </div>
   </section>
 
-  <!-- ============ Company ============ -->
+  <!-- ============ Profile ============ -->
   <section class="section company" id="company">
     <div class="container">
-      <p class="label reveal" data-en="Company">会社概要</p>
-      <h2 class="title reveal" data-en="About the company.">会社のこと。</h2>
+      <p class="label reveal" data-en="Profile">団体概要</p>
+      <h2 class="title reveal" data-en="About ToWhats.">常奥のこと。</h2>
 
       <dl class="info reveal">
         <div class="info__row">
-          <dt data-en="Name">社名</dt>
-          <dd data-en="ToWhats Inc. (常奥株式会社)">常奥株式会社<small>とわつ / ToWhats Inc.</small></dd>
+          <dt data-en="Name">名称</dt>
+          <dd data-en="ToWhats (常奥)">常奥<small>とわつ / ToWhats</small></dd>
+        </div>
+        <div class="info__row">
+          <dt data-en="Type">形態</dt>
+          <dd data-en="Volunteer student group, NIT, Sendai College">仙台高専の有志団体</dd>
         </div>
         <div class="info__row">
           <dt data-en="Location">所在地</dt>
           <dd data-en="Natori, Miyagi, Japan">宮城県名取市</dd>
         </div>
         <div class="info__row">
-          <dt data-en="Founded">設立</dt>
-          <dd><span class="tag" data-en="In preparation">準備中</span></dd>
-        </div>
-        <div class="info__row">
           <dt data-en="Representative">代表</dt>
-          <dd data-en="Kanta Uehara (上原 貫太), CEO">代表取締役 CEO　上原 貫太</dd>
+          <dd data-en="上原 貫太 (CEO)">上原 貫太（CEO）</dd>
         </div>
         <div class="info__row">
-          <dt data-en="Business">事業内容</dt>
-          <dd data-en="Planning and development of apps">アプリの企画・開発</dd>
+          <dt data-en="Activities">活動内容</dt>
+          <dd data-en="Planning and developing apps">アプリの企画・開発</dd>
         </div>
       </dl>
     </div>
@@ -252,8 +253,8 @@
   <svg class="divider divider--footer" viewBox="0 0 2880 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 Q60 10 120 22 T240 22 T360 22 T480 22 T600 22 T720 22 T840 22 T960 22 T1080 22 T1200 22 T1320 22 T1440 22 T1560 22 T1680 22 T1800 22 T1920 22 T2040 22 T2160 22 T2280 22 T2400 22 T2520 22 T2640 22 T2760 22 T2880 22 V48 H0Z"/></svg>
   <div class="footer__sun" aria-hidden="true"></div>
   <p class="footer__copy" data-en="Delivering smiles<br>from Hitachi &amp; Mutsu.">常陸・陸奥から<br>笑顔を届ける。</p>
-  <p class="footer__name">常奥株式会社 ToWhats Inc.</p>
-  <p class="footer__small">&copy; <span id="year">2026</span> ToWhats Inc.</p>
+  <p class="footer__name">常奥 ToWhats</p>
+  <p class="footer__small">&copy; <span id="year">2026</span> ToWhats</p>
 </footer>
 
 <script src="script.js"></script>

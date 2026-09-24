@@ -1,5 +1,5 @@
 /* =========================================================
-   常奥株式会社 ToWhats Inc. — script.js
+   常奥 ToWhats — script.js
    1. Language (ja / en)
    2. Menu
    3. Scroll: the sun rises, sections pop in
@@ -27,8 +27,8 @@
      Japanese is written in the HTML, English lives in data-en.
      ========================================================= */
   var TEXT = {
-    ja: { title: '常奥株式会社 ToWhats Inc.', menu: 'メニュー', open: 'メニューを開く', close: 'メニューを閉じる' },
-    en: { title: 'ToWhats Inc. | 常奥株式会社', menu: 'Menu', open: 'Open menu', close: 'Close menu' }
+    ja: { title: '常奥 ToWhats', menu: 'メニュー', open: 'メニューを開く', close: 'メニューを閉じる' },
+    en: { title: 'ToWhats | 常奥', menu: 'Menu', open: 'Open menu', close: 'Close menu' }
   };
 
   var translatable = $$('[data-en]');

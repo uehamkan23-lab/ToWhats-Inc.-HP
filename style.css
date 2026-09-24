@@ -19,8 +19,21 @@
   --ink:     #1a2456;
   --muted:   rgba(26, 36, 86, .72);
 
-  --display: "Dela Gothic One", "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
-  --body:    "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+  /* ---------------------------------------------------------
+     Fonts — Morisawa Fonts
+     見出し : じゅん 501   丸ゴシックの極太。レトロポスターの日の出に合う
+     本文   : A1ゴシック R / B   にじみのある柔らかいゴシック。手づくり感
+     手書き : 那欽        ステッカーとテロップ用の、ポップな筆文字
+
+     Morisawa の font-family 名は、管理画面の Web フォント設定に
+     表示される名前と完全に一致させる必要があります。
+     下の "Jun 501" などは仮の名前です。管理画面の表記に置き換えてください。
+     後ろに続く Google Fonts は、Morisawa が読み込まれるまでの代替です。
+     --------------------------------------------------------- */
+  --display:   "Jun 501", "じゅん 501", "Dela Gothic One", "Hiragino Maru Gothic ProN", sans-serif;
+  --body:      "A1 Gothic R", "A1ゴシック R", "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+  --body-bold: "A1 Gothic B", "A1ゴシック B", "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+  --hand:      "Nakin", "那欽", "Dela Gothic One", "Hiragino Maru Gothic ProN", sans-serif;
 
   --line: 3px solid var(--navy);
   --shadow: 6px 6px 0 var(--navy);
@@ -49,6 +62,7 @@ body {
   line-height: 1.9;
   letter-spacing: .03em;
   font-feature-settings: "palt";
+  font-synthesis: none;
   word-break: auto-phrase;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -62,6 +76,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 mark { background: none; color: inherit; }
 
 :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
+
+/* bold body text: Morisawa's bold is its own family (A1ゴシック B) */
+.nav a, .pill, .hero__eyebrow, .label, .about__sub, .card__text, .product__text,
+.btn, .member__role, .info dt, .info dd, .tag, .footer__name {
+  font-family: var(--body-bold);
+}
 
 /* the tilted ticker is wider than the screen; clip it without making main a scroll container */
 main { overflow-x: clip; }
@@ -239,7 +259,7 @@ main { overflow-x: clip; }
   border-radius: 50%;
   background: var(--sun);
   color: var(--navy);
-  font-family: var(--display);
+  font-family: var(--hand);
   font-size: 18px;
   line-height: 1.2;
   text-align: center;
@@ -291,7 +311,7 @@ main { overflow-x: clip; }
   gap: 28px;
   width: max-content;
   animation: marquee 36s linear infinite;
-  font-family: var(--display);
+  font-family: var(--hand);
   font-size: clamp(18px, 2.2vw, 24px);
   white-space: nowrap;
   padding-left: 28px;

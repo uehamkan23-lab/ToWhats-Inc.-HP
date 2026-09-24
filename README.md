@@ -21,7 +21,30 @@ HTML / CSS / JavaScript のみで作った静的サイトです。ビルド不�
 | コーラル | `#f0645f` | 見出しの影・ステッカー・カード |
 | 生成り | `#fff7e8` | ページの背景 |
 
-フォントは **Dela Gothic One**（見出し）と **Zen Kaku Gothic New**（本文）。どちらも Google Fonts、SIL Open Font License です。
+## フォント（Morisawa Fonts）
+
+| 役割 | 書体 | 選んだ理由 |
+|---|---|---|
+| 見出し | じゅん 501 | 丸ゴシックの極太。レトロポスター風の日の出と相性が良い |
+| 本文 | A1ゴシック R / B | にじみのある柔らかいゴシック。手づくり感が出る |
+| ステッカー・テロップ | 那欽 | ポップな筆文字。遊び心の担当 |
+
+### 表示させるための手順
+
+Morisawa の Web フォントは、**Morisawa Fonts のアカウントに紐づいた埋め込みコード**がないと表示されません。
+
+1. Morisawa Fonts の管理画面で、Web フォントを使うドメインを登録する
+   （GitHub Pages なら `uehamkan23-lab.github.io`）
+2. 上の3書体（じゅん 501 / A1ゴシック R・B / 那欽）を Web フォントとして有効にする
+3. 発行された**埋め込みコード**を、`index.html` の `<!-- MORISAWA_EMBED_CODE -->` の位置に貼る
+4. 管理画面に表示される **font-family 名**を、`style.css` 冒頭の `--display` / `--body` / `--body-bold` / `--hand` の先頭の名前（今は `"Jun 501"` などの仮の名前）と置き換える
+5. 表示を確認できたら、`index.html` の Google Fonts の3行は削除してよい
+
+Web フォントが使えるかどうかは、契約しているプランによって異なります。管理画面で確認してください。
+
+埋め込みコードが入るまでは、代わりに Google Fonts の **Dela Gothic One** と **Zen Kaku Gothic New** で表示されます。
+
+Morisawa の書体は太さごとに別の書体として配信されるため、`font-synthesis: none` を指定して、太字書体をさらに太く加工しないようにしています。
 
 ## ファイル構成
 
@@ -61,21 +84,27 @@ HTML / CSS / JavaScript のみで作った静的サイトです。ビルド不�
 
 `prefers-reduced-motion: reduce`（動きを減らす設定）の環境では、すべての動きを止めます。JavaScript が無効でも全文が読めます。
 
-## ローカルでの確認
+## サイトの見方
 
-```bash
-python3 -m http.server 8000
-# → http://localhost:8000
+### 自分のパソコンで見る
+
+1. GitHub のリポジトリページで **Code** → **Download ZIP**
+2. 展開したフォルダの `index.html` をダブルクリック
+
+### インターネットに公開する（GitHub Pages・無料）
+
+このリポジトリは公開（public）なので、無料で公開できます。
+
+1. GitHub のリポジトリ → **Settings** → 左メニューの **Pages**
+2. **Source** を **Deploy from a branch** にする
+3. **Branch** で `claude/portfolio-site-creation-3m6ltu`、フォルダは `/ (root)` を選んで **Save**
+4. 1〜2分後、次の URL で見られるようになる
+
+```
+https://uehamkan23-lab.github.io/ToWhats-Inc.-HP/
 ```
 
-## 公開（デプロイ）
-
-公開先は未定です。GitHub Pages の場合：
-
-1. GitHub のリポジトリ → **Settings** → **Pages**
-2. Source を **Deploy from a branch** にする
-3. 公開したいブランチと `/ (root)` を選んで **Save**
-
+以降は、このブランチに変更をプッシュするたびに自動で更新されます。
 Vercel や Netlify でもビルド設定は不要です（フレームワークなし、出力ディレクトリはルート）。
 
 ## 未確定の項目

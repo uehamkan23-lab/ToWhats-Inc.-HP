@@ -45,6 +45,16 @@
     document.title = TEXT[next].title;
     nav.setAttribute('aria-label', TEXT[next].menu);
     syncBurgerLabel();
+    refreshWebFonts();
+  }
+
+  // Morisawa's web fonts are subset to the characters on the page when it loads.
+  // After swapping the language the new characters must be requested again.
+  // (TypeSquare-style loader: Ts.loadFont(). Harmless no-op when it is absent.)
+  function refreshWebFonts() {
+    if (window.Ts && typeof window.Ts.loadFont === 'function') {
+      window.Ts.loadFont();
+    }
   }
 
   $('#langToggle').addEventListener('click', function () {

@@ -18,9 +18,37 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script>document.documentElement.classList.add('js');</script>
+<script>
+  /* Runs before the page paints: decides whether the opening screen is shown.
+     Once per browser tab, never with reduced motion, and a 4s failsafe so the
+     page can never stay covered even if script.js fails to load. */
+  (function (root) {
+    root.classList.add('js');
+    var seen = false;
+    try { seen = sessionStorage.getItem('towhats-opening') === '1'; } catch (e) {}
+    if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+    root.classList.add('is-opening');
+    setTimeout(function () { root.classList.remove('is-opening'); }, 4000);
+  })(document.documentElement);
+</script>
 </head>
 <body>
+
+<!-- ============ Opening screen ============
+     サイトを開いたときに一度だけ出る画面。
+     .opening__art の中身が差し替え用のスロットです（assets/README.md 参照）。 -->
+<div class="opening" id="opening" aria-hidden="true">
+  <div class="opening__stage">
+    <div class="opening__art">
+      <span class="opening__sun"></span>
+      <img class="opening__logo" src="assets/logo-placeholder.svg" alt="" width="96" height="96">
+    </div>
+    <p class="opening__name">常奥株式会社</p>
+    <p class="opening__en">ToWhats Inc.</p>
+  </div>
+  <p class="opening__hint">TAP TO SKIP</p>
+  <svg class="opening__edge" viewBox="0 0 2880 48" preserveAspectRatio="none"><path d="M0 26 Q60 38 120 26 T240 26 T360 26 T480 26 T600 26 T720 26 T840 26 T960 26 T1080 26 T1200 26 T1320 26 T1440 26 T1560 26 T1680 26 T1800 26 T1920 26 T2040 26 T2160 26 T2280 26 T2400 26 T2520 26 T2640 26 T2760 26 T2880 26 V0 H0Z"/></svg>
+</div>
 
 <!-- ============ Header ============ -->
 <header class="header" id="header">

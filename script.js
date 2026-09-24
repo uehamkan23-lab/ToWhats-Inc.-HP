@@ -1,11 +1,8 @@
 /* =========================================================
    常奥株式会社 ToWhats Inc. — script.js
-   1. Theme (light / dark)
-   2. Language (ja / en)
-   3. Hero title animation
-   4. Scroll reveal
-   5. Scroll spy + progress bar + sticky header
-   6. Mobile navigation
+   1. Language (ja / en)
+   2. Mobile menu
+   3. Scroll-linked motion (incl. reveal)
    ========================================================= */
 (function () {
   'use strict';
@@ -13,276 +10,198 @@
   var root = document.documentElement;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- small helpers ---------- */
-  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
-  function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+  function $(sel) { return document.querySelector(sel); }
+  function $$(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
   function store(key, value) {
     try {
       if (value === undefined) { return window.localStorage.getItem(key); }
       window.localStorage.setItem(key, value);
-    } catch (e) { /* private mode / blocked storage */ }
+    } catch (e) { /* storage unavailable */ }
     return null;
   }
 
   /* =========================================================
-     1. Theme
+     1. Language
+     Japanese is in the HTML; English is in data-en.
      ========================================================= */
-  var themeToggle = $('#themeToggle');
-  var savedTheme = store('towhats-theme');
-
-  if (savedTheme === 'light' || savedTheme === 'dark') {
-    root.setAttribute('data-theme', savedTheme);
-  }
-
-  function currentTheme() {
-    var attr = root.getAttribute('data-theme');
-    if (attr) { return attr; }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
-  function syncThemeMeta() {
-    var meta = $('meta[name="theme-color"]');
-    if (meta) { meta.setAttribute('content', currentTheme() === 'dark' ? '#12131a' : '#faf8f3'); }
-  }
-  syncThemeMeta();
-
-  if (themeToggle) {
-    themeToggle.addEventListener('click', function () {
-      var next = currentTheme() === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      store('towhats-theme', next);
-      syncThemeMeta();
-    });
-  }
-
-  /* =========================================================
-     2. Language
-     Japanese lives in the HTML; English lives in data-en.
-     The original Japanese is cached in data-ja on first switch.
-     ========================================================= */
-  var LANG_TEXT = {
-    ja: {
-      htmlLang: 'ja',
-      title: '常奥株式会社 ToWhats Inc.',
-      navLabel: 'メインナビゲーション',
-      themeLabel: 'テーマを切り替える',
-      langLabel: 'Switch to English',
-      burgerOpen: 'メニューを開く',
-      burgerClose: 'メニューを閉じる'
-    },
-    en: {
-      htmlLang: 'en',
-      title: 'ToWhats Inc. — 常奥株式会社',
-      navLabel: 'Main navigation',
-      themeLabel: 'Switch colour theme',
-      langLabel: '日本語に切り替える',
-      burgerOpen: 'Open menu',
-      burgerClose: 'Close menu'
-    }
+  var TEXT = {
+    ja: { title: '常奥株式会社 ToWhats Inc.', menu: 'メニュー', open: 'メニューを開く', close: 'メニューを閉じる' },
+    en: { title: 'ToWhats Inc.', menu: 'Menu', open: 'Open menu', close: 'Close menu' }
   };
 
-  var langToggle = $('#langToggle');
   var translatable = $$('[data-en]');
-  var currentLang = store('towhats-lang') === 'en' ? 'en' : 'ja';
+  translatable.forEach(function (el) { el.setAttribute('data-ja', el.innerHTML); });
 
-  translatable.forEach(function (el) {
-    el.setAttribute('data-ja', el.innerHTML);
+  var lang = store('towhats-lang') === 'en' ? 'en' : 'ja';
+
+  function applyLang(next) {
+    translatable.forEach(function (el) {
+      el.innerHTML = el.getAttribute(next === 'en' ? 'data-en' : 'data-ja');
+    });
+    lang = next;
+    root.lang = next;
+    root.setAttribute('data-lang', next);
+    document.title = TEXT[next].title;
+    $('#menu').setAttribute('aria-label', TEXT[next].menu);
+    syncBurgerLabel();
+    splitStatement();
+    onScroll();
+  }
+
+  $('#langToggle').addEventListener('click', function () {
+    var next = lang === 'ja' ? 'en' : 'ja';
+    store('towhats-lang', next);
+    applyLang(next);
   });
 
-  function applyLang(lang) {
-    var pack = LANG_TEXT[lang];
-
-    translatable.forEach(function (el) {
-      var next = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ja');
-      if (next !== null) { el.innerHTML = next; }
-    });
-
-    root.setAttribute('lang', pack.htmlLang);
-    root.setAttribute('data-lang', lang);
-    document.title = pack.title;
-
-    var nav = $('#nav');
-    if (nav) { nav.setAttribute('aria-label', pack.navLabel); }
-    if (themeToggle) { themeToggle.setAttribute('aria-label', pack.themeLabel); }
-    if (langToggle) {
-      langToggle.setAttribute('aria-label', pack.langLabel);
-      var on = $('.tool__lang-on', langToggle);
-      var off = $('.tool__lang-off', langToggle);
-      if (on && off) {
-        on.textContent = lang === 'en' ? 'EN' : 'JA';
-        off.textContent = lang === 'en' ? 'JA' : 'EN';
-      }
-    }
-
-    var burger = $('#burger');
-    if (burger) {
-      burger.setAttribute('aria-label', burger.getAttribute('aria-expanded') === 'true' ? pack.burgerClose : pack.burgerOpen);
-    }
-
-    currentLang = lang;
-    splitHeroTitle();
-  }
-
-  if (langToggle) {
-    langToggle.addEventListener('click', function () {
-      var next = currentLang === 'ja' ? 'en' : 'ja';
-      store('towhats-lang', next);
-      applyLang(next);
-    });
-  }
-
   /* =========================================================
-     3. Hero title animation
-     Japanese splits per character, English per word, so that
-     words never break mid-line.
+     2. Mobile menu
      ========================================================= */
-  var heroTitle = $('#heroTitle');
-  var NO_LINE_START = /[。、，．,.\u3001\u3002\uff09\u300d\u300f\u3011\uff1f\uff01?!)\]}\u30fc\u3005\u309d\u309e]/;
-
-  function splitHeroTitle() {
-    if (!heroTitle) { return; }
-
-    var raw = currentLang === 'en'
-      ? (heroTitle.getAttribute('data-en') || heroTitle.textContent)
-      : (heroTitle.getAttribute('data-ja') || heroTitle.textContent);
-
-    var probe = document.createElement('div');
-    probe.innerHTML = raw;
-    var text = probe.textContent;
-
-    var pieces = currentLang === 'en' ? text.split(/(\s+)/) : text.split('');
-
-    heroTitle.textContent = '';
-    var shown = 0;
-    var lastSpan = null;
-
-    pieces.forEach(function (piece) {
-      if (/^\s+$/.test(piece)) {
-        heroTitle.appendChild(document.createTextNode(' '));
-        lastSpan = null;
-        return;
-      }
-
-      // Kinsoku: punctuation and closing brackets must not start a line,
-      // so they are merged into the preceding span instead of getting one.
-      if (lastSpan && NO_LINE_START.test(piece)) {
-        lastSpan.textContent += piece;
-        return;
-      }
-
-      var span = document.createElement('span');
-      span.className = 'char';
-      span.textContent = piece;
-      span.style.animationDelay = reduceMotion ? '0s' : (0.16 + shown * 0.045).toFixed(3) + 's';
-      heroTitle.appendChild(span);
-      lastSpan = span;
-      shown += 1;
-    });
-  }
-
-  /* =========================================================
-     4. Scroll reveal
-     ========================================================= */
-  var revealItems = $$('.reveal');
-
-  if ('IntersectionObserver' in window) {
-    var revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
-
-    revealItems.forEach(function (el) { revealObserver.observe(el); });
-  } else {
-    revealItems.forEach(function (el) { el.classList.add('is-visible'); });
-  }
-
-  /* =========================================================
-     5. Scroll spy, progress bar, sticky header
-     ========================================================= */
-  var header = $('#header');
-  var progressBar = $('#progressBar');
-  var navLinks = $$('.nav__link');
-  var sections = navLinks
-    .map(function (link) { return document.querySelector(link.getAttribute('href')); })
-    .filter(Boolean);
-
-  var ticking = false;
-
-  function onScroll() {
-    var y = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (header) { header.classList.toggle('is-stuck', y > 8); }
-
-    if (progressBar) {
-      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      var ratio = scrollable > 0 ? y / scrollable : 0;
-      progressBar.style.width = Math.min(100, Math.max(0, ratio * 100)) + '%';
-    }
-
-    var line = y + window.innerHeight * 0.32;
-    var activeIndex = -1;
-    sections.forEach(function (section, i) {
-      if (section.offsetTop <= line) { activeIndex = i; }
-    });
-    navLinks.forEach(function (link, i) {
-      link.classList.toggle('is-active', i === activeIndex);
-    });
-
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', function () {
-    if (!ticking) {
-      window.requestAnimationFrame(onScroll);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  window.addEventListener('resize', onScroll, { passive: true });
-
-  /* =========================================================
-     6. Mobile navigation
-     ========================================================= */
+  var gnav = $('#gnav');
   var burger = $('#burger');
-  var nav = $('#nav');
+
+  function syncBurgerLabel() {
+    var open = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-label', TEXT[lang][open ? 'close' : 'open']);
+  }
 
   function setMenu(open) {
-    if (!burger || !nav) { return; }
-    nav.classList.toggle('is-open', open);
+    gnav.classList.toggle('is-open', open);
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    burger.setAttribute('aria-label', LANG_TEXT[currentLang][open ? 'burgerClose' : 'burgerOpen']);
     document.body.style.overflow = open ? 'hidden' : '';
+    syncBurgerLabel();
   }
 
-  if (burger) {
-    burger.addEventListener('click', function () {
-      setMenu(burger.getAttribute('aria-expanded') !== 'true');
-    });
-  }
-
-  navLinks.forEach(function (link) {
-    link.addEventListener('click', function () { setMenu(false); });
+  burger.addEventListener('click', function () {
+    setMenu(burger.getAttribute('aria-expanded') !== 'true');
   });
-
+  $$('#menu a').forEach(function (a) {
+    a.addEventListener('click', function () { setMenu(false); });
+  });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { setMenu(false); }
   });
-
   window.addEventListener('resize', function () {
-    if (window.innerWidth > 860) { setMenu(false); }
+    if (window.innerWidth > 833) { setMenu(false); }
   });
 
   /* =========================================================
-     Boot
+     3. Scroll-linked motion
      ========================================================= */
-  var year = $('#year');
-  if (year) { year.textContent = String(new Date().getFullYear()); }
+  var heroContent = $('#heroContent');
+  var hero = $('.hero');
+  var statement = $('#statement');
+  var principles = $('.principles');
+  var principleItems = $$('.principle');
+  var dots = $$('.principles__dots span');
+  var productVisual = $('#productVisual');
+  var reveals = $$('.reveal');
+  var words = [];
 
-  applyLang(currentLang);
-  onScroll();
+  // Japanese has no spaces, so split it into phrases that must not break
+  // inside (e.g. 会社です。). Particles, punctuation and lone kanji are glued
+  // onto the phrase before them. Falls back to single characters.
+  var HIRA = /^[\u3041-\u309f]+$/;
+  var PUNCT = /^[、。，．・」』）！？]+$/;
+  var SENTENCE_END = /[。！？]$/;
+  var ONE_KANJI = /^[\u4e00-\u9fff々]$/;
+  var ENDS_KANJI = /[\u4e00-\u9fff々]$/;
+
+  function japanesePhrases(text) {
+    if (!window.Intl || !Intl.Segmenter) { return text.split(''); }
+    var out = [];
+    Array.from(new Intl.Segmenter('ja', { granularity: 'word' }).segment(text)).forEach(function (s) {
+      var x = s.segment;
+      var last = out[out.length - 1];
+      var glue = last && (
+        PUNCT.test(x) ||
+        (HIRA.test(x) && !SENTENCE_END.test(last)) ||
+        (ONE_KANJI.test(x) && ENDS_KANJI.test(last))
+      );
+      if (glue) { out[out.length - 1] += x; } else { out.push(x); }
+    });
+    return out;
+  }
+
+  // Wrap the statement in spans that light up on scroll.
+  function splitStatement() {
+    var text = statement.textContent;
+    var pieces = lang === 'en' ? text.split(/(\s+)/) : japanesePhrases(text);
+    statement.textContent = '';
+    words = [];
+    pieces.forEach(function (piece) {
+      if (!piece) { return; }
+      if (/^\s+$/.test(piece)) {
+        statement.appendChild(document.createTextNode(' '));
+        return;
+      }
+      var span = document.createElement('span');
+      span.className = 'w';
+      span.textContent = piece;
+      statement.appendChild(span);
+      words.push(span);
+    });
+  }
+
+  function onScroll() {
+    var vh = window.innerHeight;
+
+    // Reveal: fade elements in once they enter the lower part of the screen.
+    for (var r = reveals.length - 1; r >= 0; r--) {
+      if (reduceMotion || reveals[r].getBoundingClientRect().top < vh * 0.88) {
+        reveals[r].classList.add('is-visible');
+        reveals.splice(r, 1);
+      }
+    }
+
+    if (reduceMotion) { return; }
+
+    // Hero: shrink and fade as it leaves.
+    var h = hero.getBoundingClientRect();
+    var hp = clamp(-h.top / (h.height * 0.75));
+    heroContent.style.transform = 'translateY(' + (hp * 60).toFixed(1) + 'px) scale(' + (1 - hp * 0.08).toFixed(4) + ')';
+    heroContent.style.opacity = (1 - hp * 1.1).toFixed(3);
+
+    // Statement: light the text up as it passes through the viewport.
+    var s = statement.getBoundingClientRect();
+    var start = vh * 0.82;
+    var end = vh * 0.38;
+    var sp = clamp((start - s.top) / (start - end + s.height));
+    var lit = Math.round(sp * words.length);
+    for (var i = 0; i < words.length; i++) {
+      words[i].classList.toggle('is-on', i < lit);
+    }
+
+    // Principles: show one at a time while the stage is pinned.
+    var p = principles.getBoundingClientRect();
+    var travel = p.height - vh;
+    if (travel > 0) {
+      var pp = clamp(-p.top / travel);
+      var idx = Math.min(principleItems.length - 1, Math.floor(pp * principleItems.length));
+      principleItems.forEach(function (el, n) {
+        el.classList.toggle('is-active', n === idx);
+        el.classList.toggle('is-past', n < idx);
+      });
+      dots.forEach(function (d, n) { d.classList.toggle('is-active', n === idx); });
+    }
+
+    // Product: the visual grows into place.
+    var v = productVisual.getBoundingClientRect();
+    var vp = clamp((vh - v.top) / (vh * 0.8));
+    productVisual.style.transform = 'scale(' + (0.82 + vp * 0.18).toFixed(4) + ')';
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) { return; }
+    ticking = true;
+    window.requestAnimationFrame(function () { onScroll(); ticking = false; });
+  }, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  /* ---------- boot ---------- */
+  $('#year').textContent = String(new Date().getFullYear());
+  applyLang(lang);
 })();

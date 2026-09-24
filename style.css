@@ -13,6 +13,8 @@
   --sun:     #ffc83d;
   --orange:  #ff8f3f;
   --red:     #d70009;   /* the logo red */
+  --hero-red: #e0433a;   /* a warmer red for the big hero field */
+  --note:    #fff1c4;   /* hand-written labels on red */
   --sky:     #7fc8f0;
   --cream:   #fff7e8;
   --cream-2: #fdeccd;
@@ -34,6 +36,8 @@
   --body:      "A1 Gothic R", "A1ゴシック R", "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
   --body-bold: "A1 Gothic B", "A1ゴシック B", "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
   --hand:      "Nakin", "那欽", "Dela Gothic One", "Hiragino Maru Gothic ProN", sans-serif;
+  /* English hand-written labels in the hero (Google Fonts, OFL) */
+  --script:    "Caveat", "Segoe Print", "Bradley Hand", cursive;
 
   --line: 3px solid var(--navy);
   --shadow: 6px 6px 0 var(--navy);
@@ -83,7 +87,7 @@ mark { background: none; color: inherit; }
   font-family: var(--body-bold);
 }
 
-/* the tilted ticker is wider than the screen; clip it without making main a scroll container */
+/* nothing may widen the page sideways (tilted stickers, the giant word); clip without making main a scroll container */
 main { overflow-x: clip; }
 
 .container {
@@ -248,82 +252,185 @@ main { overflow-x: clip; }
 .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* =========================================================
-   Hero — sunrise scene
+   Hero — sticker collage (after echishin recruit)
+   Every piece sits on the stage at --x / --y with width --w,
+   tilted by --r, and pops in after --d. JS adds scroll parallax
+   through `transform`; pop/bob live on the inner image, tilt and
+   hover use the individual `rotate` / `scale` properties, so none
+   of them overwrite each other.
    ========================================================= */
 .hero {
   position: relative;
-  min-height: 100svh;
-  min-height: max(100svh, 620px);
-  background: var(--navy);
+  min-height: max(100svh, 700px);
+  background: var(--hero-red);
   overflow: hidden;
   isolation: isolate;
 }
+.hero__stage { position: absolute; inset: 0; }
 
-.hero__scene {
+.hero__copy {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-/* the sun: #sun is moved by JS on scroll, its circles rise once on load */
-.hero__sun > circle { animation: sun-rise 2.4s var(--out) .2s both; }
-.hero__sun > .hero__sun-halo { transform-box: fill-box; transform-origin: center; animation: sun-rise 2.4s var(--out) .2s both, halo 4s ease-in-out 2.6s infinite; }
-
-@keyframes sun-rise { from { transform: translateY(300px); } to { transform: none; } }
-@keyframes halo {
-  0%, 100% { transform: scale(1); opacity: .18; }
-  50%      { transform: scale(1.08); opacity: .28; }
-}
-
-.wave path { animation: drift linear infinite; }
-.wave--back path  { fill: var(--navy-3); animation-duration: 40s; }
-.wave--mid path   { fill: var(--navy-2); animation-duration: 28s; animation-direction: reverse; }
-.wave--front path { fill: var(--navy);   animation-duration: 18s; }
-@keyframes drift { from { transform: translateX(0); } to { transform: translateX(-1440px); } }
-
-.hero__content {
-  position: relative;
-  max-width: var(--maxw);
-  margin-inline: auto;
-  padding: calc(150px + env(safe-area-inset-top, 0px)) var(--gutter) 0;
-  text-align: center;
-  color: var(--cream);
+  left: 7%;
+  top: 36%;
+  z-index: 4;
+  color: #fff;
   will-change: transform;
 }
-
 .hero__eyebrow {
   display: inline-block;
-  font-weight: 700;
-  font-size: clamp(13px, 1.4vw, 15px);
+  font-size: clamp(13px, 1.3vw, 15px);
   letter-spacing: .14em;
   padding: 4px 16px;
-  border: 2px solid rgba(255, 247, 232, .5);
+  border: 2px solid rgba(255, 255, 255, .7);
   border-radius: 999px;
-  margin-bottom: 22px;
-  animation: pop .8s var(--spring) .3s both;
+  margin-bottom: 20px;
+  animation: pop .8s var(--spring) .15s both;
 }
-
 .hero__title {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(40px, 8.4vw, 116px);
-  line-height: 1.18;
+  font-size: clamp(38px, 5.8vw, 84px);
+  line-height: 1.22;
   letter-spacing: .02em;
-  -webkit-text-stroke: .09em var(--navy);
-  paint-order: stroke fill;
-  text-shadow: .07em .07em 0 var(--red);
+  text-shadow: .06em .06em 0 var(--navy);
 }
 .hero__line { display: block; animation: pop .9s var(--spring) both; }
-.hero__line:nth-child(1) { animation-delay: .5s; }
-.hero__line:nth-child(2) { animation-delay: .7s; }
-[data-lang="en"] .hero__title { font-size: clamp(38px, 7.6vw, 104px); letter-spacing: 0; }
+.hero__line:nth-child(1) { animation-delay: .25s; }
+.hero__line:nth-child(2) { animation-delay: .4s; }
+[data-lang="en"] .hero__title { font-size: clamp(34px, 4vw, 60px); letter-spacing: 0; }
+[data-lang="en"] .hero__copy { top: 34.5%; }
 
 @keyframes pop {
   from { opacity: 0; transform: translateY(30px) scale(.8); }
   to   { opacity: 1; transform: none; }
 }
+
+/* ---- stickers ---- */
+.st {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  z-index: 2;
+  margin: 0;
+  rotate: var(--r, 0deg);
+  transition: scale .5s var(--spring);
+  will-change: transform;
+}
+.st:hover { scale: 1.06; }
+.st > img,
+.st > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 14px rgba(70, 0, 0, .28));
+  animation:
+    st-pop .8s var(--spring) var(--d, 0s) both,
+    st-bob var(--bob, 4.6s) ease-in-out calc(var(--d, 0s) + .8s) infinite alternate;
+}
+.st:nth-of-type(2n) { --bob: 5.4s; }
+.st:nth-of-type(3n) { --bob: 3.9s; }
+@keyframes st-pop { from { opacity: 0; transform: scale(.35) rotate(-14deg); } }
+@keyframes st-bob { to { transform: translateY(-9px) rotate(1.6deg); } }
+
+/* illustration slots, shown until the artwork arrives */
+.st--ph {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  border: 3px dashed rgba(255, 255, 255, .85);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, .08);
+  min-width: 112px;
+  animation: st-pop .8s var(--spring) var(--d, 0s) both;
+}
+.st--ph b { display: block; font-family: var(--body-bold); font-size: 14px; }
+
+/* ---- the four members: a group photo at the bottom right ---- */
+.hero__team {
+  position: absolute;
+  right: 1%;
+  bottom: 0;
+  width: 58%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+.member-st { top: auto; bottom: 0; pointer-events: auto; }
+.member-st > img {
+  filter: drop-shadow(0 -4px 16px rgba(70, 0, 0, .25));
+  transform-origin: 50% 100%;
+  animation:
+    st-rise .9s var(--spring) var(--d) both,
+    st-sway var(--bob, 5s) ease-in-out calc(var(--d) + .9s) infinite alternate;
+}
+@keyframes st-rise { from { opacity: 0; transform: translateY(40%); } }
+@keyframes st-sway { from { transform: rotate(-.8deg); } to { transform: rotate(.8deg); } }
+.member-st--uehara    { --x: 0;   --w: 33%; --d: .75s; z-index: 3; }
+.member-st--anzai     { --x: 22%; --w: 28%; --d: .9s;  z-index: 2; }
+.member-st--kobayashi { --x: 44%; --w: 32%; --d: 1.05s; z-index: 3; }
+.member-st--yuki      { --x: 67%; --w: 32%; --d: 1.2s; z-index: 2; }
+
+/* ---- hand-written labels with a curly arrow ---- */
+.note {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  font-family: var(--script);
+  font-weight: 600;
+  font-size: clamp(17px, 1.6vw, 24px);
+  line-height: 1;
+  color: var(--note);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: note-in .6s var(--out) calc(var(--d, 0s) + .55s) both;
+}
+.note__arrow {
+  width: 1.8em;
+  height: 1.8em;
+  margin-top: .3em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 130;
+  animation: draw .8s var(--out) calc(var(--d, 0s) + .8s) both;
+}
+@keyframes note-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes draw { from { stroke-dashoffset: 130; } to { stroke-dashoffset: 0; } }
+
+.note--pitch  { top: -9%;  left: 62%; rotate: -8deg; }
+.note--jump   { top: -4%;  left: 78%; rotate: 6deg; }
+.note--member { top: -15%; left: 30%; rotate: -7deg; }
+
+/* ---- giant scrolling word ---- */
+.hero__giant {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -.12em;
+  z-index: 5;
+  font-family: var(--display);
+  font-size: clamp(84px, 15vw, 230px);
+  line-height: 1;
+  color: #fff;
+  pointer-events: none;
+}
+.hero__giant-track {
+  display: flex;
+  gap: .3em;
+  width: max-content;
+  white-space: nowrap;
+  animation: marquee 48s linear infinite;
+}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* =========================================================
    Stickers
@@ -344,18 +451,6 @@ main { overflow-x: clip; }
   box-shadow: 4px 4px 0 var(--navy);
 }
 
-.sticker--hero {
-  position: absolute;
-  top: 110px;
-  right: max(var(--gutter), 6%);
-  rotate: 14deg;
-  animation: sticker-in 1s var(--spring) 1.1s both;
-}
-@keyframes sticker-in {
-  from { opacity: 0; transform: scale(0) rotate(-200deg); }
-  to   { opacity: 1; transform: none; }
-}
-
 .sticker--product {
   position: absolute;
   top: -34px;
@@ -366,36 +461,6 @@ main { overflow-x: clip; }
   color: var(--cream);
   rotate: 12deg;
 }
-
-/* =========================================================
-   Ticker
-   ========================================================= */
-.ticker {
-  position: relative;
-  z-index: 2;
-  margin-top: -28px;
-  background: var(--sun);
-  border-block: var(--line);
-  rotate: -2deg;
-  width: 104%;
-  margin-left: -2%;
-  overflow: hidden;
-  padding-block: 14px;
-}
-
-.ticker__track {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  width: max-content;
-  animation: marquee 36s linear infinite;
-  font-family: var(--hand);
-  font-size: clamp(18px, 2.2vw, 24px);
-  white-space: nowrap;
-  padding-left: 28px;
-}
-.ticker .star { width: 22px; height: 22px; fill: var(--red); flex: none; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* =========================================================
    Shared section parts
@@ -428,7 +493,15 @@ main { overflow-x: clip; }
 /* =========================================================
    About
    ========================================================= */
-.about { padding-top: clamp(120px, 14vw, 180px); text-align: center; }
+.about { position: relative; padding-top: clamp(120px, 14vw, 180px); text-align: center; overflow: hidden; }
+.about__peek,
+.about__catch {
+  position: absolute;
+  height: auto;
+  filter: drop-shadow(0 10px 14px rgba(26, 36, 86, .18));
+}
+.about__peek  { left: -6px; top: 16%; width: clamp(96px, 12vw, 180px); }
+.about__catch { right: 3%; bottom: 10%; width: clamp(96px, 11vw, 170px); rotate: 6deg; animation: st-bob 5s ease-in-out infinite alternate; }
 
 .about__lead {
   font-family: var(--display);
@@ -582,7 +655,7 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
 .member--red  .member__photo { background: var(--red); }
 .member--orange .member__photo { background: var(--orange); }
 .member--sky    .member__photo { background: var(--sky); }
-.member__photo img { width: 100%; height: 100%; object-fit: cover; }
+.member__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 6%; scale: 1.08; }
 
 .member__role {
   display: inline-block;
@@ -720,12 +793,40 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
 
 @media (max-width: 600px) {
   .logo img { height: 34px; }
-  .hero__content { padding-top: calc(130px + env(safe-area-inset-top, 0px)); }
-  .sticker--hero { position: relative; top: auto; right: auto; margin: 28px auto 0; width: 96px; font-size: 15px; }
+  .about__peek { top: auto; bottom: 4%; }
+  .about { padding-bottom: 170px; }
   .about { text-align: left; }
   .about__lead br { display: none; }
   .info__row { grid-template-columns: 1fr; gap: 2px; }
   .member__photo { width: min(100%, 150px); }
+}
+
+/* ---- hero collage on smaller screens ---- */
+@media (max-width: 1000px) {
+  .hero__copy { top: 30%; }
+  .hero__team { width: 72%; }
+  .st--pitch { --y: 15% !important; }
+  .st--ph-a, .st--silhouette { display: none; }
+}
+
+@media (max-width: 700px) {
+  .hero { min-height: max(100svh, 660px); }
+  .hero__copy { left: 6%; right: 6%; top: 16%; }
+  .hero__title { font-size: clamp(32px, 9.6vw, 46px); }
+  [data-lang="en"] .hero__title { font-size: clamp(28px, 8vw, 40px); }
+  .st--duo, .st--silhouette, .st--ph { display: none; }
+  .st--pitch { --x: 4% !important;  --y: 42% !important; --w: 20vw !important; }
+  .st--jump  { --x: 56% !important; --y: 40% !important; --w: 36vw !important; }
+  .st--sun   { --x: 35% !important; --y: 47% !important; --w: 15vw !important; }
+  .note--pitch { top: -18%; left: 30%; }
+  .note--jump  { top: -17%; left: -8%; }
+  .hero__team { width: 100%; right: 0; }
+  .member-st--uehara    { --x: 0;   --w: 36%; }
+  .member-st--anzai     { --x: 21%; --w: 31%; }
+  .member-st--kobayashi { --x: 42%; --w: 35%; }
+  .member-st--yuki      { --x: 64%; --w: 36%; }
+  .note--member { font-size: 15px; top: -19%; left: 12%; }
+  .hero__giant { font-size: 24vw; }
 }
 
 /* =========================================================
@@ -740,6 +841,5 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   }
   .js .reveal { opacity: 1; translate: 0 0; }
   .about__lead mark { background-size: 100% 42%; }
-  .ticker__track { flex-wrap: wrap; width: auto; justify-content: center; }
-  .ticker__track > :nth-child(n+9) { display: none; }
+  .hero__giant-track { transform: none; }
 }

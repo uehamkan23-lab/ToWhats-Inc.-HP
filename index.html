@@ -18,6 +18,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<!-- 手書き風の英字ラベル（ヒーロー）用。Morisawa に切り替えた後も残します -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script>
   /* Runs before the page paints: decides whether the opening screen is shown.
@@ -77,55 +79,84 @@
 
 <main>
 
-  <!-- ============ Hero : sunrise ============ -->
+  <!-- ============ Hero : sticker collage ============
+       切り抜き写真をステッカーのように散らしたトップ。
+       位置は各要素の --x / --y / --w（画面に対する割合）で調整できます。 -->
   <section class="hero" id="top">
-    <svg class="hero__scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-      <defs>
-        <mask id="sunCut">
-          <rect x="0" y="0" width="1440" height="900" fill="#fff"/>
-          <rect x="400" y="650" width="640" height="10" fill="#000"/>
-          <rect x="400" y="680" width="640" height="14" fill="#000"/>
-          <rect x="400" y="714" width="640" height="18" fill="#000"/>
-        </mask>
-      </defs>
-      <g class="hero__sky">
-        <rect y="0"   width="1440" height="900" fill="#1a2456"/>
-        <rect y="330" width="1440" height="570" fill="#2b2f7a"/>
-        <rect y="440" width="1440" height="460" fill="#55388d"/>
-        <rect y="530" width="1440" height="370" fill="#a8457f"/>
-        <rect y="600" width="1440" height="300" fill="#f0645f"/>
-        <rect y="660" width="1440" height="240" fill="#ff8f3f"/>
-      </g>
-      <g class="hero__sun" id="sun">
-        <circle class="hero__sun-halo" cx="720" cy="680" r="240" fill="#ffc83d" opacity=".18"/>
-        <circle cx="720" cy="680" r="180" fill="#ffc83d" mask="url(#sunCut)"/>
-      </g>
-      <g class="wave wave--back"><path d="M0 700 Q120 674 240 700 T480 700 T720 700 T960 700 T1200 700 T1440 700 T1680 700 T1920 700 T2160 700 T2400 700 T2640 700 T2880 700 V900 H0Z"/></g>
-      <g class="wave wave--mid"><path d="M0 760 Q90 740 180 760 T360 760 T540 760 T720 760 T900 760 T1080 760 T1260 760 T1440 760 T1620 760 T1800 760 T1980 760 T2160 760 T2340 760 T2520 760 T2700 760 T2880 760 V900 H0Z"/></g>
-      <g class="wave wave--front"><path d="M0 815 Q60 799 120 815 T240 815 T360 815 T480 815 T600 815 T720 815 T840 815 T960 815 T1080 815 T1200 815 T1320 815 T1440 815 T1560 815 T1680 815 T1800 815 T1920 815 T2040 815 T2160 815 T2280 815 T2400 815 T2520 815 T2640 815 T2760 815 T2880 815 V900 H0Z"/></g>
-    </svg>
+    <div class="hero__stage">
 
-    <div class="hero__content">
-      <p class="hero__eyebrow" data-en="A student group at NIT, Sendai College">仙台高専の有志団体</p>
-      <h1 class="hero__title">
-        <span class="hero__line" data-en="Delivering smiles">常陸・陸奥から</span>
-        <span class="hero__line" data-en="from Hitachi &amp; Mutsu.">笑顔を届ける。</span>
-      </h1>
-      <p class="sticker sticker--hero">
-        <span>Since<br>2026</span>
-      </p>
+      <div class="hero__copy" data-depth=".08">
+        <p class="hero__eyebrow" data-en="A student group at NIT, Sendai College">仙台高専の有志団体</p>
+        <h1 class="hero__title">
+          <span class="hero__line" data-en="Delivering smiles">常陸・陸奥から</span>
+          <span class="hero__line" data-en="from Hitachi &amp; Mutsu.">笑顔を届ける。</span>
+        </h1>
+      </div>
+
+      <!-- group stickers -->
+      <figure class="st st--pitch" data-depth=".32" style="--x:1.5%; --y:12%; --w:8.5vw; --d:.35s; --r:-4deg">
+        <img src="assets/people/fun-pitch.webp" alt="" width="568" height="900">
+        <p class="note note--pitch"><span>Let's play!</span><svg class="note__arrow" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 6c10 2 18 10 14 18-3 6-12 5-10-1 2-7 16-6 22 3 5 7 6 15 4 24"/><path d="M34 49l6 7 6-8"/></svg></p>
+      </figure>
+      <figure class="st st--jump" data-depth=".22" style="--x:44%; --y:12%; --w:13vw; --d:.5s; --r:3deg">
+        <img src="assets/people/fun-jump.webp" alt="課題・不満を飛び越える" width="840" height="900">
+        <p class="note note--jump"><span>Jump over it!</span><svg class="note__arrow" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 6c10 2 18 10 14 18-3 6-12 5-10-1 2-7 16-6 22 3 5 7 6 15 4 24"/><path d="M34 49l6 7 6-8"/></svg></p>
+      </figure>
+      <figure class="st st--sun" data-depth=".15" style="--x:34%; --y:13%; --w:6.5vw; --d:.45s; --r:0deg" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs><mask id="stSunCut"><rect width="120" height="120" fill="#fff"/><rect x="0" y="70" width="120" height="6" fill="#000"/><rect x="0" y="84" width="120" height="8" fill="#000"/></mask></defs>
+          <circle cx="60" cy="60" r="54" fill="#fff"/>
+          <circle cx="60" cy="60" r="44" fill="#ffc83d" mask="url(#stSunCut)"/>
+        </svg>
+      </figure>
+      <figure class="st st--silhouette" data-depth=".3" style="--x:88%; --y:13%; --w:8vw; --d:.6s; --r:5deg">
+        <img src="assets/people/fun-silhouette.webp" alt="" width="614" height="900">
+      </figure>
+      <figure class="st st--duo" data-depth=".18" style="--x:4%; --y:62%; --w:9vw; --d:.7s; --r:-2deg">
+        <img src="assets/people/fun-duo.webp" alt="" width="546" height="900">
+      </figure>
+
+      <!-- illustration slots (placeholders until the artwork arrives; see assets/README.md) -->
+      <div class="st st--ph st--ph-a" data-depth=".26" style="--x:67%; --y:18%; --w:8.5vw; --d:.55s; --r:-5deg">
+        <span data-en="Illustration<br><b>Yuriage sunrise</b>">イラスト予定<br><b>閖上の日の出</b></span>
+      </div>
+      <div class="st st--ph st--ph-b" data-depth=".12" style="--x:33%; --y:66%; --w:8vw; --d:.8s; --r:4deg">
+        <span data-en="Illustration<br><b>NIT Sendai</b>">イラスト予定<br><b>仙台高専</b></span>
+      </div>
+
+      <!-- the four members, standing together at the bottom right -->
+      <div class="hero__team">
+        <figure class="st member-st member-st--uehara" data-depth="-.04">
+          <img src="assets/people/uehara.webp" alt="上原 貫太" width="1000" height="1000">
+          <p class="note note--member"><span>Leader</span><svg class="note__arrow" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 6c10 2 18 10 14 18-3 6-12 5-10-1 2-7 16-6 22 3 5 7 6 15 4 24"/><path d="M34 49l6 7 6-8"/></svg></p>
+        </figure>
+        <figure class="st member-st member-st--anzai" data-depth="-.07">
+          <img src="assets/people/anzai.webp" alt="安齋 隼" width="1000" height="1000">
+          <p class="note note--member"><span>Treasurer</span><svg class="note__arrow" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 6c10 2 18 10 14 18-3 6-12 5-10-1 2-7 16-6 22 3 5 7 6 15 4 24"/><path d="M34 49l6 7 6-8"/></svg></p>
+        </figure>
+        <figure class="st member-st member-st--kobayashi" data-depth="-.04">
+          <img src="assets/people/kobayashi.webp" alt="小林 壮志" width="1000" height="1000">
+          <p class="note note--member"><span>Design</span><svg class="note__arrow" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 6c10 2 18 10 14 18-3 6-12 5-10-1 2-7 16-6 22 3 5 7 6 15 4 24"/><path d="M34 49l6 7 6-8"/></svg></p>
+        </figure>
+        <figure class="st member-st member-st--yuki" data-depth="-.07">
+          <img src="assets/people/yuki.webp" alt="結城 敬蔵" width="1000" height="1000">
+          <p class="note note--member"><span>Strategy</span><svg class="note__arrow" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 6c10 2 18 10 14 18-3 6-12 5-10-1 2-7 16-6 22 3 5 7 6 15 4 24"/><path d="M34 49l6 7 6-8"/></svg></p>
+        </figure>
+      </div>
+    </div>
+
+    <div class="hero__giant" aria-hidden="true">
+      <div class="hero__giant-track">
+        <span>TOWHATS</span><span>TOWHATS</span><span>TOWHATS</span><span>TOWHATS</span>
+        <span>TOWHATS</span><span>TOWHATS</span><span>TOWHATS</span><span>TOWHATS</span>
+      </div>
     </div>
   </section>
 
-  <!-- ============ Ticker ============ -->
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker__track">
-      <span data-en="Delivering smiles from Hitachi and Mutsu.">常陸・陸奥から笑顔を届ける。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span>ToWhats</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Everyone is an engineer.">全員がエンジニア。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Hooray for engineers!">エンジニア万歳！</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Delivering smiles from Hitachi and Mutsu.">常陸・陸奥から笑顔を届ける。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span>ToWhats</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Everyone is an engineer.">全員がエンジニア。</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg><span data-en="Hooray for engineers!">エンジニア万歳！</span><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z"/></svg>
-    </div>
-  </div>
-
   <!-- ============ About ============ -->
   <section class="section about" id="about">
+    <img class="about__peek" src="assets/people/fun-peek.webp" alt="" width="636" height="873" loading="lazy">
+    <img class="about__catch" src="assets/people/fun-catch.webp" alt="" width="602" height="900" loading="lazy">
     <div class="container">
       <p class="label reveal" data-en="About us">私たち</p>
       <p class="about__lead reveal" data-en="We build apps &mdash; and <mark>anything else we find fun.</mark>">アプリ開発を軸に、<br><mark>面白いと思ったものを</mark><br>何でもつくるチームです。</p>
@@ -192,23 +223,23 @@
 
       <ul class="members">
         <li class="member member--sun reveal">
-          <div class="member__photo"><img src="assets/placeholder-member.svg" alt="" width="400" height="400" loading="lazy"></div>
-          <p class="member__role">CEO</p>
+          <div class="member__photo"><img src="assets/people/uehara.webp" alt="" width="1000" height="1000" loading="lazy"></div>
+          <p class="member__role" data-en="Leader">代表</p>
           <h3 class="member__name">上原 貫太</h3>
         </li>
         <li class="member member--red reveal">
-          <div class="member__photo"><img src="assets/placeholder-member.svg" alt="" width="400" height="400" loading="lazy"></div>
-          <p class="member__role">CFO</p>
+          <div class="member__photo"><img src="assets/people/anzai.webp" alt="" width="1000" height="1000" loading="lazy"></div>
+          <p class="member__role" data-en="Treasurer">会計</p>
           <h3 class="member__name">安齋 隼</h3>
         </li>
         <li class="member member--orange reveal">
-          <div class="member__photo"><img src="assets/placeholder-member.svg" alt="" width="400" height="400" loading="lazy"></div>
-          <p class="member__role">CDO</p>
+          <div class="member__photo"><img src="assets/people/kobayashi.webp" alt="" width="1000" height="1000" loading="lazy"></div>
+          <p class="member__role" data-en="Design">デザイン</p>
           <h3 class="member__name">小林 壮志</h3>
         </li>
         <li class="member member--sky reveal">
-          <div class="member__photo"><img src="assets/placeholder-member.svg" alt="" width="400" height="400" loading="lazy"></div>
-          <p class="member__role">CSO</p>
+          <div class="member__photo"><img src="assets/people/yuki.webp" alt="" width="1000" height="1000" loading="lazy"></div>
+          <p class="member__role" data-en="Strategy">戦略</p>
           <h3 class="member__name">結城 敬蔵</h3>
         </li>
       </ul>
@@ -236,7 +267,7 @@
         </div>
         <div class="info__row">
           <dt data-en="Representative">代表</dt>
-          <dd data-en="上原 貫太 (CEO)">上原 貫太（CEO）</dd>
+          <dd>上原 貫太</dd>
         </div>
         <div class="info__row">
           <dt data-en="Activities">活動内容</dt>

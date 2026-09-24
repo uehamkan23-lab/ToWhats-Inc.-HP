@@ -1,16 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Screenshot placeholder">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#1d1d1f"/>
-      <stop offset="1" stop-color="#111113"/>
-    </linearGradient>
-  </defs>
-  <rect width="1600" height="1000" fill="url(#bg)"/>
-  <rect x="80" y="80" width="1440" height="920" rx="20" fill="none" stroke="#3a3a3c" stroke-width="3"/>
-  <path d="M80 160h1440" stroke="#3a3a3c" stroke-width="3"/>
-  <circle cx="124" cy="120" r="9" fill="#3a3a3c"/>
-  <circle cx="156" cy="120" r="9" fill="#3a3a3c"/>
-  <circle cx="188" cy="120" r="9" fill="#3a3a3c"/>
-  <path d="M480 420h640M560 500h480M600 580h400" stroke="#2c2c2e" stroke-width="18" stroke-linecap="round"/>
-  <text x="800" y="780" font-family="ui-monospace,Menlo,monospace" font-size="24" letter-spacing="8" text-anchor="middle" fill="#6e6e73">SCREENSHOT 1600 × 1000</text>
+  <rect width="1600" height="1000" fill="#283077"/>
+  <g fill="none" stroke="#3a3f95" stroke-width="2">
+    <path d="M0 125H1600M0 250H1600M0 375H1600M0 500H1600M0 625H1600M0 750H1600M0 875H1600"/>
+    <path d="M200 0V1000M400 0V1000M600 0V1000M800 0V1000M1000 0V1000M1200 0V1000M1400 0V1000"/>
+  </g>
+  <rect x="330" y="170" width="940" height="660" rx="36" fill="#fff7e8" stroke="#1a2456" stroke-width="10"/>
+  <path d="M330 280H1270" stroke="#1a2456" stroke-width="10"/>
+  <circle cx="400" cy="225" r="16" fill="#f0645f"/>
+  <circle cx="450" cy="225" r="16" fill="#ffc83d"/>
+  <circle cx="500" cy="225" r="16" fill="#7fc8f0"/>
+  <path d="M480 420h640M480 500h480M480 580h560" stroke="#fdeccd" stroke-width="34" stroke-linecap="round"/>
+  <text x="800" y="740" font-family="ui-monospace,Menlo,monospace" font-size="30" font-weight="700" letter-spacing="6" text-anchor="middle" fill="#1a2456">SCREENSHOT 1600 × 1000</text>
 </svg>

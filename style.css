@@ -376,12 +376,20 @@ main { overflow-x: clip; }
 .member-st--yuki      { --x: 67%; --w: 32%; --d: 1.2s; z-index: 2; }
 
 /* ---- hand-written labels with a curly arrow ---- */
+/* Text on top, arrow underneath pointing down at the person.
+   Each label is anchored by its bottom edge (= the arrow tip) with
+   --tip-y (how far into the sticker the tip reaches) and --tip-x.
+   --flip: -1 curls the arrow the other way so it points down-left. */
 .note {
   position: absolute;
   margin: 0;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 2px;
+  gap: 0;
+  top: auto;
+  bottom: calc(100% - var(--tip-y, 0%));
+  left: var(--tip-x, 30%);
   font-family: var(--script);
   font-weight: 600;
   font-size: clamp(17px, 1.6vw, 24px);
@@ -392,12 +400,14 @@ main { overflow-x: clip; }
   animation: note-in .6s var(--out) calc(var(--d, 0s) + .55s) both;
 }
 .note__arrow {
-  width: 1.8em;
-  height: 1.8em;
-  margin-top: .3em;
+  width: 2.1em;
+  height: 2.1em;
+  margin-top: .05em;
+  margin-left: var(--arrow-x, .3em);
+  transform: scaleX(var(--flip, 1));
   fill: none;
   stroke: currentColor;
-  stroke-width: 3.2;
+  stroke-width: 3.6;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 130;
@@ -406,9 +416,10 @@ main { overflow-x: clip; }
 @keyframes note-in { from { opacity: 0; transform: translateY(8px); } }
 @keyframes draw { from { stroke-dashoffset: 130; } to { stroke-dashoffset: 0; } }
 
-.note--pitch  { top: -9%;  left: 62%; rotate: -8deg; }
-.note--jump   { top: -4%;  left: 78%; rotate: 6deg; }
-.note--member { top: -15%; left: 30%; rotate: -7deg; }
+/* tips land on: the glove, the jumper's back, the top of each head */
+.note--pitch  { --tip-x: 44%; --tip-y: 22%; --flip: -1; --arrow-x: 0em; rotate: -6deg; }
+.note--jump   { --tip-x: 40%; --tip-y: 14%; --flip: -1; --arrow-x: 0em; rotate: 5deg; }
+.note--member { --tip-x: 28%; --tip-y: 6%;  rotate: -5deg; }
 
 /* ---- giant scrolling word ---- */
 .hero__giant {
@@ -818,14 +829,14 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   .st--pitch { --x: 4% !important;  --y: 42% !important; --w: 20vw !important; }
   .st--jump  { --x: 56% !important; --y: 40% !important; --w: 36vw !important; }
   .st--sun   { --x: 35% !important; --y: 47% !important; --w: 15vw !important; }
-  .note--pitch { top: -18%; left: 30%; }
-  .note--jump  { top: -17%; left: -8%; }
+  .note--pitch { --tip-x: 40%; --tip-y: 18%; }
+  .note--jump  { --tip-x: 22%; --tip-y: 12%; }
   .hero__team { width: 100%; right: 0; }
   .member-st--uehara    { --x: 0;   --w: 36%; }
   .member-st--anzai     { --x: 21%; --w: 31%; }
   .member-st--kobayashi { --x: 42%; --w: 35%; }
   .member-st--yuki      { --x: 64%; --w: 36%; }
-  .note--member { font-size: 15px; top: -19%; left: 12%; }
+  .note--member { font-size: 15px; --tip-x: 18%; --tip-y: 8%; }
   .hero__giant { font-size: 24vw; }
 }
 

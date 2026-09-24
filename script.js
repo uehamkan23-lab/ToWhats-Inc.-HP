@@ -140,7 +140,7 @@
      Here it is held for a moment, then lifted like a curtain.
      ========================================================= */
   var opening = $('#opening');
-  var HOLD_MS = 2300;
+  var HOLD_MS = 3300;
 
   function liftOpening() {
     if (!root.classList.contains('is-opening') || opening.classList.contains('is-leaving')) { return; }

@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="style.css">
 <script>
   /* Runs before the page paints: decides whether the opening screen is shown.
-     Once per browser tab, never with reduced motion, and a 4s failsafe so the
+     Once per browser tab, never with reduced motion, and a 5s failsafe so the
      page can never stay covered even if script.js fails to load. */
   (function (root) {
     root.classList.add('js');
@@ -28,7 +28,7 @@
     try { seen = sessionStorage.getItem('towhats-opening') === '1'; } catch (e) {}
     if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
     root.classList.add('is-opening');
-    setTimeout(function () { root.classList.remove('is-opening'); }, 4000);
+    setTimeout(function () { root.classList.remove('is-opening'); }, 5000);
   })(document.documentElement);
 </script>
 </head>

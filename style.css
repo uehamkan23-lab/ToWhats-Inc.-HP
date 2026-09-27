@@ -73,6 +73,7 @@ body {
 }
 
 img { display: block; max-width: 100%; height: auto; }
+[hidden] { display: none !important; }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3, p, ol, ul, dl, dd { margin: 0; padding: 0; }
 ol, ul { list-style: none; }
@@ -665,6 +666,10 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   transition: rotate .5s var(--spring), scale .5s var(--spring);
 }
 .member:hover .member__photo { rotate: -6deg; scale: 1.05; }
+.member__link { display: block; }
+.member__go { display: inline-block; margin-top: 8px; font-family: var(--body-bold); font-weight: 700; font-size: 13px; color: var(--red); }
+.member__link:hover .member__name { text-decoration: underline; text-underline-offset: 4px; }
+.home-blog { background: var(--cream); }
 .member--sun    .member__photo { background: var(--sun); }
 .member--red  .member__photo { background: var(--red); }
 .member--orange .member__photo { background: var(--orange); }

@@ -1,5 +1,5 @@
 /* =========================================================
-   常奥 ToWhats — script.js
+   常奥 ToWhats — script.js  (shared by every page)
    1. Language (ja / en)
    2. Menu
    3. Scroll: hero stickers drift apart, sections pop in
@@ -27,14 +27,18 @@
      Japanese is written in the HTML, English lives in data-en.
      ========================================================= */
   var TEXT = {
-    ja: { title: '常奥 ToWhats', menu: 'メニュー', open: 'メニューを開く', close: 'メニューを閉じる' },
-    en: { title: 'ToWhats | 常奥', menu: 'Menu', open: 'Open menu', close: 'Close menu' }
+    ja: { menu: 'メニュー', open: 'メニューを開く', close: 'メニューを閉じる' },
+    en: { menu: 'Menu', open: 'Open menu', close: 'Close menu' }
   };
+  // Each page keeps its own <title>; <html data-title-en="…"> gives the English one.
+  var TITLES = { ja: document.title, en: root.getAttribute('data-title-en') || document.title };
 
   var translatable = $$('[data-en]');
   translatable.forEach(function (el) { el.setAttribute('data-ja', el.innerHTML); });
 
   var lang = store('towhats-lang') === 'en' ? 'en' : 'ja';
+  window.TOWHATS = window.TOWHATS || {};
+  window.TOWHATS.lang = lang;
 
   function applyLang(next) {
     translatable.forEach(function (el) {
@@ -43,10 +47,13 @@
     lang = next;
     root.lang = next;
     root.setAttribute('data-lang', next);
-    document.title = TEXT[next].title;
+    document.title = TITLES[next];
     nav.setAttribute('aria-label', TEXT[next].menu);
     syncBurgerLabel();
     refreshWebFonts();
+    // Parts drawn later by other scripts (blog lists) re-render on this.
+    window.TOWHATS.lang = next;
+    document.dispatchEvent(new CustomEvent('towhats:lang', { detail: next }));
   }
 
   // Morisawa's web fonts are subset to the characters on the page when it loads.
@@ -119,7 +126,7 @@
       }
     }
 
-    if (reduceMotion) { return; }
+    if (reduceMotion || !hero) { return; }
 
     var y = Math.max(0, -hero.getBoundingClientRect().top);
     if (y < hero.offsetHeight) {
@@ -157,7 +164,9 @@
     setTimeout(function () { opening.remove(); }, 1200);
   }
 
-  if (root.classList.contains('is-opening')) {
+  if (!opening) {
+    root.classList.remove('is-opening');   // only the top page has an opening
+  } else if (root.classList.contains('is-opening')) {
     setTimeout(liftOpening, HOLD_MS);
     opening.addEventListener('click', liftOpening);
     document.addEventListener('keydown', function (e) {
@@ -168,7 +177,8 @@
   }
 
   /* ---------- boot ---------- */
-  $('#year').textContent = String(new Date().getFullYear());
+  var year = $('#year');
+  if (year) { year.textContent = String(new Date().getFullYear()); }
   applyLang(lang);
   onScroll();
 })();

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja" data-lang="ja" data-title-en="{{TITLE}} | ToWhats">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{TITLE}}｜常奥 ToWhats</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<meta property="og:title" content="{{TITLE}}｜常奥 ToWhats">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#e0433a">
+<meta property="article:published_time" content="{{DATE}}">
+<link rel="icon" href="../../assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<!-- Morisawa Fonts の埋め込みコードを入れるときは、トップページ（index.html）と同じものをここにも貼ってください -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../pages.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="header__bar">
+    <a class="logo" href="../../">
+      <img src="../../assets/logo-header.png" alt="常奥 ToWhats" width="800" height="394">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="メニュー">
+      <a href="../../#about" data-en="About">私たち</a>
+      <a href="../../#works" data-en="Works">つくるもの</a>
+      <a href="../../members/" data-en="Members">メンバー</a>
+      <a href="../../blog/" data-en="Blog" aria-current="page">ブログ</a>
+      <a href="../../#company" data-en="Profile">団体概要</a>
+    </nav>
+
+    <button class="pill pill--lang" id="langToggle" type="button" data-en="日本語">EN</button>
+
+    <button class="burger" id="burger" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="container article">
+      <ol class="crumbs"><li><a href="../../">ホーム</a></li><li><a href="../">ブログ</a></li></ol>
+      <h1 class="page-head__title">{{TITLE}}</h1>
+      <p class="article__meta">
+        <time datetime="{{DATE}}">{{DATE_LABEL}}</time>
+        <span class="article__author"><img src="../../assets/people/{{AUTHOR_KEY}}.webp" alt=""><a href="../../members/{{AUTHOR_KEY}}/">{{AUTHOR_NAME}}</a><span>（{{AUTHOR_ROLE}}）</span></span>
+      </p>
+    </div>
+    <svg class="divider" viewBox="0 0 2880 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 Q60 10 120 22 T240 22 T360 22 T480 22 T600 22 T720 22 T840 22 T960 22 T1080 22 T1200 22 T1320 22 T1440 22 T1560 22 T1680 22 T1800 22 T1920 22 T2040 22 T2160 22 T2280 22 T2400 22 T2520 22 T2640 22 T2760 22 T2880 22 V48 H0Z"/></svg>
+  </section>
+
+  <section class="page-body">
+    <article class="container article">
+{{COVER}}
+      <div class="prose">
+{{BODY}}
+      </div>
+      <nav class="article__foot">
+        <a class="btn btn--ghost" href="../" data-en="All posts">ブログ一覧へ</a>
+        <a class="btn btn--ghost" href="../../members/{{AUTHOR_KEY}}/" data-en="About the author">書いた人の紹介</a>
+      </nav>
+    </article>
+  </section>
+</main>
+
+<footer class="footer">
+  <svg class="divider divider--footer" viewBox="0 0 2880 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 Q60 10 120 22 T240 22 T360 22 T480 22 T600 22 T720 22 T840 22 T960 22 T1080 22 T1200 22 T1320 22 T1440 22 T1560 22 T1680 22 T1800 22 T1920 22 T2040 22 T2160 22 T2280 22 T2400 22 T2520 22 T2640 22 T2760 22 T2880 22 V48 H0Z"/></svg>
+  <div class="footer__sun" aria-hidden="true"></div>
+  <p class="footer__copy" data-en="Delivering smiles<br>from Hitachi &amp; Mutsu.">常陸・陸奥から<br>笑顔を届ける。</p>
+  <p class="footer__name">常奥 ToWhats</p>
+  <p class="footer__small">&copy; <span id="year">2026</span> ToWhats</p>
+</footer>
+
+<script src="../../script.js"></script>
+</body>
+</html>

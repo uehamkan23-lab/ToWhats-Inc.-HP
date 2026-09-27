@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja" data-lang="ja" data-title-en="Write a post | ToWhats">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ブログを書く｜常奥 ToWhats</title>
+<meta name="description" content="メンバー専用のブログ投稿ページです。">
+<meta property="og:title" content="ブログを書く｜常奥 ToWhats">
+<meta property="og:description" content="メンバー専用のブログ投稿ページです。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#e0433a">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../../assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<!-- Morisawa Fonts の埋め込みコードを入れるときは、トップページ（index.html）と同じものをここにも貼ってください -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../pages.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="header__bar">
+    <a class="logo" href="../../">
+      <img src="../../assets/logo-header.png" alt="常奥 ToWhats" width="800" height="394">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="メニュー">
+      <a href="../../#about" data-en="About">私たち</a>
+      <a href="../../#works" data-en="Works">つくるもの</a>
+      <a href="../../members/" data-en="Members">メンバー</a>
+      <a href="../../blog/" data-en="Blog" aria-current="page">ブログ</a>
+      <a href="../../#company" data-en="Profile">団体概要</a>
+    </nav>
+
+    <button class="pill pill--lang" id="langToggle" type="button" data-en="日本語">EN</button>
+
+    <button class="burger" id="burger" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="container">
+      <ol class="crumbs"><li><a href="../../">ホーム</a></li><li><a href="../../blog/">ブログ</a></li><li aria-current="page">ブログを書く</li></ol>
+      <p class="label" data-en="Members only">メンバー専用</p>
+      <h1 class="page-head__title" data-en="Write a post">ブログを書く</h1>
+      <p class="page-head__lead" data-en="Connect with a GitHub access token to publish straight to the site. Only members with a token can publish.">GitHub のアクセストークンで接続すると、書いた記事をそのままサイトに公開できます。トークンを持っているメンバーだけが公開できます。</p>
+    </div>
+    <svg class="divider" viewBox="0 0 2880 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 Q60 10 120 22 T240 22 T360 22 T480 22 T600 22 T720 22 T840 22 T960 22 T1080 22 T1200 22 T1320 22 T1440 22 T1560 22 T1680 22 T1800 22 T1920 22 T2040 22 T2160 22 T2280 22 T2400 22 T2520 22 T2640 22 T2760 22 T2880 22 V48 H0Z"/></svg>
+  </section>
+
+  <section class="page-body">
+    <div class="container writer">
+
+      <!-- 1. connect -->
+      <section class="panel" id="connectPanel">
+        <h2>1. GitHub に接続</h2>
+        <div class="field">
+          <label for="token">アクセストークン</label>
+          <input id="token" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…">
+          <small>このリポジトリへの書き込み権限があるトークンだけが使えます。トークンは GitHub 以外には送られません。</small>
+        </div>
+        <label class="check"><input id="remember" type="checkbox"> この端末に保存する（自分の端末のときだけ）</label>
+        <div class="actions">
+          <button class="btn" id="connectBtn" type="button">接続する</button>
+          <button class="btn btn--ghost" id="disconnectBtn" type="button" hidden>接続を解除</button>
+        </div>
+        <p class="status" id="connectStatus" role="status" hidden></p>
+        <details class="help">
+          <summary>トークンの作り方</summary>
+          <ol>
+            <li>GitHub の <b>Settings</b> → <b>Developer settings</b> → <b>Personal access tokens</b> → <b>Fine-grained tokens</b> → <b>Generate new token</b></li>
+            <li><b>Repository access</b> で <code>ToWhats-Inc.-HP</code> だけを選ぶ</li>
+            <li><b>Permissions</b> → <b>Repository permissions</b> → <b>Contents</b> を <b>Read and write</b> にする</li>
+            <li>作成したトークン（<code>github_pat_</code> で始まる文字列）を上の欄に貼る</li>
+          </ol>
+          <p>リポジトリの共同編集者（Collaborator）になっている人のトークンだけが使えます。</p>
+        </details>
+      </section>
+
+      <!-- 2. write -->
+      <section class="panel" id="editPanel" hidden>
+        <h2>2. 記事を書く</h2>
+        <div class="row">
+          <div class="field">
+            <label for="postSelect">書く記事</label>
+            <select id="postSelect"><option value="">＋ 新しい記事</option></select>
+          </div>
+          <div class="field">
+            <label for="author">書いた人</label>
+            <select id="author"></select>
+          </div>
+          <div class="field">
+            <label for="date">日付</label>
+            <input id="date" type="date">
+          </div>
+        </div>
+        <div class="field">
+          <label for="title">タイトル</label>
+          <input id="title" type="text" maxlength="80" placeholder="例：NajoshiteAI の開発をはじめました">
+        </div>
+        <div class="field">
+          <label for="slug">URL に使う名前</label>
+          <input id="slug" type="text" maxlength="60" spellcheck="false" placeholder="例：2026-09-27-start">
+          <small id="slugHint">半角の英小文字・数字・ハイフンだけ。記事の URL は <code>/blog/この名前/</code> になります。</small>
+        </div>
+
+        <div class="field" style="margin-top:22px">
+          <span class="field__label">本文</span>
+          <div class="tabs" role="tablist">
+            <button type="button" role="tab" aria-selected="true" data-view="write">書く</button>
+            <button type="button" role="tab" aria-selected="false" data-view="preview">プレビュー</button>
+          </div>
+          <div class="editor" id="editor" data-view="write">
+            <div class="editor__write">
+              <div class="toolbar" aria-label="書式">
+                <button type="button" data-md="h2">見出し</button>
+                <button type="button" data-md="bold">太字</button>
+                <button type="button" data-md="link">リンク</button>
+                <button type="button" data-md="list">箇条書き</button>
+                <button type="button" data-md="quote">引用</button>
+                <button type="button" data-md="image">画像を追加</button>
+              </div>
+              <textarea id="body" spellcheck="false" placeholder="ここに本文を書きます。&#10;&#10;## 見出し&#10;行頭に ## を付けると見出しになります。&#10;**太字** や [リンク](https://example.com) も使えます。"></textarea>
+              <input id="imageInput" type="file" accept="image/*" multiple hidden>
+              <div class="images" id="images"></div>
+            </div>
+            <div class="preview" aria-live="polite">
+              <p class="preview__title" id="previewTitle"></p>
+              <div class="prose" id="preview"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:18px">
+          <label for="cover">表紙の画像</label>
+          <select id="cover"><option value="">なし</option></select>
+          <small>記事一覧のカードと、記事の先頭に表示されます。本文に追加した画像から選べます。</small>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="publishBtn" type="button">公開する</button>
+          <button class="btn btn--ghost" id="newBtn" type="button">新しい記事にする</button>
+          <button class="btn btn--danger" id="deleteBtn" type="button" hidden>この記事を削除</button>
+        </div>
+        <p class="status" id="publishStatus" role="status" hidden></p>
+      </section>
+
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <svg class="divider divider--footer" viewBox="0 0 2880 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 Q60 10 120 22 T240 22 T360 22 T480 22 T600 22 T720 22 T840 22 T960 22 T1080 22 T1200 22 T1320 22 T1440 22 T1560 22 T1680 22 T1800 22 T1920 22 T2040 22 T2160 22 T2280 22 T2400 22 T2520 22 T2640 22 T2760 22 T2880 22 V48 H0Z"/></svg>
+  <div class="footer__sun" aria-hidden="true"></div>
+  <p class="footer__copy" data-en="Delivering smiles<br>from Hitachi &amp; Mutsu.">常陸・陸奥から<br>笑顔を届ける。</p>
+  <p class="footer__name">常奥 ToWhats</p>
+  <p class="footer__small">&copy; <span id="year">2026</span> ToWhats</p>
+</footer>
+
+<script src="../../script.js"></script>
+<script src="../../members.js"></script>
+<script src="../../blog/config.js"></script>
+<script src="../../blog/write/markdown.js"></script>
+<script src="../../blog/write/write.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" data-lang="ja">
+<html lang="ja" data-lang="ja" data-title-en="ToWhats | 常奥">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -21,6 +21,7 @@
 <!-- 手書き風の英字ラベル（ヒーロー）用。Morisawa に切り替えた後も残します -->
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="pages.css">
 <script>
   /* Runs before the page paints: decides whether the opening screen is shown.
      Once per browser tab, never with reduced motion, and a 5s failsafe so the
@@ -63,9 +64,9 @@
 
     <nav class="nav" id="nav" aria-label="メニュー">
       <a href="#about" data-en="About">私たち</a>
-      <a href="#philosophy" data-en="Philosophy">大切なこと</a>
       <a href="#works" data-en="Works">つくるもの</a>
-      <a href="#team" data-en="Team">メンバー</a>
+      <a href="members/" data-en="Members">メンバー</a>
+      <a href="blog/" data-en="Blog">ブログ</a>
       <a href="#company" data-en="Profile">団体概要</a>
     </nav>
 
@@ -204,7 +205,7 @@
         <div class="product__body">
           <p class="sticker sticker--product"><span data-en="In<br>dev!">開発中</span></p>
           <h3 class="product__name">NajoshiteAI</h3>
-          <p class="product__text" data-en="Details coming soon.">詳細は、準備中です。</p>
+          <p class="product__text" data-en="A study app where you teach an AI student, Najimi. Najimi asks questions with a misunderstanding on purpose. Coming spring 2027.">AI の生徒「なじみ」に勉強を教える学習アプリ。なじみは、わざと勘違いをしたまま質問をしてきます。2027年春 リリース予定。</p>
           <a class="btn" href="https://najoshiteai.pages.dev/" target="_blank" rel="noopener noreferrer">
             <span data-en="Visit the site">サイトを見る</span>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
@@ -223,26 +224,48 @@
 
       <ul class="members">
         <li class="member member--sun reveal">
-          <div class="member__photo"><img src="assets/people/uehara.webp" alt="" width="1000" height="1000" loading="lazy"></div>
-          <p class="member__role" data-en="Leader">代表</p>
-          <h3 class="member__name">上原 貫太</h3>
+          <a class="member__link" href="members/uehara/">
+            <div class="member__photo"><img src="assets/people/uehara.webp" alt="" width="1000" height="1000" loading="lazy"></div>
+            <p class="member__role" data-en="Leader">代表</p>
+            <h3 class="member__name">上原 貫太</h3>
+            <span class="member__go" data-en="See profile →">紹介を見る →</span>
+          </a>
         </li>
         <li class="member member--red reveal">
-          <div class="member__photo"><img src="assets/people/anzai.webp" alt="" width="1000" height="1000" loading="lazy"></div>
-          <p class="member__role" data-en="Treasurer">会計</p>
-          <h3 class="member__name">安齋 隼</h3>
+          <a class="member__link" href="members/anzai/">
+            <div class="member__photo"><img src="assets/people/anzai.webp" alt="" width="1000" height="1000" loading="lazy"></div>
+            <p class="member__role" data-en="Treasurer">会計</p>
+            <h3 class="member__name">安齋 隼</h3>
+            <span class="member__go" data-en="See profile →">紹介を見る →</span>
+          </a>
         </li>
         <li class="member member--orange reveal">
-          <div class="member__photo"><img src="assets/people/kobayashi.webp" alt="" width="1000" height="1000" loading="lazy"></div>
-          <p class="member__role" data-en="Design">デザイン</p>
-          <h3 class="member__name">小林 壮志</h3>
+          <a class="member__link" href="members/kobayashi/">
+            <div class="member__photo"><img src="assets/people/kobayashi.webp" alt="" width="1000" height="1000" loading="lazy"></div>
+            <p class="member__role" data-en="Design">デザイン</p>
+            <h3 class="member__name">小林 壮志</h3>
+            <span class="member__go" data-en="See profile →">紹介を見る →</span>
+          </a>
         </li>
         <li class="member member--sky reveal">
-          <div class="member__photo"><img src="assets/people/yuki.webp" alt="" width="1000" height="1000" loading="lazy"></div>
-          <p class="member__role" data-en="Strategy">戦略</p>
-          <h3 class="member__name">結城 敬蔵</h3>
+          <a class="member__link" href="members/yuki/">
+            <div class="member__photo"><img src="assets/people/yuki.webp" alt="" width="1000" height="1000" loading="lazy"></div>
+            <p class="member__role" data-en="Strategy">戦略</p>
+            <h3 class="member__name">結城 敬蔵</h3>
+            <span class="member__go" data-en="See profile →">紹介を見る →</span>
+          </a>
         </li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ============ Blog (latest 3) ============ -->
+  <section class="section home-blog" id="blog">
+    <div class="container">
+      <p class="label reveal" data-en="Blog">ブログ</p>
+      <h2 class="title reveal" data-en="Notes from building things.">つくりながら、書いています。</h2>
+      <div data-posts data-root="" data-limit="3"></div>
+      <p class="more-link"><a class="btn" href="blog/"><span data-en="All posts">記事をすべて見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></p>
     </div>
   </section>
 
@@ -289,5 +312,7 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="members.js"></script>
+<script src="blog.js"></script>
 </body>
 </html>

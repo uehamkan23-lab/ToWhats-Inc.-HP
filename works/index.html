@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja" data-lang="ja" data-title-en="Blog | ToWhats">
+<html lang="ja" data-lang="ja" data-title-en="Works | ToWhats">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ブログ｜常奥 ToWhats</title>
-<meta name="description" content="常奥（ToWhats）のメンバーが書くブログです。">
-<meta property="og:title" content="ブログ｜常奥 ToWhats">
-<meta property="og:description" content="常奥（ToWhats）のメンバーが書くブログです。">
+<title>つくるもの｜常奥 ToWhats</title>
+<meta name="description" content="常奥（ToWhats）がつくっているもの、つくったものです。">
+<meta property="og:title" content="つくるもの｜常奥 ToWhats">
+<meta property="og:description" content="常奥（ToWhats）がつくっているもの、つくったものです。">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#e0433a">
 <link rel="icon" href="../assets/favicon.png" type="image/png">
@@ -29,9 +29,9 @@
 
     <nav class="nav" id="nav" aria-label="メニュー">
       <a href="../about/" data-en="About">私たち</a>
-      <a href="../works/" data-en="Works">つくるもの</a>
+      <a href="../works/" data-en="Works" aria-current="page">つくるもの</a>
       <a href="../members/" data-en="Members">メンバー</a>
-      <a href="../blog/" data-en="Blog" aria-current="page">ブログ</a>
+      <a href="../blog/" data-en="Blog">ブログ</a>
       <a href="../about/#profile" data-en="Profile">団体概要</a>
     </nav>
 
@@ -46,18 +46,18 @@
 <main>
   <section class="page-head">
     <div class="container">
-      <ol class="crumbs"><li><a href="../">ホーム</a></li><li aria-current="page">ブログ</li></ol>
-      <p class="label" data-en="Blog">ブログ</p>
-      <h1 class="page-head__title" data-en="Notes from building things.">つくりながら、書いていきます。</h1>
-      <p class="page-head__lead" data-en="What we are building, what we are thinking, and news, written by the members.">開発の様子や、考えたこと、お知らせを、メンバーが書いています。</p>
+      <ol class="crumbs"><li><a href="../">ホーム</a></li><li aria-current="page">つくるもの</li></ol>
+      <p class="label" data-en="Works">つくるもの</p>
+      <h1 class="page-head__title" data-en="What we are building.">つくっているもの。</h1>
+      <p class="page-head__lead" data-en="Things in progress and things we have made, with the members who worked on each.">開発中のもの、これまでにつくったもの。それぞれ、関わったメンバーを載せています。</p>
     </div>
     <svg class="divider" viewBox="0 0 2880 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 Q60 10 120 22 T240 22 T360 22 T480 22 T600 22 T720 22 T840 22 T960 22 T1080 22 T1200 22 T1320 22 T1440 22 T1560 22 T1680 22 T1800 22 T1920 22 T2040 22 T2160 22 T2280 22 T2400 22 T2520 22 T2640 22 T2760 22 T2880 22 V48 H0Z"/></svg>
   </section>
 
   <section class="page-body">
     <div class="container">
-      <nav class="post-filter" data-post-filter aria-label="書いた人で絞り込む"></nav>
-      <div data-posts data-root="../" data-url-filter></div>
+      <nav class="post-filter" data-work-filter aria-label="関わったメンバーで絞り込む"></nav>
+      <div data-works data-root="../" data-url-filter></div>
     </div>
   </section>
 </main>
@@ -72,6 +72,6 @@
 
 <script src="../script.js"></script>
 <script src="../members.js"></script>
-<script src="../blog.js"></script>
+<script src="../works.js"></script>
 </body>
 </html>

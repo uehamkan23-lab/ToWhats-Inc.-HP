@@ -83,7 +83,7 @@ mark { background: none; color: inherit; }
 :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; border-radius: 6px; }
 
 /* bold body text: Morisawa's bold is its own family (A1ゴシック B) */
-.nav a, .pill, .hero__eyebrow, .label, .about__sub, .card__text, .product__text,
+.nav a, .pill, .hero__eyebrow, .label, .about__sub, .card__text,
 .btn, .member__role, .info dt, .info dd, .tag, .footer__name {
   font-family: var(--body-bold);
 }
@@ -466,16 +466,6 @@ main { overflow-x: clip; }
   box-shadow: 4px 4px 0 var(--navy);
 }
 
-.sticker--product {
-  position: absolute;
-  top: -34px;
-  right: 24px;
-  width: 92px;
-  font-size: 17px;
-  background: var(--red);
-  color: var(--cream);
-  rotate: 12deg;
-}
 
 /* =========================================================
    Shared section parts
@@ -588,43 +578,6 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
 .divider--top    { top: -47px; }
 .divider--bottom { bottom: -47px; transform: scaleY(-1); }
 
-.product {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  background: var(--cream);
-  border: var(--line);
-  border-radius: 28px;
-  box-shadow: 10px 10px 0 var(--sun);
-}
-
-.product__visual {
-  border-right: var(--line);
-  border-radius: 25px 0 0 25px;
-  overflow: hidden;
-  background: var(--navy-2);
-}
-.product__visual img { width: 100%; height: 100%; object-fit: cover; transition: scale .8s var(--out); }
-.product:hover .product__visual img { scale: 1.04; }
-
-.product__body {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: clamp(36px, 4vw, 52px);
-}
-.product__name {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(32px, 4.4vw, 54px);
-  line-height: 1.1;
-  letter-spacing: -.01em;
-  margin-bottom: 14px;
-}
-.product__text { font-weight: 700; color: var(--muted); margin-bottom: 28px; }
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -642,6 +595,7 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
 .btn:hover  { translate: -2px -2px; box-shadow: 6px 6px 0 var(--red); }
 .btn:hover svg { translate: 4px 0; }
 .btn:active { translate: 3px 3px; box-shadow: 0 0 0 var(--red); }
+.btn--on-dark { background: var(--sun); color: var(--navy); box-shadow: 4px 4px 0 var(--red); }
 
 /* =========================================================
    Team
@@ -805,8 +759,6 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   .nav a { font-family: var(--display); font-weight: 400; font-size: 20px; padding: 10px 16px; }
 
   .cards { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
-  .product { grid-template-columns: 1fr; }
-  .product__visual { border-right: 0; border-bottom: var(--line); border-radius: 25px 25px 0 0; aspect-ratio: 16 / 10; }
   .members { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 

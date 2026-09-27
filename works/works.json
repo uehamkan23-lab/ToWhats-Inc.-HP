@@ -1,0 +1,45 @@
+[
+  {
+    "slug": "najoshiteai",
+    "title": "NajoshiteAI",
+    "summary": "AI の生徒「なじみ」に勉強を教える学習アプリ。",
+    "status": "開発中",
+    "period": "2027年春 リリース予定",
+    "members": [
+      "uehara",
+      "kobayashi"
+    ],
+    "others": "",
+    "url": "https://najoshiteai.pages.dev/",
+    "cover": "cover.webp",
+    "updated": "2026-09-27"
+  },
+  {
+    "slug": "wasufinder",
+    "title": "WasuFinder",
+    "summary": "公共交通機関での忘れ物を検知する AI。",
+    "status": "",
+    "period": "第6回 AI甲子園「JOYFUL」",
+    "members": [
+      "uehara"
+    ],
+    "others": "",
+    "url": "https://www.sendai-nct.ac.jp/20260330-2/",
+    "cover": "",
+    "updated": "2026-09-26"
+  },
+  {
+    "slug": "milcraft",
+    "title": "ミルクラフト",
+    "summary": "令和7年度 なとりこどもファンドに採択された事業。",
+    "status": "",
+    "period": "令和7年度",
+    "members": [
+      "uehara"
+    ],
+    "others": "",
+    "url": "",
+    "cover": "",
+    "updated": "2026-09-25"
+  }
+]

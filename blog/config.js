@@ -1,6 +1,6 @@
 /* =========================================================
-   Where blog posts are saved. The writer page commits to this
-   repository and branch, and GitHub Pages publishes from it.
+   Where posts and works are saved. The writer page commits to
+   this repository and branch, and GitHub Pages publishes from it.
    If the site is later published from another branch (for
    example "main"), change `branch` here.
    ========================================================= */

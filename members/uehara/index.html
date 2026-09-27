@@ -28,11 +28,11 @@
     </a>
 
     <nav class="nav" id="nav" aria-label="メニュー">
-      <a href="../../#about" data-en="About">私たち</a>
-      <a href="../../#works" data-en="Works">つくるもの</a>
+      <a href="../../about/" data-en="About">私たち</a>
+      <a href="../../works/" data-en="Works">つくるもの</a>
       <a href="../../members/" data-en="Members" aria-current="page">メンバー</a>
       <a href="../../blog/" data-en="Blog">ブログ</a>
-      <a href="../../#company" data-en="Profile">団体概要</a>
+      <a href="../../about/#profile" data-en="Profile">団体概要</a>
     </nav>
 
     <button class="pill pill--lang" id="langToggle" type="button" data-en="日本語">EN</button>
@@ -87,6 +87,12 @@
       </section>
 
       <section class="block">
+        <p class="block__en">Works</p>
+        <h2 class="block__title" data-en="What I am part of.">関わっているもの</h2>
+        <div data-works data-root="../../" data-member="uehara"></div>
+      </section>
+
+      <section class="block">
         <p class="block__en">Blog</p>
         <h2 class="block__title" data-en="Posts by Kanta Uehara">上原 貫太のブログ</h2>
         <div data-posts data-root="../../" data-author="uehara"></div>
@@ -118,5 +124,6 @@
 <script src="../../script.js"></script>
 <script src="../../members.js"></script>
 <script src="../../blog.js"></script>
+<script src="../../works.js"></script>
 </body>
 </html>

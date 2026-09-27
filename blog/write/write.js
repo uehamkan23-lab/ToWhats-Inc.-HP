@@ -1,13 +1,15 @@
 /* =========================================================
-   常奥 ToWhats — blog writer (/blog/write/)
+   常奥 ToWhats — writer (/blog/write/)
+   Writes two kinds of pages:
+     ブログ記事   → blog/<slug>/   listed in blog/posts.json
+     つくるもの   → works/<slug>/  listed in works/works.json
 
    Members connect with a GitHub fine-grained token that can
-   write to this repository. Publishing makes ONE commit that
-   contains, for a post called <slug>:
-     blog/<slug>/index.html   the finished page (from blog/post-template.html)
-     blog/<slug>/post.md      the text, so the post can be edited later
-     blog/<slug>/<images>     images added in the editor
-     blog/posts.json          the list the blog pages read
+   write to this repository. Publishing makes ONE commit with:
+     <dir>/<slug>/index.html   the finished page (from the kind's template)
+     <dir>/<slug>/<source>.md  the text, so it can be edited later
+     <dir>/<slug>/<images>     images added in the editor
+     <dir>/<list>.json         the list the site reads
    GitHub Pages then publishes it within a minute or two.
    ========================================================= */
 (function () {
@@ -20,13 +22,32 @@
   var REPO = '/repos/' + CFG.owner + '/' + CFG.repo;
   var SLUG_RE = /^[a-z0-9][a-z0-9-]{0,58}[a-z0-9]$|^[a-z0-9]$/;
   var TOKEN_KEY = 'towhats-gh-token';
-  var DRAFT_KEY = 'towhats-blog-draft';
+  var DRAFT_KEY = 'towhats-draft-';
+
+  var KINDS = {
+    blog: {
+      dir: 'blog', list: 'posts.json', template: 'post-template.html', source: 'post.md',
+      noun: '記事', commit: 'ブログ', pick: '書く記事', titleLabel: 'タイトル',
+      titleHint: '例：NajoshiteAI の開発をはじめました', slugHint: '例：2026-09-27-start',
+      sort: function (a, b) { return String(b.date).localeCompare(String(a.date)) || String(b.slug).localeCompare(String(a.slug)); },
+      label: function (p) { return p.date + '　' + p.title; }
+    },
+    works: {
+      dir: 'works', list: 'works.json', template: 'work-template.html', source: 'work.md',
+      noun: '作品', commit: 'つくるもの', pick: '書く作品', titleLabel: '名前',
+      titleHint: '例：NajoshiteAI', slugHint: '例：najoshiteai',
+      sort: function (a, b) { return String(b.updated || '').localeCompare(String(a.updated || '')) || String(a.slug).localeCompare(String(b.slug)); },
+      label: function (p) { return p.title + (p.status ? '（' + p.status + '）' : ''); }
+    }
+  };
 
   function $(id) { return document.getElementById(id); }
   var el = {
     token: $('token'), remember: $('remember'), connectBtn: $('connectBtn'), disconnectBtn: $('disconnectBtn'),
     connectStatus: $('connectStatus'), editPanel: $('editPanel'),
-    postSelect: $('postSelect'), author: $('author'), date: $('date'), title: $('title'), slug: $('slug'),
+    postSelect: $('postSelect'), postSelectLabel: $('postSelectLabel'), titleLabel: $('titleLabel'), slugHint: $('slugHint'),
+    author: $('author'), date: $('date'), title: $('title'), slug: $('slug'),
+    status: $('status'), period: $('period'), summary: $('summary'), memberChecks: $('memberChecks'), others: $('others'), url: $('url'),
     body: $('body'), imageInput: $('imageInput'), images: $('images'), cover: $('cover'),
     preview: $('preview'), previewTitle: $('previewTitle'), editor: $('editor'),
     publishBtn: $('publishBtn'), newBtn: $('newBtn'), deleteBtn: $('deleteBtn'), publishStatus: $('publishStatus')
@@ -34,18 +55,18 @@
 
   var state = {
     token: '',
-    login: '',
-    posts: [],          // from posts.json
-    editing: null,      // slug of the post being edited, or null for a new one
+    kind: 'blog',
+    items: [],          // the current kind's list
+    editing: null,      // slug being edited, or null for a new one
     images: {},         // name -> { url, base64 (new only), isNew }
     deleteArmed: false
   };
+  function K() { return KINDS[state.kind]; }
 
   /* ---------------- storage (per device, optional) ---------------- */
   function get(store, k) { try { return window[store].getItem(k); } catch (e) { return null; } }
   function set(store, k, v) { try { if (v == null) { window[store].removeItem(k); } else { window[store].setItem(k, v); } } catch (e) { /* ignore */ } }
 
-  /* ---------------- status lines ---------------- */
   function status(node, kind, html) {
     node.hidden = !html;
     node.className = 'status' + (kind ? ' status--' + kind : '');
@@ -83,13 +104,14 @@
     return new TextDecoder('utf-8').decode(bytes);
   }
 
-  function readFile(path, ref) {
-    return gh('GET', REPO + '/contents/' + path + '?ref=' + encodeURIComponent(ref || CFG.branch))
+  function readFile(path) {
+    return gh('GET', REPO + '/contents/' + path + '?ref=' + encodeURIComponent(CFG.branch))
       .then(function (f) { return decodeBase64Utf8(f.content); });
   }
 
-  function readPostsJson(ref) {
-    return readFile(CFG.dir + '/posts.json', ref)
+  function readList(kind) {
+    var k = KINDS[kind];
+    return readFile(k.dir + '/' + k.list)
       .then(function (t) { var j = JSON.parse(t); return Array.isArray(j) ? j : []; })
       .catch(function (e) { if (e.status === 404) { return []; } throw e; });
   }
@@ -126,13 +148,12 @@
         if (!repo.permissions || !repo.permissions.push) {
           throw new Error('このトークンには ' + CFG.repo + ' への書き込み権限がありません。');
         }
-        state.login = user.login;
         set(el.remember.checked ? 'localStorage' : 'sessionStorage', TOKEN_KEY, state.token);
         if (!el.remember.checked) { set('localStorage', TOKEN_KEY, null); }
         status(el.connectStatus, 'ok', MD.escape(user.login) + ' として接続しました。');
         el.disconnectBtn.hidden = false;
         el.editPanel.hidden = false;
-        return refreshPostList();
+        return refreshList();
       })
       .catch(function (e) {
         state.token = '';
@@ -146,7 +167,7 @@
   }
 
   function disconnect() {
-    state.token = ''; state.login = '';
+    state.token = '';
     set('localStorage', TOKEN_KEY, null); set('sessionStorage', TOKEN_KEY, null);
     el.token.value = '';
     el.editPanel.hidden = true;
@@ -154,14 +175,16 @@
     status(el.connectStatus, '', '');
   }
 
-  function refreshPostList() {
-    return readPostsJson().then(function (posts) {
-      state.posts = posts;
+  function refreshList() {
+    var kind = state.kind;
+    return readList(kind).then(function (items) {
+      if (kind !== state.kind) { return; }
+      state.items = items;
       var keep = el.postSelect.value;
-      el.postSelect.innerHTML = '<option value="">＋ 新しい記事</option>' + posts.map(function (p) {
-        return '<option value="' + MD.escape(p.slug) + '">' + MD.escape(p.date + '　' + p.title) + '</option>';
+      el.postSelect.innerHTML = '<option value="">＋ 新しく書く</option>' + items.slice().sort(K().sort).map(function (p) {
+        return '<option value="' + MD.escape(p.slug) + '">' + MD.escape(K().label(p)) + '</option>';
       }).join('');
-      el.postSelect.value = keep && posts.some(function (p) { return p.slug === keep; }) ? keep : '';
+      el.postSelect.value = keep && items.some(function (p) { return p.slug === keep; }) ? keep : '';
     });
   }
 
@@ -171,10 +194,42 @@
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
 
-  function fillAuthors() {
+  function fillMembers() {
     el.author.innerHTML = MEMBERS.map(function (m) {
       return '<option value="' + m.key + '">' + MD.escape(m.name + '（' + m.role.ja + '）') + '</option>';
     }).join('');
+    el.memberChecks.innerHTML = MEMBERS.map(function (m) {
+      return '<label><input type="checkbox" value="' + m.key + '"> ' + MD.escape(m.name) + '</label>';
+    }).join('');
+  }
+  function checkedMembers() {
+    return Array.prototype.filter.call(el.memberChecks.querySelectorAll('input'), function (i) { return i.checked; })
+      .map(function (i) { return i.value; });
+  }
+  function setCheckedMembers(keys) {
+    Array.prototype.forEach.call(el.memberChecks.querySelectorAll('input'), function (i) { i.checked = keys.indexOf(i.value) >= 0; });
+  }
+
+  function applyKindUI() {
+    var k = K();
+    Array.prototype.forEach.call(document.querySelectorAll('[data-for]'), function (n) {
+      n.hidden = n.getAttribute('data-for') !== state.kind;
+    });
+    el.postSelectLabel.textContent = k.pick;
+    el.titleLabel.textContent = k.titleLabel;
+    el.title.placeholder = k.titleHint;
+    el.slug.placeholder = k.slugHint;
+    el.slugHint.innerHTML = '半角の英小文字・数字・ハイフンだけ。URL は <code>/' + k.dir + '/この名前/</code> になります。あとから変えられません。';
+    Array.prototype.forEach.call(document.querySelectorAll('input[name="kind"]'), function (r) { r.checked = r.value === state.kind; });
+  }
+
+  function switchKind(kind) {
+    if (!KINDS[kind] || kind === state.kind) { return; }
+    state.kind = kind;
+    applyKindUI();
+    resetEditor(true);
+    status(el.publishStatus, '', '');
+    if (state.token) { refreshList(); }
   }
 
   function resetEditor(fromDraft) {
@@ -182,33 +237,44 @@
     state.images = {};
     state.deleteArmed = false;
     var d = null;
-    if (fromDraft) { try { d = JSON.parse(get('localStorage', DRAFT_KEY) || 'null'); } catch (e) { d = null; } }
-    el.title.value = d ? d.title : '';
-    el.slug.value = d ? d.slug : today() + '-';
-    el.author.value = d ? d.author : el.author.value;
-    el.date.value = d ? d.date : today();
-    el.body.value = d ? d.body : '';
+    if (fromDraft) { try { d = JSON.parse(get('localStorage', DRAFT_KEY + state.kind) || 'null'); } catch (e) { d = null; } }
+    d = d || {};
+    el.title.value = d.title || '';
+    el.slug.value = d.slug != null ? d.slug : (state.kind === 'blog' ? today() + '-' : '');
+    if (d.author) { el.author.value = d.author; }
+    el.date.value = d.date || today();
+    el.status.value = d.status || '';
+    el.period.value = d.period || '';
+    el.summary.value = d.summary || '';
+    el.others.value = d.others || '';
+    el.url.value = d.url || '';
+    setCheckedMembers(d.members || []);
+    el.body.value = d.body || '';
     el.slug.readOnly = false;
     el.deleteBtn.hidden = true;
-    el.deleteBtn.textContent = 'この記事を削除';
+    el.deleteBtn.textContent = '削除する';
     el.postSelect.value = '';
     drawImages();
     render();
   }
 
   function saveDraft() {
-    if (state.editing) { return; }   // drafts are for new posts only
-    set('localStorage', DRAFT_KEY, JSON.stringify({
-      title: el.title.value, slug: el.slug.value, author: el.author.value, date: el.date.value, body: el.body.value
+    if (state.editing) { return; }   // drafts are for new items only
+    set('localStorage', DRAFT_KEY + state.kind, JSON.stringify({
+      title: el.title.value, slug: el.slug.value, author: el.author.value, date: el.date.value, body: el.body.value,
+      status: el.status.value, period: el.period.value, summary: el.summary.value, others: el.others.value,
+      url: el.url.value, members: checkedMembers()
     }));
   }
 
-  function loadPost(slug) {
-    var base = CFG.dir + '/' + slug;
-    status(el.publishStatus, 'busy', '記事を読み込んでいます…');
-    Promise.all([readFile(base + '/post.md'), gh('GET', REPO + '/contents/' + base + '?ref=' + encodeURIComponent(CFG.branch))])
+  function loadItem(slug) {
+    var k = K();
+    var base = k.dir + '/' + slug;
+    status(el.publishStatus, 'busy', '読み込んでいます…');
+    Promise.all([readFile(base + '/' + k.source), gh('GET', REPO + '/contents/' + base + '?ref=' + encodeURIComponent(CFG.branch))])
       .then(function (res) {
         var parsed = parseFrontMatter(res[0]);
+        var meta = parsed.meta;
         state.editing = slug;
         state.images = {};
         res[1].forEach(function (f) {
@@ -216,13 +282,19 @@
             state.images[f.name] = { url: f.download_url, isNew: false };
           }
         });
-        el.title.value = parsed.meta.title || '';
+        el.title.value = meta.title || '';
         el.slug.value = slug;
         el.slug.readOnly = true;
-        el.author.value = parsed.meta.author || el.author.value;
-        el.date.value = parsed.meta.date || today();
+        if (meta.author) { el.author.value = meta.author; }
+        el.date.value = meta.date || today();
+        el.status.value = meta.status || '';
+        el.period.value = meta.period || '';
+        el.summary.value = meta.summary || '';
+        el.others.value = meta.others || '';
+        el.url.value = meta.url || '';
+        setCheckedMembers(String(meta.members || '').split(',').filter(Boolean));
         el.body.value = parsed.body;
-        drawImages(parsed.meta.cover || '');
+        drawImages(meta.cover || '');
         el.deleteBtn.hidden = false;
         render();
         status(el.publishStatus, '', '');
@@ -252,7 +324,7 @@
   function imageUrl(name) { return state.images[name] ? state.images[name].url : null; }
 
   function render() {
-    el.previewTitle.textContent = el.title.value || 'タイトル';
+    el.previewTitle.textContent = el.title.value || K().titleLabel;
     el.preview.innerHTML = MD.render(el.body.value, { image: imageUrl }) || '<p style="color:var(--muted)">プレビューがここに表示されます。</p>';
   }
 
@@ -291,7 +363,7 @@
             reader.onload = function () {
               state.images[name] = { url: URL.createObjectURL(b), base64: String(reader.result).split(',')[1], isNew: true };
               insertAtCursor('\n![](' + name + ')\n');
-              if (!el.cover.value) { drawImages(name); } else { drawImages(); }
+              drawImages(el.cover.value || name);
               render(); saveDraft();
             };
             reader.readAsDataURL(b);
@@ -323,81 +395,126 @@
     image: function () { el.imageInput.click(); }
   };
 
-  /* ---------------- publish / delete ---------------- */
+  /* ---------------- building the files ---------------- */
   function memberOf(key) { return MEMBERS.filter(function (m) { return m.key === key; })[0]; }
-
-  function dateLabel(iso) {
-    var p = iso.split('-');
-    return p[0] + '年' + Number(p[1]) + '月' + Number(p[2]) + '日';
-  }
-
+  function dateLabel(iso) { var p = iso.split('-'); return p[0] + '年' + Number(p[1]) + '月' + Number(p[2]) + '日'; }
   function fill(template, values) {
     return template.replace(/\{\{([A-Z_]+)\}\}/g, function (_, k) { return values[k] != null ? values[k] : ''; });
   }
+  function coverHtml(cover) {
+    return cover ? '      <figure class="article__cover"><img src="' + MD.escape(cover) + '" alt=""></figure>' : '';
+  }
 
+  // Reads the form, checks it, and returns what to save; throws a message on bad input.
+  function collect() {
+    var f = {
+      title: el.title.value.trim(),
+      slug: el.slug.value.trim(),
+      body: el.body.value.replace(/\s+$/, '') + '\n',
+      cover: el.cover.value
+    };
+    if (!f.title) { throw new Error(state.kind === 'works' ? '名前を入力してください。' : 'タイトルを入力してください。'); }
+    if (!SLUG_RE.test(f.slug)) { throw new Error('URL に使う名前は、半角の英小文字・数字・ハイフンで入力してください（先頭と最後は英数字）。'); }
+    if (state.kind === 'blog') {
+      f.author = memberOf(el.author.value);
+      f.date = el.date.value;
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(f.date)) { throw new Error('日付を選んでください。'); }
+      if (!f.author) { throw new Error('書いた人を選んでください。'); }
+      if (!f.body.trim()) { throw new Error('本文を書いてください。'); }
+    } else {
+      f.status = el.status.value;
+      f.period = el.period.value.trim();
+      f.summary = el.summary.value.trim();
+      f.members = checkedMembers();
+      f.others = el.others.value.trim();
+      f.url = el.url.value.trim();
+      if (!f.members.length && !f.others) { throw new Error('関わった人を、少なくとも1人選ぶか書いてください。'); }
+      if (f.url && !/^https?:\/\/[^\s"'<>]+$/i.test(f.url)) { throw new Error('URL は https:// から始まる形で入力してください。'); }
+    }
+    return f;
+  }
+
+  function buildBlog(f, template, list) {
+    var e = MD.escape;
+    var excerpt = MD.plain(f.body, 90);
+    var html = fill(template, {
+      TITLE: e(f.title), DESCRIPTION: e(excerpt), DATE: e(f.date), DATE_LABEL: e(dateLabel(f.date)),
+      AUTHOR_KEY: e(f.author.key), AUTHOR_NAME: e(f.author.name), AUTHOR_ROLE: e(f.author.role.ja),
+      COVER: coverHtml(f.cover), BODY: MD.render(f.body)
+    });
+    var entry = { slug: f.slug, title: f.title, date: f.date, author: f.author.key, excerpt: excerpt, cover: f.cover };
+    var source = frontMatter({ title: f.title, date: f.date, author: f.author.key, cover: f.cover }) + f.body;
+    return { html: html, entry: entry, source: source, who: f.author.name };
+  }
+
+  function buildWork(f, template) {
+    var e = MD.escape;
+    var people = f.members.map(memberOf).filter(Boolean);
+    var chips = people.map(function (m) {
+      return '<a class="person" href="../../members/' + m.key + '/"><img src="../../assets/people/' + m.key + '.webp" alt="">' + e(m.name) + '</a>';
+    }).join('');
+    if (f.others) { chips += '<span class="person person--other">' + e(f.others) + '</span>'; }
+    var statusClass = { '開発中': 'dev', '公開中': 'live', '完了': 'done', '準備中': 'soon' }[f.status] || 'dev';
+    var body = f.body.trim() ? MD.render(f.body) : '';
+    var html = fill(template, {
+      TITLE: e(f.title),
+      DESCRIPTION: e(f.summary || MD.plain(f.body, 90)),
+      SUMMARY: e(f.summary),
+      STATUS_HTML: f.status ? '<span class="status-pill status-pill--' + statusClass + '">' + e(f.status) + '</span>' : '',
+      MEMBERS_HTML: chips,
+      PERIOD_HTML: f.period ? '        <div><dt data-en="When">時期</dt><dd>' + e(f.period) + '</dd></div>' : '',
+      LINK_HTML: f.url ? '        <div><dt data-en="Link">リンク</dt><dd><a href="' + e(f.url) + '" target="_blank" rel="noopener noreferrer">' + e(f.url) + '</a></dd></div>' : '',
+      COVER: coverHtml(f.cover),
+      BODY: body
+    });
+    var entry = {
+      slug: f.slug, title: f.title, summary: f.summary, status: f.status, period: f.period,
+      members: f.members, others: f.others, url: f.url, cover: f.cover, updated: today()
+    };
+    var source = frontMatter({
+      title: f.title, status: f.status, period: f.period, summary: f.summary,
+      members: f.members.join(','), others: f.others, url: f.url, cover: f.cover
+    }) + f.body;
+    var who = people.map(function (m) { return m.name; }).concat(f.others ? [f.others] : []).join('・');
+    return { html: html, entry: entry, source: source, who: who };
+  }
+
+  /* ---------------- publish / delete ---------------- */
   function publish() {
-    var title = el.title.value.trim();
-    var slug = el.slug.value.trim();
-    var body = el.body.value.replace(/\s+$/, '') + '\n';
-    var author = memberOf(el.author.value);
-    var date = el.date.value;
-    var isNew = !state.editing;
-
-    if (!title) { return status(el.publishStatus, 'error', 'タイトルを入力してください。'); }
-    if (!SLUG_RE.test(slug)) { return status(el.publishStatus, 'error', 'URL に使う名前は、半角の英小文字・数字・ハイフンで入力してください（先頭と最後は英数字）。'); }
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) { return status(el.publishStatus, 'error', '日付を選んでください。'); }
-    if (!body.trim()) { return status(el.publishStatus, 'error', '本文を書いてください。'); }
-    if (!author) { return status(el.publishStatus, 'error', '書いた人を選んでください。'); }
+    var kind = state.kind, k = KINDS[kind], isNew = !state.editing, f;
+    try { f = collect(); } catch (err) { return status(el.publishStatus, 'error', MD.escape(err.message)); }
 
     el.publishBtn.disabled = true;
     status(el.publishStatus, 'busy', '公開しています…');
+    var base = k.dir + '/' + f.slug;
 
-    var cover = el.cover.value;
-    var excerpt = MD.plain(body, 90);
-    var base = CFG.dir + '/' + slug;
-
-    Promise.all([readFile(CFG.dir + '/post-template.html'), readPostsJson()])
+    Promise.all([readFile(k.dir + '/' + k.template), readList(kind)])
       .then(function (res) {
-        var template = res[0], posts = res[1];
-        if (isNew && posts.some(function (p) { return p.slug === slug; })) {
-          throw new Error('「' + slug + '」という名前の記事がすでにあります。別の名前にしてください。');
+        var template = res[0], items = res[1];
+        if (isNew && items.some(function (p) { return p.slug === f.slug; })) {
+          throw new Error('「' + f.slug + '」という名前の' + k.noun + 'がすでにあります。別の名前にしてください。');
         }
-        var e = MD.escape;
-        var html = fill(template, {
-          TITLE: e(title),
-          DESCRIPTION: e(excerpt),
-          DATE: e(date),
-          DATE_LABEL: e(dateLabel(date)),
-          AUTHOR_KEY: e(author.key),
-          AUTHOR_NAME: e(author.name),
-          AUTHOR_ROLE: e(author.role.ja),
-          COVER: cover ? '      <figure class="article__cover"><img src="' + e(cover) + '" alt=""></figure>' : '',
-          BODY: MD.render(body)
-        });
-        var entry = { slug: slug, title: title, date: date, author: author.key, excerpt: excerpt, cover: cover };
-        var list = posts.filter(function (p) { return p.slug !== slug; }).concat([entry]);
-        list.sort(function (a, b) { return String(b.date).localeCompare(String(a.date)) || String(b.slug).localeCompare(String(a.slug)); });
-
+        var built = kind === 'blog' ? buildBlog(f, template) : buildWork(f, template);
+        var list = items.filter(function (p) { return p.slug !== f.slug; }).concat([built.entry]).sort(k.sort);
         var files = [
-          { path: base + '/index.html', content: html },
-          { path: base + '/post.md', content: frontMatter({ title: title, date: date, author: author.key, cover: cover }) + body },
-          { path: CFG.dir + '/posts.json', content: JSON.stringify(list, null, 2) + '\n' }
+          { path: base + '/index.html', content: built.html },
+          { path: base + '/' + k.source, content: built.source },
+          { path: k.dir + '/' + k.list, content: JSON.stringify(list, null, 2) + '\n' }
         ];
         Object.keys(state.images).forEach(function (n) {
           var im = state.images[n];
           if (im.isNew) { files.push({ path: base + '/' + n, content: im.base64, encoding: 'base64' }); }
         });
-        var verb = isNew ? '公開' : '更新';
-        return commit(files, 'ブログ: 「' + title + '」を' + verb + '（' + author.name + '）');
+        return commit(files, k.commit + ': 「' + f.title + '」を' + (isNew ? '公開' : '更新') + '（' + built.who + '）');
       })
       .then(function () {
         Object.keys(state.images).forEach(function (n) { state.images[n].isNew = false; delete state.images[n].base64; });
-        state.editing = slug;
+        state.editing = f.slug;
         el.slug.readOnly = true;
         el.deleteBtn.hidden = false;
-        set('localStorage', DRAFT_KEY, null);
-        status(el.publishStatus, 'ok', '公開しました。1〜2分でサイトに反映されます → <a href="../' + encodeURIComponent(slug) + '/" target="_blank" rel="noopener">記事を開く</a>');
-        return refreshPostList().then(function () { el.postSelect.value = slug; });
+        set('localStorage', DRAFT_KEY + kind, null);
+        status(el.publishStatus, 'ok', '公開しました。1〜2分でサイトに反映されます → <a href="../../' + k.dir + '/' + encodeURIComponent(f.slug) + '/" target="_blank" rel="noopener">ページを開く</a>');
+        return refreshList().then(function () { el.postSelect.value = f.slug; });
       })
       .catch(function (e) {
         var msg = e.status === 409 || e.status === 422
@@ -409,51 +526,56 @@
       .then(function () { el.publishBtn.disabled = false; });
   }
 
-  // Two-step delete: the first click arms the button, the second removes the post.
-  function removePost() {
-    var slug = state.editing;
+  // Two-step delete: the first click arms the button, the second removes it.
+  function removeItem() {
+    var slug = state.editing, kind = state.kind, k = KINDS[kind];
     if (!slug) { return; }
     if (!state.deleteArmed) {
       state.deleteArmed = true;
       el.deleteBtn.textContent = '本当に削除する（元に戻せません）';
-      setTimeout(function () { state.deleteArmed = false; el.deleteBtn.textContent = 'この記事を削除'; }, 6000);
+      setTimeout(function () { state.deleteArmed = false; el.deleteBtn.textContent = '削除する'; }, 6000);
       return;
     }
     state.deleteArmed = false;
     el.deleteBtn.disabled = true;
     status(el.publishStatus, 'busy', '削除しています…');
-    var base = CFG.dir + '/' + slug;
-    Promise.all([gh('GET', REPO + '/contents/' + base + '?ref=' + encodeURIComponent(CFG.branch)), readPostsJson()])
+    var base = k.dir + '/' + slug;
+    Promise.all([gh('GET', REPO + '/contents/' + base + '?ref=' + encodeURIComponent(CFG.branch)), readList(kind)])
       .then(function (res) {
         var files = res[0].filter(function (f) { return f.type === 'file'; }).map(function (f) { return { path: f.path, remove: true }; });
         var list = res[1].filter(function (p) { return p.slug !== slug; });
-        files.push({ path: CFG.dir + '/posts.json', content: JSON.stringify(list, null, 2) + '\n' });
-        return commit(files, 'ブログ: 「' + slug + '」を削除');
+        files.push({ path: k.dir + '/' + k.list, content: JSON.stringify(list, null, 2) + '\n' });
+        return commit(files, k.commit + ': 「' + slug + '」を削除');
       })
       .then(function () {
         status(el.publishStatus, 'ok', '削除しました。1〜2分でサイトからも消えます。');
-        return refreshPostList().then(function () { resetEditor(false); });
+        return refreshList().then(function () { resetEditor(false); });
       })
       .catch(function (e) { status(el.publishStatus, 'error', '削除できませんでした：' + MD.escape(e.message)); })
-      .then(function () { el.deleteBtn.disabled = false; el.deleteBtn.textContent = 'この記事を削除'; });
+      .then(function () { el.deleteBtn.disabled = false; el.deleteBtn.textContent = '削除する'; });
   }
 
   /* ---------------- wiring ---------------- */
-  fillAuthors();
+  fillMembers();
+  applyKindUI();
   resetEditor(true);
 
   el.connectBtn.addEventListener('click', function () { connect(el.token.value); });
   el.token.addEventListener('keydown', function (e) { if (e.key === 'Enter') { connect(el.token.value); } });
   el.disconnectBtn.addEventListener('click', disconnect);
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="kind"]'), function (r) {
+    r.addEventListener('change', function () { if (r.checked) { switchKind(r.value); } });
+  });
   el.postSelect.addEventListener('change', function () {
-    if (el.postSelect.value) { loadPost(el.postSelect.value); } else { resetEditor(true); }
+    if (el.postSelect.value) { loadItem(el.postSelect.value); } else { resetEditor(true); }
   });
   el.newBtn.addEventListener('click', function () { resetEditor(false); status(el.publishStatus, '', ''); });
   el.publishBtn.addEventListener('click', publish);
-  el.deleteBtn.addEventListener('click', removePost);
-  ['input', 'change'].forEach(function (ev) {
-    [el.title, el.body, el.slug, el.author, el.date].forEach(function (n) { n.addEventListener(ev, function () { render(); saveDraft(); }); });
+  el.deleteBtn.addEventListener('click', removeItem);
+  [el.title, el.body, el.slug, el.author, el.date, el.status, el.period, el.summary, el.others, el.url].forEach(function (n) {
+    ['input', 'change'].forEach(function (ev) { n.addEventListener(ev, function () { render(); saveDraft(); }); });
   });
+  el.memberChecks.addEventListener('change', saveDraft);
   el.slug.addEventListener('input', function () {
     var v = el.slug.value.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-{2,}/g, '-');
     if (v !== el.slug.value) { el.slug.value = v; }
@@ -469,6 +591,10 @@
       Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-view]'), function (x) { x.setAttribute('aria-selected', String(x === b)); });
     });
   });
+
+  // ?kind=works opens the writer on "つくるもの".
+  var wanted = new URLSearchParams(window.location.search).get('kind');
+  if (wanted && KINDS[wanted]) { switchKind(wanted); }
 
   // Reconnect automatically with a saved token.
   var saved = get('sessionStorage', TOKEN_KEY) || get('localStorage', TOKEN_KEY);

@@ -2,7 +2,7 @@
    常奥 ToWhats — writer (/blog/write/)
    Writes two kinds of pages:
      ブログ記事   → blog/<slug>/   listed in blog/posts.json
-     つくるもの   → works/<slug>/  listed in works/works.json
+     作品展示会   → works/<slug>/  listed in works/works.json
 
    Members connect with a GitHub fine-grained token that can
    write to this repository. Publishing makes ONE commit with:
@@ -34,7 +34,7 @@
     },
     works: {
       dir: 'works', list: 'works.json', template: 'work-template.html', source: 'work.md',
-      noun: '作品', commit: 'つくるもの', pick: '書く作品', titleLabel: '名前',
+      noun: '作品', commit: '作品展示会', pick: '書く作品', titleLabel: '名前',
       titleHint: '例：NajoshiteAI', slugHint: '例：najoshiteai',
       sort: function (a, b) { return String(b.updated || '').localeCompare(String(a.updated || '')) || String(a.slug).localeCompare(String(b.slug)); },
       label: function (p) { return p.title + (p.status ? '（' + p.status + '）' : ''); }
@@ -454,7 +454,7 @@
       return '<a class="person" href="../../members/' + m.key + '/"><img src="../../assets/people/' + m.key + '.webp" alt="">' + e(m.name) + '</a>';
     }).join('');
     if (f.others) { chips += '<span class="person person--other">' + e(f.others) + '</span>'; }
-    var statusClass = { '開発中': 'dev', '公開中': 'live', '完了': 'done', '準備中': 'soon' }[f.status] || 'dev';
+    var statusClass = { '制作中': 'dev', '開発中': 'dev', '公開中': 'live', '完了': 'done', '準備中': 'soon' }[f.status] || 'dev';
     var body = f.body.trim() ? MD.render(f.body) : '';
     var html = fill(template, {
       TITLE: e(f.title),
@@ -592,7 +592,7 @@
     });
   });
 
-  // ?kind=works opens the writer on "つくるもの".
+  // ?kind=works opens the writer on the exhibition (works).
   var wanted = new URLSearchParams(window.location.search).get('kind');
   if (wanted && KINDS[wanted]) { switchKind(wanted); }
 

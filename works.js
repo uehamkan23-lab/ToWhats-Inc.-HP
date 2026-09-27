@@ -1,6 +1,6 @@
 /* =========================================================
    常奥 ToWhats — works.js
-   Draws the "つくるもの" cards from works/works.json.
+   Draws the ToWhats作品展示会 (exhibition) cards from works/works.json.
 
    <div data-works data-root="../"></div>                grid
    <div data-works data-root="" data-flow></div>          cards flowing left → right (top page)
@@ -15,8 +15,8 @@
     ja: { empty: 'まだ載せているものはありません。', error: '読み込めませんでした。', loading: '読み込んでいます…', all: 'すべて', and: '、', more: 'ほか' },
     en: { empty: 'Nothing here yet.', error: 'Could not load the works.', loading: 'Loading…', all: 'All', and: ', ', more: '+' }
   };
-  var STATUS_EN = { '開発中': 'In development', '公開中': 'Live', '完了': 'Done', '準備中': 'Coming soon' };
-  var STATUS_CLASS = { '開発中': 'dev', '公開中': 'live', '完了': 'done', '準備中': 'soon' };
+  var STATUS_EN = { '制作中': 'In progress', '開発中': 'In progress', '公開中': 'Live', '完了': 'Done', '準備中': 'Coming soon' };
+  var STATUS_CLASS = { '制作中': 'dev', '開発中': 'dev', '公開中': 'live', '完了': 'done', '準備中': 'soon' };
 
   function lang() { return (window.TOWHATS && window.TOWHATS.lang) || 'ja'; }
   function member(key) { for (var i = 0; i < MEMBERS.length; i++) { if (MEMBERS[i].key === key) { return MEMBERS[i]; } } return null; }

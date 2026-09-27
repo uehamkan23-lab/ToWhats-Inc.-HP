@@ -1,6 +1,6 @@
 ---
 title: "NajoshiteAI"
-status: "開発中"
+status: "制作中"
 period: "2027年春 リリース予定"
 summary: "AI の生徒「なじみ」に勉強を教える学習アプリ。"
 members: "uehara,kobayashi"

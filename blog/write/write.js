@@ -1,8 +1,9 @@
 /* =========================================================
    常奥 ToWhats — writer (/blog/write/)
-   Writes two kinds of pages:
-     ブログ記事   → blog/<slug>/   listed in blog/posts.json
-     作品展示会   → works/<slug>/  listed in works/works.json
+   Writes three kinds of pages:
+     ブログ記事       → blog/<slug>/   listed in blog/posts.json
+     作品展示会       → works/<slug>/  listed in works/works.json
+     お知らせ・実績   → news/<slug>/   listed in news/news.json
 
    Members connect with a GitHub fine-grained token that can
    write to this repository. Publishing makes ONE commit with:
@@ -10,6 +11,7 @@
      <dir>/<slug>/<source>.md  the text, so it can be edited later
      <dir>/<slug>/<images>     images added in the editor
      <dir>/<list>.json         the list the site reads
+     sitemap.xml               the page list for search engines
    GitHub Pages then publishes it within a minute or two.
    ========================================================= */
 (function () {
@@ -17,6 +19,7 @@
 
   var CFG = window.TOWHATS_BLOG;
   var MD = window.TowhatsMarkdown;
+  var SITEMAP = window.TowhatsSitemap;
   var MEMBERS = window.TOWHATS_MEMBERS || [];
   var API = 'https://api.github.com';
   var REPO = '/repos/' + CFG.owner + '/' + CFG.repo;
@@ -38,8 +41,16 @@
       titleHint: '例：NajoshiteAI', slugHint: '例：najoshiteai',
       sort: function (a, b) { return String(b.updated || '').localeCompare(String(a.updated || '')) || String(a.slug).localeCompare(String(b.slug)); },
       label: function (p) { return p.title + (p.status ? '（' + p.status + '）' : ''); }
+    },
+    news: {
+      dir: 'news', list: 'news.json', template: 'news-template.html', source: 'news.md',
+      noun: 'お知らせ', commit: 'お知らせ・実績', pick: '書くお知らせ・実績', titleLabel: 'タイトル',
+      titleHint: '例：〇〇コンテストで△△賞をいただきました', slugHint: '例：2026-10-contest',
+      sort: function (a, b) { return String(b.date).localeCompare(String(a.date)) || String(b.updated || '').localeCompare(String(a.updated || '')); },
+      label: function (p) { return p.date + '　［' + (NEWS_TYPES[p.type] || 'お知らせ') + '］' + p.title; }
     }
   };
+  var NEWS_TYPES = { news: 'お知らせ', award: '実績' };
 
   function $(id) { return document.getElementById(id); }
   var el = {
@@ -47,6 +58,7 @@
     connectStatus: $('connectStatus'), editPanel: $('editPanel'),
     postSelect: $('postSelect'), postSelectLabel: $('postSelectLabel'), titleLabel: $('titleLabel'), slugHint: $('slugHint'),
     author: $('author'), date: $('date'), title: $('title'), slug: $('slug'),
+    newsType: $('newsType'), precision: $('precision'),
     status: $('status'), period: $('period'), summary: $('summary'), memberChecks: $('memberChecks'), others: $('others'), url: $('url'),
     body: $('body'), imageInput: $('imageInput'), images: $('images'), cover: $('cover'),
     preview: $('preview'), previewTitle: $('previewTitle'), editor: $('editor'),
@@ -213,7 +225,7 @@
   function applyKindUI() {
     var k = K();
     Array.prototype.forEach.call(document.querySelectorAll('[data-for]'), function (n) {
-      n.hidden = n.getAttribute('data-for') !== state.kind;
+      n.hidden = n.getAttribute('data-for').split(' ').indexOf(state.kind) < 0;
     });
     el.postSelectLabel.textContent = k.pick;
     el.titleLabel.textContent = k.titleLabel;
@@ -243,6 +255,8 @@
     el.slug.value = d.slug != null ? d.slug : (state.kind === 'blog' ? today() + '-' : '');
     if (d.author) { el.author.value = d.author; }
     el.date.value = d.date || today();
+    el.newsType.value = d.newsType || 'news';
+    el.precision.value = d.precision || 'day';
     el.status.value = d.status || '';
     el.period.value = d.period || '';
     el.summary.value = d.summary || '';
@@ -262,6 +276,7 @@
     if (state.editing) { return; }   // drafts are for new items only
     set('localStorage', DRAFT_KEY + state.kind, JSON.stringify({
       title: el.title.value, slug: el.slug.value, author: el.author.value, date: el.date.value, body: el.body.value,
+      newsType: el.newsType.value, precision: el.precision.value,
       status: el.status.value, period: el.period.value, summary: el.summary.value, others: el.others.value,
       url: el.url.value, members: checkedMembers()
     }));
@@ -286,7 +301,10 @@
         el.slug.value = slug;
         el.slug.readOnly = true;
         if (meta.author) { el.author.value = meta.author; }
-        el.date.value = meta.date || today();
+        var date = String(meta.date || '');
+        el.precision.value = date.length === 4 ? 'year' : date.length === 7 ? 'month' : 'day';
+        el.date.value = date.length === 4 ? date + '-01-01' : date.length === 7 ? date + '-01' : (date || today());
+        el.newsType.value = NEWS_TYPES[meta.type] ? meta.type : 'news';
         el.status.value = meta.status || '';
         el.period.value = meta.period || '';
         el.summary.value = meta.summary || '';
@@ -397,7 +415,20 @@
 
   /* ---------------- building the files ---------------- */
   function memberOf(key) { return MEMBERS.filter(function (m) { return m.key === key; })[0]; }
-  function dateLabel(iso) { var p = iso.split('-'); return p[0] + '年' + Number(p[1]) + '月' + Number(p[2]) + '日'; }
+  // "2026", "2026-03" or "2026-03-30" → 2026年 / 2026年3月 / 2026年3月30日
+  function dateLabel(iso) {
+    var p = iso.split('-');
+    return p[0] + '年' + (p[1] ? Number(p[1]) + '月' : '') + (p[2] ? Number(p[2]) + '日' : '');
+  }
+  function personChips(keys, root) {
+    return keys.map(memberOf).filter(Boolean).map(function (m) {
+      return '<a class="person" href="' + root + 'members/' + m.key + '/"><img src="' + root + 'assets/people/' + m.key + '.webp" alt="">' + MD.escape(m.name) + '</a>';
+    }).join('');
+  }
+  function linkRow(url) {
+    var e = MD.escape;
+    return url ? '        <div><dt data-en="Link">リンク</dt><dd><a href="' + e(url) + '" target="_blank" rel="noopener noreferrer">' + e(url) + '</a></dd></div>' : '';
+  }
   function fill(template, values) {
     return template.replace(/\{\{([A-Z_]+)\}\}/g, function (_, k) { return values[k] != null ? values[k] : ''; });
   }
@@ -421,6 +452,13 @@
       if (!/^\d{4}-\d{2}-\d{2}$/.test(f.date)) { throw new Error('日付を選んでください。'); }
       if (!f.author) { throw new Error('書いた人を選んでください。'); }
       if (!f.body.trim()) { throw new Error('本文を書いてください。'); }
+    } else if (state.kind === 'news') {
+      f.type = NEWS_TYPES[el.newsType.value] ? el.newsType.value : 'news';
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(el.date.value)) { throw new Error('日付を選んでください。'); }
+      f.date = el.date.value.slice(0, { year: 4, month: 7 }[el.precision.value] || 10);
+      f.members = checkedMembers();
+      f.url = el.url.value.trim();
+      if (f.url && !/^https?:\/\/[^\s"'<>]+$/i.test(f.url)) { throw new Error('URL は https:// から始まる形で入力してください。'); }
     } else {
       f.status = el.status.value;
       f.period = el.period.value.trim();
@@ -450,9 +488,7 @@
   function buildWork(f, template) {
     var e = MD.escape;
     var people = f.members.map(memberOf).filter(Boolean);
-    var chips = people.map(function (m) {
-      return '<a class="person" href="../../members/' + m.key + '/"><img src="../../assets/people/' + m.key + '.webp" alt="">' + e(m.name) + '</a>';
-    }).join('');
+    var chips = personChips(f.members, '../../');
     if (f.others) { chips += '<span class="person person--other">' + e(f.others) + '</span>'; }
     var statusClass = { '制作中': 'dev', '開発中': 'dev', '公開中': 'live', '完了': 'done', '準備中': 'soon' }[f.status] || 'dev';
     var body = f.body.trim() ? MD.render(f.body) : '';
@@ -463,7 +499,7 @@
       STATUS_HTML: f.status ? '<span class="status-pill status-pill--' + statusClass + '">' + e(f.status) + '</span>' : '',
       MEMBERS_HTML: chips,
       PERIOD_HTML: f.period ? '        <div><dt data-en="When">時期</dt><dd>' + e(f.period) + '</dd></div>' : '',
-      LINK_HTML: f.url ? '        <div><dt data-en="Link">リンク</dt><dd><a href="' + e(f.url) + '" target="_blank" rel="noopener noreferrer">' + e(f.url) + '</a></dd></div>' : '',
+      LINK_HTML: linkRow(f.url),
       COVER: coverHtml(f.cover),
       BODY: body
     });
@@ -477,6 +513,38 @@
     }) + f.body;
     var who = people.map(function (m) { return m.name; }).concat(f.others ? [f.others] : []).join('・');
     return { html: html, entry: entry, source: source, who: who };
+  }
+
+  function buildNews(f, template) {
+    var e = MD.escape;
+    var people = f.members.map(memberOf).filter(Boolean);
+    var chips = personChips(f.members, '../../');
+    var excerpt = MD.plain(f.body, 90);
+    var html = fill(template, {
+      TITLE: e(f.title),
+      DESCRIPTION: e(excerpt || f.title),
+      DATE: e(f.date), DATE_LABEL: e(dateLabel(f.date)),
+      TYPE: f.type, TYPE_LABEL: e(NEWS_TYPES[f.type]),
+      MEMBERS_HTML: chips ? '        <div><dt data-en="Members">関わった人</dt><dd>' + chips + '</dd></div>' : '',
+      LINK_HTML: linkRow(f.url),
+      COVER: coverHtml(f.cover),
+      BODY: f.body.trim() ? MD.render(f.body) : ''
+    });
+    var entry = { slug: f.slug, title: f.title, date: f.date, type: f.type, members: f.members, url: f.url, excerpt: excerpt, cover: f.cover, updated: today() };
+    var source = frontMatter({ title: f.title, date: f.date, type: f.type, members: f.members.join(','), url: f.url, cover: f.cover }) + f.body;
+    var who = people.map(function (m) { return m.name; }).join('・') || '常奥';
+    return { html: html, entry: entry, source: source, who: who };
+  }
+
+  /* All three lists, with `kind` replaced by `list`, for sitemap.xml. */
+  function sitemapFile(kind, list) {
+    if (!SITEMAP || !CFG.siteUrl) { return Promise.resolve(null); }
+    var kinds = Object.keys(KINDS);
+    return Promise.all(kinds.map(function (k) { return k === kind ? list : readList(k); })).then(function (res) {
+      var lists = {};
+      kinds.forEach(function (k, i) { lists[k] = res[i]; });
+      return { path: 'sitemap.xml', content: SITEMAP.build(CFG.siteUrl, MEMBERS, lists) };
+    });
   }
 
   /* ---------------- publish / delete ---------------- */
@@ -494,13 +562,18 @@
         if (isNew && items.some(function (p) { return p.slug === f.slug; })) {
           throw new Error('「' + f.slug + '」という名前の' + k.noun + 'がすでにあります。別の名前にしてください。');
         }
-        var built = kind === 'blog' ? buildBlog(f, template) : buildWork(f, template);
+        var built = kind === 'blog' ? buildBlog(f, template) : kind === 'news' ? buildNews(f, template) : buildWork(f, template);
         var list = items.filter(function (p) { return p.slug !== f.slug; }).concat([built.entry]).sort(k.sort);
+        return sitemapFile(kind, list).then(function (sitemap) { return { built: built, list: list, sitemap: sitemap }; });
+      })
+      .then(function (r) {
+        var built = r.built;
         var files = [
           { path: base + '/index.html', content: built.html },
           { path: base + '/' + k.source, content: built.source },
-          { path: k.dir + '/' + k.list, content: JSON.stringify(list, null, 2) + '\n' }
+          { path: k.dir + '/' + k.list, content: JSON.stringify(r.list, null, 2) + '\n' }
         ];
+        if (r.sitemap) { files.push(r.sitemap); }
         Object.keys(state.images).forEach(function (n) {
           var im = state.images[n];
           if (im.isNew) { files.push({ path: base + '/' + n, content: im.base64, encoding: 'base64' }); }
@@ -545,7 +618,10 @@
         var files = res[0].filter(function (f) { return f.type === 'file'; }).map(function (f) { return { path: f.path, remove: true }; });
         var list = res[1].filter(function (p) { return p.slug !== slug; });
         files.push({ path: k.dir + '/' + k.list, content: JSON.stringify(list, null, 2) + '\n' });
-        return commit(files, k.commit + ': 「' + slug + '」を削除');
+        return sitemapFile(kind, list).then(function (sitemap) {
+          if (sitemap) { files.push(sitemap); }
+          return commit(files, k.commit + ': 「' + slug + '」を削除');
+        });
       })
       .then(function () {
         status(el.publishStatus, 'ok', '削除しました。1〜2分でサイトからも消えます。');
@@ -572,7 +648,7 @@
   el.newBtn.addEventListener('click', function () { resetEditor(false); status(el.publishStatus, '', ''); });
   el.publishBtn.addEventListener('click', publish);
   el.deleteBtn.addEventListener('click', removeItem);
-  [el.title, el.body, el.slug, el.author, el.date, el.status, el.period, el.summary, el.others, el.url].forEach(function (n) {
+  [el.title, el.body, el.slug, el.author, el.date, el.newsType, el.precision, el.status, el.period, el.summary, el.others, el.url].forEach(function (n) {
     ['input', 'change'].forEach(function (ev) { n.addEventListener(ev, function () { render(); saveDraft(); }); });
   });
   el.memberChecks.addEventListener('change', saveDraft);
@@ -592,7 +668,7 @@
     });
   });
 
-  // ?kind=works opens the writer on the exhibition (works).
+  // ?kind=works / ?kind=news opens the writer on that kind.
   var wanted = new URLSearchParams(window.location.search).get('kind');
   if (wanted && KINDS[wanted]) { switchKind(wanted); }
 

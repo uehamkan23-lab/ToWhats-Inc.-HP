@@ -1,0 +1,11 @@
+# 検索エンジン向けの設定です。
+# 検索エンジンは、ドメインの一番上（https://〇〇/robots.txt）にあるこのファイルだけを読みます。
+# github.io の「/ToWhats-Inc.-HP/」の下で公開している間は読まれないので、
+# sitemap.xml は Google Search Console から登録してください。
+# 独自のドメインに移したら、下の Sitemap の URL をそのドメインに書き換えてください
+# （blog/config.js の siteUrl も同じものにします）。
+
+User-agent: *
+Disallow: /blog/write/
+
+Sitemap: https://uehamkan23-lab.github.io/ToWhats-Inc.-HP/sitemap.xml

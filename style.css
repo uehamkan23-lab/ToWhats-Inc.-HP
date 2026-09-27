@@ -261,6 +261,9 @@ main { overflow-x: clip; }
    ========================================================= */
 .hero {
   position: relative;
+  /* older browsers without svh / max() keep the first line that they understand */
+  min-height: 700px;
+  min-height: max(100vh, 700px);
   min-height: max(100svh, 700px);
   background: var(--hero-red);
   overflow: hidden;
@@ -821,7 +824,7 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
 }
 
 @media (max-width: 700px) {
-  .hero { min-height: max(100svh, 660px); }
+  .hero { min-height: 660px; min-height: max(100vh, 660px); min-height: max(100svh, 660px); }
   .hero__copy { left: 6%; right: 6%; top: 16%; }
   .hero__title { font-size: clamp(32px, 9.6vw, 46px); }
   [data-lang="en"] .hero__title { font-size: clamp(28px, 8vw, 40px); }

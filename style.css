@@ -688,12 +688,17 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
 }
 .divider--footer { top: -47px; }
 
-.footer__sun {
-  width: 120px;
-  height: 60px;
-  margin: 0 auto 26px;
-  border-radius: 60px 60px 0 0;
-  background: var(--sun);
+/* the full logo (with 常奥) on a cream sticker, so the black kanji show on navy */
+.footer__logo {
+  display: block;
+  width: 180px;
+  height: auto;
+  margin: 0 auto 30px;
+  padding: 16px 20px;
+  background: var(--cream);
+  border-radius: 22px;
+  box-shadow: 6px 6px 0 var(--red);
+  rotate: -3deg;
   animation: bob 4s ease-in-out infinite;
 }
 @keyframes bob { 50% { translate: 0 -8px; } }

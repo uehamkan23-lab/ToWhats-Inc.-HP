@@ -93,7 +93,7 @@ Morisawa の書体は太さごとに別の書体として配信されるため�
 │   ├── logo-mark.png          オープニング用：赤いマーク部分
 │   ├── logo-kanji-jo.png      オープニング用：「常」
 │   ├── logo-kanji-oku.png     オープニング用：「奥」
-│   ├── favicon.png            ファビコン（「To」のマーク）
+│   ├── favicon.png            ファビコン（「常奥」入りのロゴ。favicon-32.png は小さい版）
 │   ├── apple-touch-icon.png   iPhone のホーム画面用アイコン
 │   ├── source/                いただいたロゴの元画像（4000 × 4000）
 │   └── people/                切り抜き済みのステッカー画像（WebP）

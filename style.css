@@ -336,23 +336,6 @@ main { overflow-x: clip; }
 @keyframes st-pop { from { opacity: 0; transform: scale(.35) rotate(-14deg); } }
 @keyframes st-bob { to { transform: translateY(-9px) rotate(1.6deg); } }
 
-/* illustration slots, shown until the artwork arrives */
-.st--ph {
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  color: #fff;
-  font-size: 12px;
-  line-height: 1.5;
-  border: 3px dashed rgba(255, 255, 255, .85);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, .08);
-  min-width: 112px;
-  animation: st-pop .8s var(--spring) var(--d, 0s) both;
-}
-.st--ph b { display: block; font-family: var(--body-bold); font-size: 14px; }
-
 /* ---- the four members: a group photo at the bottom right ---- */
 .hero__team {
   position: absolute;
@@ -781,7 +764,7 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   .hero__copy { top: 30%; }
   .hero__team { width: 72%; }
   .st--pitch { --y: 15% !important; }
-  .st--ph-a, .st--silhouette { display: none; }
+  .st--silhouette { display: none; }
 }
 
 @media (max-width: 700px) {
@@ -789,7 +772,7 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   .hero__copy { left: 6%; right: 6%; top: 16%; }
   .hero__title { font-size: clamp(32px, 9.6vw, 46px); }
   [data-lang="en"] .hero__title { font-size: clamp(28px, 8vw, 40px); }
-  .st--duo, .st--silhouette, .st--ph { display: none; }
+  .st--duo, .st--silhouette { display: none; }
   .st--pitch { --x: 4% !important;  --y: 42% !important; --w: 20vw !important; }
   .st--jump  { --x: 56% !important; --y: 40% !important; --w: 36vw !important; }
   .note--pitch { --tip-x: 40%; --tip-y: 18%; }

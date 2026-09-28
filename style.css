@@ -322,8 +322,7 @@ main { overflow-x: clip; }
   will-change: transform;
 }
 .st:hover { scale: 1.06; }
-.st > img,
-.st > svg {
+.st > img {
   display: block;
   width: 100%;
   height: auto;
@@ -788,7 +787,6 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   .st--duo, .st--silhouette, .st--ph { display: none; }
   .st--pitch { --x: 4% !important;  --y: 42% !important; --w: 20vw !important; }
   .st--jump  { --x: 56% !important; --y: 40% !important; --w: 36vw !important; }
-  .st--sun   { --x: 35% !important; --y: 47% !important; --w: 15vw !important; }
   .note--pitch { --tip-x: 40%; --tip-y: 18%; }
   .note--jump  { --tip-x: 22%; --tip-y: 12%; }
   .hero__team { width: 100%; right: 0; }

@@ -38,6 +38,7 @@
   --hand:      "Nakin", "那欽", "Dela Gothic One", "Hiragino Maru Gothic ProN", sans-serif;
   /* English hand-written labels in the hero (Google Fonts, OFL) */
   --script:    "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --pen:       "Klee One", "Yomogi", "Hiragino Mincho ProN", serif;   /* thin, handwritten: the goal */
 
   --line: 3px solid var(--navy);
   --shadow: 6px 6px 0 var(--navy);
@@ -263,7 +264,7 @@ main { overflow-x: clip; }
    Hero — sticker collage (after echishin recruit)
    Every piece sits on the stage at --x / --y with width --w,
    tilted by --r, and pops in after --d. JS adds scroll parallax
-   through `transform`; pop/bob live on the inner image, tilt and
+   through `transform`; the pop-in lives on the inner image, tilt and
    hover use the individual `rotate` / `scale` properties, so none
    of them overwrite each other.
    ========================================================= */
@@ -297,18 +298,19 @@ main { overflow-x: clip; }
   margin-bottom: 20px;
   animation: pop .8s var(--spring) .15s both;
 }
+/* the goal: thin, handwritten letters */
 .hero__title {
-  font-family: var(--display);
+  font-family: var(--pen);
   font-weight: 400;
-  font-size: clamp(38px, 5.8vw, 84px);
-  line-height: 1.22;
-  letter-spacing: .02em;
-  text-shadow: .06em .06em 0 var(--navy);
+  font-size: clamp(24px, 2.8vw, 42px);
+  line-height: 1.6;
+  letter-spacing: .06em;
+  text-shadow: 0 2px 10px rgba(26, 36, 86, .25);
 }
 .hero__line { display: block; animation: pop .9s var(--spring) both; }
 .hero__line:nth-child(1) { animation-delay: .25s; }
 .hero__line:nth-child(2) { animation-delay: .4s; }
-[data-lang="en"] .hero__title { font-size: clamp(34px, 4vw, 60px); letter-spacing: 0; }
+[data-lang="en"] .hero__title { font-size: clamp(26px, 3vw, 44px); letter-spacing: .01em; }
 [data-lang="en"] .hero__copy { top: 34.5%; }
 
 @keyframes pop {
@@ -334,14 +336,9 @@ main { overflow-x: clip; }
   width: 100%;
   height: auto;
   filter: drop-shadow(0 10px 14px rgba(70, 0, 0, .28));
-  animation:
-    st-pop .8s var(--spring) var(--d, 0s) both,
-    st-bob var(--bob, 4.6s) ease-in-out calc(var(--d, 0s) + .8s) infinite alternate;
+  animation: st-pop .8s var(--spring) var(--d, 0s) both;
 }
-.st:nth-of-type(2n) { --bob: 5.4s; }
-.st:nth-of-type(3n) { --bob: 3.9s; }
 @keyframes st-pop { from { opacity: 0; transform: scale(.35) rotate(-14deg); } }
-@keyframes st-bob { to { transform: translateY(-9px) rotate(1.6deg); } }
 
 /* ---- the four members: a group photo at the bottom right ---- */
 .hero__team {
@@ -357,12 +354,9 @@ main { overflow-x: clip; }
 .member-st > img {
   filter: drop-shadow(0 -4px 16px rgba(70, 0, 0, .25));
   transform-origin: 50% 100%;
-  animation:
-    st-rise .9s var(--spring) var(--d) both,
-    st-sway var(--bob, 5s) ease-in-out calc(var(--d) + .9s) infinite alternate;
+  animation: st-rise .9s var(--spring) var(--d) both;
 }
 @keyframes st-rise { from { opacity: 0; transform: translateY(40%); } }
-@keyframes st-sway { from { transform: rotate(-.8deg); } to { transform: rotate(.8deg); } }
 .member-st--uehara    { --x: 0;   --w: 33%; --d: .75s; z-index: 3; }
 .member-st--anzai     { --x: 22%; --w: 28%; --d: .9s;  z-index: 2; }
 .member-st--kobayashi { --x: 44%; --w: 32%; --d: 1.05s; z-index: 3; }
@@ -495,7 +489,7 @@ main { overflow-x: clip; }
   filter: drop-shadow(0 10px 14px rgba(26, 36, 86, .18));
 }
 .about__peek  { left: -6px; top: 16%; width: clamp(96px, 12vw, 180px); }
-.about__catch { right: 3%; bottom: 10%; width: clamp(96px, 11vw, 170px); rotate: 6deg; animation: st-bob 5s ease-in-out infinite alternate; }
+.about__catch { right: 3%; bottom: 10%; width: clamp(96px, 11vw, 170px); rotate: 6deg; }
 
 .about__lead {
   font-family: var(--display);
@@ -689,14 +683,14 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
   border-radius: 22px;
   box-shadow: 6px 6px 0 var(--red);
   rotate: -3deg;
-  animation: bob 4s ease-in-out infinite;
 }
-@keyframes bob { 50% { translate: 0 -8px; } }
 
 .footer__copy {
-  font-family: var(--display);
-  font-size: clamp(24px, 3.4vw, 36px);
-  line-height: 1.4;
+  font-family: var(--pen);
+  font-weight: 400;
+  font-size: clamp(18px, 2.4vw, 26px);
+  line-height: 1.7;
+  letter-spacing: .05em;
   margin-bottom: 18px;
 }
 .footer__name { font-weight: 700; font-size: 14px; letter-spacing: .1em; opacity: .8; }
@@ -778,8 +772,8 @@ html:not(.js) .about__lead mark { background-size: 100% 42%; }
 @media (max-width: 700px) {
   .hero { min-height: 660px; min-height: max(100vh, 660px); min-height: max(100svh, 660px); }
   .hero__copy { left: 6%; right: 6%; top: 16%; }
-  .hero__title { font-size: clamp(32px, 9.6vw, 46px); }
-  [data-lang="en"] .hero__title { font-size: clamp(28px, 8vw, 40px); }
+  .hero__title { font-size: clamp(19px, 5.6vw, 28px); }
+  [data-lang="en"] .hero__title { font-size: clamp(19px, 5.4vw, 28px); }
   .st--duo, .st--silhouette { display: none; }
   .st--pitch { --x: 4% !important;  --y: 42% !important; --w: 20vw !important; }
   .st--jump  { --x: 56% !important; --y: 40% !important; --w: 36vw !important; }

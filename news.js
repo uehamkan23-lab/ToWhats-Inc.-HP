@@ -1,5 +1,5 @@
 /* =========================================================
-   常奥 ToWhats — news.js
+   トワツ（ToWhats） — news.js
    Draws お知らせ・実績 (news and achievements) from news/news.json.
 
    <div data-news data-root="" data-limit="5"></div>                 latest items (top page)

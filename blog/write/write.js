@@ -1,5 +1,5 @@
 /* =========================================================
-   常奥 ToWhats — writer (/blog/write/)
+   トワツ（ToWhats） — writer (/blog/write/)
    Writes three kinds of pages:
      ブログ記事       → blog/<slug>/   listed in blog/posts.json
      作品展示会       → works/<slug>/  listed in works/works.json
@@ -532,7 +532,7 @@
     });
     var entry = { slug: f.slug, title: f.title, date: f.date, type: f.type, members: f.members, url: f.url, excerpt: excerpt, cover: f.cover, updated: today() };
     var source = frontMatter({ title: f.title, date: f.date, type: f.type, members: f.members.join(','), url: f.url, cover: f.cover }) + f.body;
-    var who = people.map(function (m) { return m.name; }).join('・') || '常奥';
+    var who = people.map(function (m) { return m.name; }).join('・') || 'トワツ';
     return { html: html, entry: entry, source: source, who: who };
   }
 

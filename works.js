@@ -1,6 +1,6 @@
 /* =========================================================
-   常奥 ToWhats — works.js
-   Draws the ToWhats作品展示会 (exhibition) cards from works/works.json.
+   トワツ（ToWhats） — works.js
+   Draws the トワツ作品展示会 (exhibition) cards from works/works.json.
 
    <div data-works data-root="../"></div>                grid
    <div data-works data-root="" data-flow></div>          cards flowing left → right (top page)

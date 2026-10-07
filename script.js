@@ -1,5 +1,5 @@
 /* =========================================================
-   常奥 ToWhats — script.js  (shared by every page)
+   トワツ（ToWhats） — script.js  (shared by every page)
    1. Language (ja / en)
    2. Menu
    3. Scroll: hero stickers drift apart, sections pop in

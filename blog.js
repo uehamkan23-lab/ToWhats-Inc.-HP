@@ -1,5 +1,5 @@
 /* =========================================================
-   常奥 ToWhats — blog.js
+   トワツ（ToWhats） — blog.js
    Draws post lists from blog/posts.json. Used on the top page
    (latest posts), /blog/ (all posts, filter by author) and each
    member page (that member's posts).

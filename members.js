@@ -1,5 +1,5 @@
 /* =========================================================
-   常奥 ToWhats — members.js
+   トワツ（ToWhats） — members.js
    The four members, shared by the blog (author names), the
    writer page (author picker) and the post lists.
    Profile pages themselves are plain HTML under /members/<key>/.

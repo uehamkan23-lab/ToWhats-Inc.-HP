@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="ja" data-lang="ja" data-title-en="ToWhats | 常奥">
+<html lang="ja" data-lang="ja" data-title-en="ToWhats">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>常奥 ToWhats</title>
-<meta name="description" content="常陸・陸奥から笑顔を届ける。常奥（とわつ / ToWhats）は、仙台高専の有志団体です。メンバーは全員がエンジニア。">
-<meta property="og:title" content="常奥 ToWhats">
+<title>トワツ</title>
+<meta name="description" content="常陸・陸奥から笑顔を届ける。トワツは、仙台高専の有志団体です。メンバーは全員がエンジニア。">
+<meta property="og:title" content="トワツ">
 <meta property="og:description" content="常陸・陸奥から笑顔を届ける。">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="常奥 ToWhats">
+<meta property="og:site_name" content="トワツ">
 <meta property="og:locale" content="ja_JP">
 <meta name="theme-color" content="#1a2456">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -43,15 +43,12 @@
 
 <!-- ============ Opening screen ============
      サイトを開いたときに一度だけ出る画面。
-     ロゴを「赤いマーク」「常」「奥」の3つに分けて動かしています（assets/README.md 参照）。 -->
+     トワツのマークが落ちてきて揺れ、「ト」「ワ」「ツ」が1文字ずつ飛び出します（assets/README.md 参照）。 -->
 <div class="opening" id="opening" aria-hidden="true">
   <div class="opening__stage">
     <div class="opening__logo">
-      <img class="opening__mark" src="assets/logo-mark.png" alt="" width="1000" height="453">
-      <div class="opening__kanji">
-        <img class="opening__jo" src="assets/logo-kanji-jo.png" alt="" width="521" height="260">
-        <img class="opening__oku" src="assets/logo-kanji-oku.png" alt="" width="479" height="260">
-      </div>
+      <img class="opening__mark" src="assets/logo-mark.png" alt="" width="750" height="839">
+      <p class="opening__name"><span>ト</span><span>ワ</span><span>ツ</span></p>
     </div>
   </div>
   <p class="opening__hint">TAP TO SKIP</p>
@@ -62,12 +59,12 @@
 <header class="header" id="header">
   <div class="header__bar">
     <a class="logo" href="#top">
-      <img src="assets/logo-header.png" alt="常奥 ToWhats" width="800" height="394">
+      <img src="assets/logo-mark.png" alt="" width="750" height="839"><span class="logo__name">トワツ</span>
     </a>
 
     <nav class="nav" id="nav" aria-label="メニュー">
       <a href="about/" data-en="About">私たち</a>
-      <a href="works/" data-en="Exhibition">ToWhats作品展示会</a>
+      <a href="works/" data-en="Exhibition">トワツ作品展示会</a>
       <a href="members/" data-en="Members">メンバー</a>
       <a href="blog/" data-en="Blog">ブログ</a>
       <a href="news/" data-en="News">お知らせ</a>
@@ -186,7 +183,7 @@
     <svg class="divider divider--top" viewBox="0 0 2880 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 Q60 10 120 22 T240 22 T360 22 T480 22 T600 22 T720 22 T840 22 T960 22 T1080 22 T1200 22 T1320 22 T1440 22 T1560 22 T1680 22 T1800 22 T1920 22 T2040 22 T2160 22 T2280 22 T2400 22 T2520 22 T2640 22 T2760 22 T2880 22 V48 H0Z"/></svg>
     <div class="container">
       <p class="label label--light reveal" data-en="Exhibition">作品展示会</p>
-      <h2 class="title title--light reveal" data-en="ToWhats Exhibition">ToWhats作品展示会</h2>
+      <h2 class="title title--light reveal" data-en="ToWhats Exhibition">トワツ作品展示会</h2>
 
       <div data-works data-root="" data-flow></div>
       <p class="more-link reveal"><a class="btn btn--on-dark" href="works/"><span data-en="Visit the exhibition">作品展示会をすべて見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></p>
@@ -242,7 +239,7 @@
   <section class="section home-news" id="news">
     <div class="container">
       <p class="label reveal" data-en="News">お知らせ・実績</p>
-      <h2 class="title reveal" data-en="ToWhats update log.">常奥アップデートログ</h2>
+      <h2 class="title reveal" data-en="ToWhats update log.">トワツアップデートログ</h2>
       <div data-news data-root="" data-limit="5"></div>
       <p class="more-link"><a class="btn" href="news/"><span data-en="All news">お知らせ・実績をすべて見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></p>
     </div>
@@ -262,12 +259,12 @@
   <section class="section company" id="company">
     <div class="container">
       <p class="label reveal" data-en="Profile">団体概要</p>
-      <h2 class="title reveal" data-en="What is ToWhats?">常奥とは？</h2>
+      <h2 class="title reveal" data-en="What is ToWhats?">トワツとは？</h2>
 
       <dl class="info reveal">
         <div class="info__row">
           <dt data-en="Name">名称</dt>
-          <dd data-en="ToWhats (常奥)">常奥<small>とわつ / ToWhats</small></dd>
+          <dd data-en="ToWhats">トワツ</dd>
         </div>
         <div class="info__row">
           <dt data-en="Type">形態</dt>
@@ -294,10 +291,10 @@
 <!-- ============ Footer ============ -->
 <footer class="footer">
   <svg class="divider divider--footer" viewBox="0 0 2880 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 Q60 10 120 22 T240 22 T360 22 T480 22 T600 22 T720 22 T840 22 T960 22 T1080 22 T1200 22 T1320 22 T1440 22 T1560 22 T1680 22 T1800 22 T1920 22 T2040 22 T2160 22 T2280 22 T2400 22 T2520 22 T2640 22 T2760 22 T2880 22 V48 H0Z"/></svg>
-  <img class="footer__logo" src="assets/logo.png" alt="" width="1000" height="722" loading="lazy">
+  <img class="footer__logo" src="assets/logo-mark.png" alt="" width="750" height="839" loading="lazy">
   <p class="footer__copy" data-en="Delivering smiles<br>from Hitachi &amp; Mutsu.">常陸・陸奥から<br>笑顔を届ける。</p>
-  <p class="footer__name">常奥 ToWhats</p>
-  <p class="footer__small">&copy; <span id="year">2026</span> ToWhats</p>
+  <p class="footer__name">トワツ</p>
+  <p class="footer__small">&copy; <span id="year">2026</span> トワツ</p>
 </footer>
 
 <script src="script.js"></script>

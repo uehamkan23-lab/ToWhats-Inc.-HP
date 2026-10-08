@@ -3,7 +3,6 @@
    1. Language (ja / en)
    2. Menu
    3. Scroll: hero stickers drift apart, sections pop in
-   4. Opening screen
    ========================================================= */
 (function () {
   'use strict';
@@ -143,38 +142,6 @@
     window.requestAnimationFrame(function () { onScroll(); ticking = false; });
   }, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
-
-  /* =========================================================
-     4. Opening screen
-     The inline script in <head> decides whether it shows (html.is-opening).
-     Here it is held for a moment, then lifted like a curtain.
-     ========================================================= */
-  var opening = $('#opening');
-  var HOLD_MS = 3300;
-
-  function liftOpening() {
-    if (!root.classList.contains('is-opening') || opening.classList.contains('is-leaving')) { return; }
-    try { window.sessionStorage.setItem('towhats-opening', '1'); } catch (e) { /* storage unavailable */ }
-    opening.classList.add('is-leaving');
-    root.classList.remove('is-opening');   // releases the hero's paused animations
-    opening.addEventListener('animationend', function (e) {
-      if (e.target === opening) { opening.remove(); }
-    });
-    // Fallback in case animationend never fires (e.g. a tab in the background).
-    setTimeout(function () { opening.remove(); }, 1200);
-  }
-
-  if (!opening) {
-    root.classList.remove('is-opening');   // only the top page has an opening
-  } else if (root.classList.contains('is-opening')) {
-    setTimeout(liftOpening, HOLD_MS);
-    opening.addEventListener('click', liftOpening);
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') { liftOpening(); }
-    });
-  } else {
-    opening.remove();
-  }
 
   /* ---------- boot ---------- */
   var year = $('#year');

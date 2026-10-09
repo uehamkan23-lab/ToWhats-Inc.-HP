@@ -500,6 +500,7 @@
       MEMBERS_HTML: chips,
       PERIOD_HTML: f.period ? '        <div><dt data-en="When">時期</dt><dd>' + e(f.period) + '</dd></div>' : '',
       LINK_HTML: linkRow(f.url),
+      CTA_HTML: f.url ? '      <p class="work-head__cta"><a class="btn btn--on-dark" href="' + e(f.url) + '" target="_blank" rel="noopener noreferrer"><span data-en="Visit the site">サイトを見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></p>' : '',
       COVER: coverHtml(f.cover),
       BODY: body
     });

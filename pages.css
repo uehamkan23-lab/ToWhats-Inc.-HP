@@ -353,6 +353,7 @@ details.help code { background: var(--cream-2); padding: 1px 6px; border-radius:
 /* ---------- work page ---------- */
 .work-head__status { margin-bottom: 14px; }
 .work-head__status:empty { display: none; }
+.work-head__cta { margin-top: 22px; }
 .work-facts {
   display: grid;
   gap: 12px;

@@ -394,6 +394,51 @@ main { overflow-x: clip; }
 /* =========================================================
    About
    ========================================================= */
+/* =========================================================
+   NajoshiteAI pick-up (a route to its own site)
+   ========================================================= */
+.pickup {
+  position: relative;
+  z-index: 2;
+  background: var(--sun);
+  border-block: var(--line);
+  padding-block: clamp(48px, 7vw, 84px);
+}
+.pickup__inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+}
+.pickup__icon {
+  display: block;
+  width: clamp(150px, 20vw, 240px);
+  aspect-ratio: 1;
+  border: var(--line);
+  border-radius: 22%;
+  overflow: hidden;
+  box-shadow: 8px 8px 0 var(--navy);
+  rotate: -4deg;
+  transition: rotate .4s var(--spring), scale .4s var(--spring);
+}
+.pickup__icon:hover { rotate: 0deg; scale: 1.04; }
+.pickup__icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pickup__title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.1;
+  margin-top: 12px;
+}
+.pickup__lead { margin-top: 14px; font-family: var(--body-bold); font-weight: 700; font-size: clamp(15px, 1.6vw, 18px); line-height: 1.8; }
+.pickup__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 14px; font-family: var(--body-bold); font-weight: 700; font-size: 14px; }
+.pickup__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
+
+@media (max-width: 700px) {
+  .pickup__inner { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .pickup__meta, .pickup__actions { justify-content: center; }
+}
+
 .about { position: relative; padding-top: clamp(120px, 14vw, 180px); text-align: center; overflow: hidden; }
 .about__peek,
 .about__catch {

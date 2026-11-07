@@ -128,21 +128,6 @@
   }, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
 
-  /* ---------- quiz: pick one, see a suggestion ---------- */
-  $$('[data-quiz]').forEach(function (quiz) {
-    var chips = Array.prototype.slice.call(quiz.querySelectorAll('[data-pick]'));
-    var answers = Array.prototype.slice.call(quiz.querySelectorAll('[data-answer]'));
-    var hint = quiz.querySelector('[data-quiz-hint]');
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        var pick = chip.getAttribute('data-pick');
-        chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
-        answers.forEach(function (a) { a.hidden = a.getAttribute('data-answer') !== pick; });
-        if (hint) { hint.hidden = true; }
-      });
-    });
-  });
-
   /* ---------- boot ---------- */
   var year = $('#year');
   if (year) { year.textContent = String(new Date().getFullYear()); }

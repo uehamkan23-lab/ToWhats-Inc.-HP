@@ -2,7 +2,7 @@
    トワツ（ToWhats） — script.js  (shared by every page)
    1. Language (ja / en)
    2. Menu
-   3. Scroll: hero stickers drift apart, sections pop in
+   3. Scroll: sections fade in
    ========================================================= */
 (function () {
   'use strict';
@@ -106,32 +106,17 @@
   /* =========================================================
      3. Scroll
      ========================================================= */
-  var hero = $('.hero');
-  // Each hero piece moves up at its own speed (data-depth), so the collage
-  // separates into layers as you scroll.
-  var layers = $$('.hero [data-depth]').map(function (el) {
-    return { el: el, depth: parseFloat(el.getAttribute('data-depth')) || 0 };
-  });
   var reveals = $$('.reveal');
 
   function onScroll() {
     var vh = window.innerHeight;
 
-    // Pop sections in once they reach the lower part of the screen.
+    // Fade sections in once they reach the lower part of the screen.
     for (var i = reveals.length - 1; i >= 0; i--) {
       if (reduceMotion || reveals[i].getBoundingClientRect().top < vh * 0.88) {
         reveals[i].classList.add('is-visible');
         reveals.splice(i, 1);
       }
-    }
-
-    if (reduceMotion || !hero) { return; }
-
-    var y = Math.max(0, -hero.getBoundingClientRect().top);
-    if (y < hero.offsetHeight) {
-      layers.forEach(function (l) {
-        l.el.style.transform = 'translate3d(0,' + (-y * l.depth).toFixed(1) + 'px,0)';
-      });
     }
   }
 

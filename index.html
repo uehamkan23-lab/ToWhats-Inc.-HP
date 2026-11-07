@@ -17,10 +17,10 @@
 <!-- Morisawa Fonts: 管理画面で発行される Web フォントの埋め込みコードを、この下に貼り付けてください -->
 <!-- MORISAWA_EMBED_CODE -->
 
-<!-- フォント（Google Fonts）: 本文・見出しは Zen Kaku Gothic New、英字の小見出しは Montserrat -->
+<!-- フォント（Google Fonts）: 日本語は Noto Sans JP、英字は Lilita One（NajoshiteAI のサイトと同じ） -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Zen+Maru+Gothic:wght@700;900&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="pages.css">
 <script>document.documentElement.classList.add('js');</script>
@@ -35,12 +35,12 @@
     </a>
 
     <nav class="nav" id="nav" aria-label="メニュー">
-      <a href="about/" data-en="About">私たち</a>
-      <a href="works/" data-en="Exhibition">トワツ作品展示会</a>
-      <a href="members/" data-en="Members">メンバー</a>
-      <a href="blog/" data-en="Blog">ブログ</a>
-      <a href="news/" data-en="News">お知らせ</a>
-      <a href="about/#profile" data-en="Profile">団体概要</a>
+      <a href="about/"><span class="nav__en">ABOUT</span><span class="nav__jp" data-en="About">私たち</span></a>
+      <a href="works/"><span class="nav__en">WORKS</span><span class="nav__jp" data-en="Exhibition">トワツ作品展示会</span></a>
+      <a href="members/"><span class="nav__en">MEMBER</span><span class="nav__jp" data-en="Members">メンバー</span></a>
+      <a href="blog/"><span class="nav__en">BLOG</span><span class="nav__jp" data-en="Blog">ブログ</span></a>
+      <a href="news/"><span class="nav__en">NEWS</span><span class="nav__jp" data-en="News">お知らせ</span></a>
+      <a href="about/#profile"><span class="nav__en">PROFILE</span><span class="nav__jp" data-en="Profile">団体概要</span></a>
     </nav>
 
     <button class="pill pill--lang" id="langToggle" type="button" data-en="日本語">EN</button>
@@ -53,34 +53,39 @@
 
 <main>
 
-  <!-- ============ Hero ============ -->
+  <!-- ============ Hero: vertical copy on ruled paper ============ -->
   <section class="hero" id="top">
-    <div class="container hero__inner">
-      <div class="hero__copy">
-        <p class="hero__eyebrow" data-en="A student group at NIT, Sendai College">仙台高専の学生団体</p>
-        <h1 class="hero__title">
-          <span class="hero__line" data-en="The answer lies in curiosity.">答えは探求心の中にある。</span>
-          <span class="hero__line" data-en="We create what sparks it.">その探求心の着火剤を創る。</span>
-        </h1>
-        <p class="hero__lead" data-en="Four students at NIT, Sendai College. We build apps, mostly for things that bug us.">仙台高専の学生4人で、アプリをつくっています。自分たちが困ったことや、面白そうだと思ったことが出発点です。</p>
+    <div class="container">
+      <div class="hero__inner">
+        <div class="hero__copy">
+          <h1 class="hero__title">
+            <span class="hero__line" data-en="The answer lies in curiosity.">答えは探求心の中にある。</span>
+            <span class="hero__line" data-en="We create what sparks it.">その探求心の着火剤を創る。</span>
+          </h1>
+          <p class="hero__lead" data-en="Four students at NIT, Sendai College. We build apps, mostly for things that bug us.">仙台高専の学生4人で、アプリをつくっています。<br>自分たちが困ったことや、<br>面白そうだと思ったことが出発点です。</p>
+        </div>
+        <figure class="hero__visual">
+          <div class="hero__team">
+            <img src="assets/people/uehara.webp" alt="上原 貫太" width="1000" height="1000">
+            <img src="assets/people/anzai.webp" alt="安齋 隼" width="1000" height="1000">
+            <img src="assets/people/kobayashi.webp" alt="小林 壮志" width="1000" height="1000">
+            <img src="assets/people/yuki.webp" alt="結城 敬蔵" width="1000" height="1000">
+          </div>
+        </figure>
+      </div>
+      <div class="hero__foot">
+        <p class="hero__tag" data-en="Student group at NIT, Sendai College">仙台高専の学生団体</p>
+        <p class="hero__tag" data-en="Four members, all engineers">メンバー4人、全員エンジニア</p>
         <div class="hero__actions">
           <a class="btn" href="works/"><span data-en="See our work">作品展示会を見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
           <a class="btn btn--ghost" href="about/"><span data-en="About us">私たちについて</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
-      <figure class="hero__visual">
-        <div class="hero__team">
-          <img src="assets/people/uehara.webp" alt="上原 貫太" width="1000" height="1000">
-          <img src="assets/people/anzai.webp" alt="安齋 隼" width="1000" height="1000">
-          <img src="assets/people/kobayashi.webp" alt="小林 壮志" width="1000" height="1000">
-          <img src="assets/people/yuki.webp" alt="結城 敬蔵" width="1000" height="1000">
-        </div>
-      </figure>
     </div>
   </section>
 
   <!-- ============ NajoshiteAI (pick up) ============ -->
-  <section class="pickup" id="najoshiteai" aria-labelledby="pickupTitle">
+  <section class="pickup band--paper arc" id="najoshiteai" aria-labelledby="pickupTitle">
     <div class="container pickup__inner">
       <a class="pickup__icon reveal" href="https://najoshiteai.pages.dev/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/najoshiteai-icon.webp" alt="" width="480" height="480" loading="lazy"></a>
       <div class="pickup__body reveal">
@@ -97,20 +102,26 @@
   </section>
 
   <!-- ============ About ============ -->
-  <section class="section about" id="about">
+  <section class="section about band--paper" id="about">
     <div class="container">
-      <p class="label reveal" data-en="About us">私たち</p>
-      <p class="about__lead reveal" data-en="Through the apps and products we build, <mark>we help each person grow a curiosity of their own.</mark>">アプリや製品の開発を通じて、<br>人それぞれの形の<mark>探求心</mark>を<br>育てていきます。</p>
+      <header class="sec-head reveal">
+        <span class="watermark" aria-hidden="true">ABOUT</span>
+        <h2 class="vtitle" data-en="Growing curiosity, through apps and products.">アプリと製品で、<br>探求心を育てる。</h2>
+      </header>
+      <p class="about__lead reveal" data-en="Through the apps and products we build, <mark>we help each person grow a curiosity of their own.</mark>">アプリや製品の開発を通じて、人それぞれの形の<mark>探求心</mark>を育てていきます。</p>
       <p class="about__sub reveal" data-en="Four of us: a leader, a treasurer, a designer and a strategist.">代表・会計・デザイン・戦略の4人で活動しています。</p>
       <p class="more-link reveal"><a class="btn" href="about/"><span data-en="More about us">私たちのこと</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></p>
     </div>
   </section>
 
   <!-- ============ Business ============ -->
-  <section class="section business" id="business">
+  <section class="section business band--paper" id="business">
     <div class="container">
-      <p class="label reveal" data-en="What we do">やっていること</p>
-      <h2 class="title reveal" data-en="Three things we do.">トワツの3つの活動</h2>
+      <header class="sec-head reveal">
+        <span class="watermark" aria-hidden="true">ACTIVITY</span>
+        <h2 class="vtitle" data-en="Three things we do.">トワツの3つの活動</h2>
+        <p class="sec-lead" data-en="App development, contests, and making things with our local community.">アプリの開発、コンテストへの挑戦、地域とのものづくり。この3つを軸に活動しています。</p>
+      </header>
       <ol class="biz">
         <li class="biz__item reveal">
           <h3 class="biz__title" data-en="Apps for learning">学びのアプリの開発</h3>
@@ -132,7 +143,7 @@
   </section>
 
   <!-- ============ Album: activity photos ============ -->
-  <section class="album" aria-label="活動のアルバム">
+  <section class="album band--deep arc" aria-label="活動のアルバム">
     <div class="album__track">
       <figure class="polaroid"><img src="assets/people/fun-pitch.webp" alt="" width="568" height="900" loading="lazy"></figure>
       <figure class="polaroid"><img src="assets/people/fun-duo.webp" alt="" width="546" height="900" loading="lazy"></figure>
@@ -144,10 +155,13 @@
   </section>
 
   <!-- ============ Philosophy ============ -->
-  <section class="section philosophy" id="philosophy">
+  <section class="section philosophy band--ground arc" id="philosophy">
     <div class="container">
-      <p class="label reveal" data-en="What we value">大事にしていること</p>
-      <h2 class="title reveal" data-en="Our three pillars.">大事な三本柱</h2>
+      <header class="sec-head reveal">
+        <span class="watermark" aria-hidden="true">VALUES</span>
+        <h2 class="vtitle" data-en="Our three pillars.">大事な三本柱</h2>
+        <p class="sec-lead" data-en="The three things that matter most to us.">トワツが大事にしている、三つのことです。</p>
+      </header>
 
       <ol class="cards">
         <li class="card card--sun reveal">
@@ -167,21 +181,27 @@
   </section>
 
   <!-- ============ Works ============ -->
-  <section class="section works" id="works">
+  <section class="section works band--deep arc" id="works">
     <div class="container">
-      <p class="label label--light reveal" data-en="Exhibition">作品展示会</p>
-      <h2 class="title title--light reveal" data-en="ToWhats Exhibition">トワツ作品展示会</h2>
+      <header class="sec-head reveal">
+        <span class="watermark" aria-hidden="true">WORKS</span>
+        <h2 class="vtitle" data-en="ToWhats Exhibition">トワツ作品展示会</h2>
+        <p class="sec-lead" data-en="From works in progress to things we have made.">制作中のものから、これまでにつくったものまで。</p>
+      </header>
 
       <div data-works data-root="" data-flow></div>
-      <p class="more-link reveal"><a class="btn btn--on-dark" href="works/"><span data-en="Visit the exhibition">作品展示会をすべて見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></p>
+      <p class="more-link reveal"><a class="btn" href="works/"><span data-en="Visit the exhibition">作品展示会をすべて見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></p>
     </div>
   </section>
 
   <!-- ============ Team ============ -->
-  <section class="section team" id="team">
+  <section class="section team band--ground arc" id="team">
     <div class="container">
-      <p class="label reveal" data-en="Team">メンバー</p>
-      <h2 class="title reveal" data-en="A 4-core CPU.">4コアCPU</h2>
+      <header class="sec-head reveal">
+        <span class="watermark" aria-hidden="true">MEMBER</span>
+        <h2 class="vtitle" data-en="A 4-core CPU.">4コアCPU</h2>
+        <p class="sec-lead" data-en="A leader, a treasurer, a designer and a strategist. Pick a photo to see each profile.">代表・会計・デザイン・戦略の4人です。写真を選ぶと、それぞれの紹介ページへ移ります。</p>
+      </header>
 
       <ul class="members">
         <li class="member member--sun reveal">
@@ -222,30 +242,38 @@
   </section>
 
   <!-- ============ News & achievements (latest 5) ============ -->
-  <section class="section home-news" id="news">
+  <section class="section home-news band--paper arc" id="news">
     <div class="container">
-      <p class="label reveal" data-en="News">お知らせ・実績</p>
-      <h2 class="title reveal" data-en="ToWhats update log.">トワツアップデートログ</h2>
+      <header class="sec-head reveal">
+        <span class="watermark" aria-hidden="true">NEWS</span>
+        <h2 class="vtitle" data-en="ToWhats update log.">トワツアップデートログ</h2>
+        <p class="sec-lead" data-en="News, and the awards and contests we have taken part in.">お知らせと、受賞・出場などの実績です。</p>
+      </header>
       <div data-news data-root="" data-limit="5"></div>
       <p class="more-link"><a class="btn" href="news/"><span data-en="All news">お知らせ・実績をすべて見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></p>
     </div>
   </section>
 
   <!-- ============ Blog (latest 3) ============ -->
-  <section class="section home-blog" id="blog">
+  <section class="section home-blog band--paper" id="blog">
     <div class="container">
-      <p class="label reveal" data-en="Blog">ブログ</p>
-      <h2 class="title reveal" data-en="Everyday release notes.">日常リリースノート</h2>
+      <header class="sec-head reveal">
+        <span class="watermark" aria-hidden="true">BLOG</span>
+        <h2 class="vtitle" data-en="Everyday release notes.">日常リリースノート</h2>
+        <p class="sec-lead" data-en="What we think about while building, and how the work is going.">つくりながら考えたことや、開発の様子を書いています。</p>
+      </header>
       <div data-posts data-root="" data-limit="3"></div>
       <p class="more-link"><a class="btn" href="blog/"><span data-en="All posts">記事をすべて見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></p>
     </div>
   </section>
 
   <!-- ============ Profile ============ -->
-  <section class="section company" id="company">
+  <section class="section company band--ground arc" id="company">
     <div class="container">
-      <p class="label reveal" data-en="Profile">団体概要</p>
-      <h2 class="title reveal" data-en="What is ToWhats?">トワツとは？</h2>
+      <header class="sec-head reveal">
+        <span class="watermark" aria-hidden="true">PROFILE</span>
+        <h2 class="vtitle" data-en="What is ToWhats?">トワツとは？</h2>
+      </header>
 
       <dl class="info reveal">
         <div class="info__row">
@@ -272,17 +300,20 @@
     </div>
   </section>
 
-  <!-- ============ Work with us ============ -->
-  <section class="cta" id="together">
-    <div class="container cta__inner">
-      <div>
-        <p class="label label--light" data-en="Work with us">一緒にやりませんか</p>
-        <h2 class="cta__title" data-en="We are looking for people to try our apps.">アプリを試してくれる人を探しています。</h2>
-        <p class="cta__text" data-en="Use them in class or on your own, and tell us what you think. Teachers, students and companies are all welcome. Please contact our leader, Uehara.">授業や自習で使ってみて、感想を聞かせてください。先生・生徒・企業の方、どなたでも歓迎です。連絡は代表の上原まで。</p>
-      </div>
-      <div class="cta__actions">
-        <a class="btn btn--on-dark" href="members/uehara/#contact"><span data-en="Contact our leader">代表に連絡する</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn--outline-light" href="works/"><span data-en="See our work">作品展示会を見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+  <!-- ============ Contact ============ -->
+  <section class="section cta band--deep arc" id="together">
+    <div class="container">
+      <header class="sec-head reveal">
+        <span class="watermark" aria-hidden="true">CONTACT</span>
+        <h2 class="vtitle" data-en="We are looking for people to try our apps.">試してくれる人を、<br>探しています。</h2>
+        <p class="sec-lead" data-en="Use them in class or on your own, and tell us what you think. Teachers, students and companies are all welcome.">授業や自習で使ってみて、感想を聞かせてください。先生・生徒・企業の方、どなたでも歓迎です。</p>
+      </header>
+      <div class="cta__box reveal">
+        <p class="cta__text" data-en="Please get in touch with our leader, Uehara. We read every message.">連絡は、代表の上原までお願いします。いただいた感想は、すべて読んでいます。</p>
+        <div class="cta__actions">
+          <a class="btn" href="members/uehara/#contact"><span data-en="Contact our leader">代表に連絡する</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost" href="works/"><span data-en="See our work">作品展示会を見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </div>
       </div>
     </div>
   </section>

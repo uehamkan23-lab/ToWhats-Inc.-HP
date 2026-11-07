@@ -3,7 +3,6 @@
    1. Language (ja / en)
    2. Menu
    3. Scroll: sections fade in
-   4. Splash: 最初に「バクシンリョーガ！」
    ========================================================= */
 (function () {
   'use strict';
@@ -143,25 +142,6 @@
       });
     });
   });
-
-  /* ---------- splash: 最初の「バクシンリョーガ！」 ---------- */
-  var splash = $('#splash');
-  function hideSplash() {
-    if (!splash || !root.classList.contains('is-splash') || splash.classList.contains('is-leaving')) { return; }
-    try { window.sessionStorage.setItem('towhats-splash', '1'); } catch (e) { /* storage unavailable */ }
-    splash.classList.add('is-leaving');
-    root.classList.remove('is-splash');
-    setTimeout(function () { splash.remove(); }, 700);
-  }
-  if (splash) {
-    if (root.classList.contains('is-splash')) {
-      setTimeout(hideSplash, 2000);
-      splash.addEventListener('click', hideSplash);
-      document.addEventListener('keydown', hideSplash, { once: true });
-    } else {
-      splash.remove();
-    }
-  }
 
   /* ---------- boot ---------- */
   var year = $('#year');

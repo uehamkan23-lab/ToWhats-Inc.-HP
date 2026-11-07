@@ -387,6 +387,51 @@ main { overflow-x: clip; }
 .about__sub { font-size: clamp(15px, 1.5vw, 17px); color: var(--muted); }
 
 /* =========================================================
+   Business — what the group does (after Goodpatch / atama+)
+   ========================================================= */
+.business { background: var(--bg); }
+.biz { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2.5vw, 28px); counter-reset: biz; }
+.biz__item {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 28px 26px;
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+.biz__num { font-family: var(--latin); font-weight: 700; font-size: 32px; line-height: 1; color: var(--bg-3); -webkit-text-stroke: 1px var(--navy); margin-bottom: 18px; }
+.biz__title { font-family: var(--display); font-weight: 900; font-size: clamp(18px, 1.8vw, 21px); line-height: 1.55; color: var(--navy); margin-bottom: 12px; }
+.biz__text { font-size: 15px; color: var(--muted); margin-bottom: 22px; }
+.biz__link { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; color: var(--navy); padding-top: 14px; border-top: var(--line); }
+.biz__link svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: translate .3s var(--out); }
+.biz__link:hover svg { translate: 3px 0; }
+
+/* =========================================================
+   Numbers (after SmartHR: the group's scale in plain figures)
+   ========================================================= */
+.numbers { background: var(--bg-2); border-block: var(--line); }
+.numbers .label { margin-bottom: clamp(28px, 4vw, 44px); }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--navy); }
+.stat { padding: 28px 22px 26px; border-bottom: var(--line); }
+.stat + .stat { border-left: var(--line); }
+.stat__value { display: flex; align-items: baseline; gap: 6px; color: var(--navy); }
+.stat__value b { font-family: var(--latin); font-weight: 700; font-size: clamp(44px, 5vw, 64px); line-height: 1; letter-spacing: -.01em; }
+.stat__value span { font-weight: 700; font-size: 16px; }
+.stat__label { margin-top: 12px; font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* =========================================================
+   Work with us (after 浜野製作所: making things together)
+   ========================================================= */
+.cta { background: var(--navy-2); color: #fff; padding-block: clamp(64px, 8vw, 96px); }
+.cta__inner { display: grid; grid-template-columns: minmax(0, 1.4fr) auto; align-items: center; gap: clamp(28px, 5vw, 64px); }
+.cta__title { font-family: var(--display); font-weight: 900; font-size: clamp(22px, 2.8vw, 32px); line-height: 1.55; margin: 14px 0 14px; }
+.cta__text { color: rgba(255, 255, 255, .8); max-width: 36em; }
+.cta__actions { display: grid; gap: 12px; }
+.btn--outline-light { background: transparent; border-color: rgba(255, 255, 255, .5); color: #fff; }
+.btn--outline-light:hover { background: rgba(255, 255, 255, .08); border-color: #fff; box-shadow: none; }
+
+/* =========================================================
    Philosophy
    ========================================================= */
 .philosophy { background: var(--bg); }
@@ -532,6 +577,21 @@ main { overflow-x: clip; }
   letter-spacing: .06em;
   margin-bottom: 18px;
 }
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px clamp(32px, 6vw, 72px);
+  margin: 8px auto 36px;
+  padding: 28px 0;
+  max-width: 760px;
+  border-block: 1px solid rgba(255, 255, 255, .14);
+  text-align: left;
+}
+.footer__nav div { display: grid; gap: 6px; align-content: start; }
+.footer__head { font-size: 12px; font-weight: 700; letter-spacing: .14em; color: rgba(255, 255, 255, .55); margin-bottom: 4px; }
+.footer__nav a { font-size: 14px; font-weight: 500; color: rgba(255, 255, 255, .9); }
+.footer__nav a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 .footer__name { font-weight: 700; font-size: 14px; letter-spacing: .14em; opacity: .85; }
 .footer__small { font-family: var(--latin); font-size: 12px; opacity: .55; margin-top: 8px; letter-spacing: .06em; }
 
@@ -544,8 +604,8 @@ main { overflow-x: clip; }
   transition: opacity .7s var(--out), translate .7s var(--out);
 }
 .js .reveal.is-visible { opacity: 1; translate: 0 0; }
-.members .reveal:nth-child(2), .cards .reveal:nth-child(2) { transition-delay: .08s; }
-.members .reveal:nth-child(3), .cards .reveal:nth-child(3) { transition-delay: .16s; }
+.members .reveal:nth-child(2), .cards .reveal:nth-child(2), .biz .reveal:nth-child(2), .stats .reveal:nth-child(2) { transition-delay: .08s; }
+.members .reveal:nth-child(3), .cards .reveal:nth-child(3), .biz .reveal:nth-child(3), .stats .reveal:nth-child(3) { transition-delay: .16s; }
 .members .reveal:nth-child(4) { transition-delay: .24s; }
 
 /* =========================================================
@@ -579,6 +639,11 @@ main { overflow-x: clip; }
   .hero__inner { grid-template-columns: 1fr; }
   .hero__visual { max-width: 560px; width: 100%; }
   .cards { grid-template-columns: 1fr; max-width: 560px; }
+  .biz { grid-template-columns: 1fr; max-width: 620px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat:nth-child(3) { border-left: 0; }
+  .cta__inner { grid-template-columns: 1fr; }
+  .cta__actions { grid-template-columns: repeat(auto-fit, minmax(220px, max-content)); }
   .members { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -591,6 +656,8 @@ main { overflow-x: clip; }
   .info__row { grid-template-columns: 1fr; gap: 2px; padding: 16px 4px; }
   .member__link { padding: 20px 12px; }
   .member__photo { width: min(100%, 120px); }
+  .stat { padding: 22px 14px; }
+  .footer__nav { justify-content: flex-start; padding-inline: 4px; }
 }
 
 /* =========================================================

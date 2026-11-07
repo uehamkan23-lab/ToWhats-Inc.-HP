@@ -23,9 +23,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Zen+Maru+Gothic:wght@700;900&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="pages.css">
-<script>document.documentElement.classList.add('js');</script>
+<!-- 最初に出る「バクシンリョーガ！」の書体（Potta One）。この文字だけを読み込む -->
+<link href="https://fonts.googleapis.com/css2?family=Potta+One&text=%E3%83%90%E3%82%AF%E3%82%B7%E3%83%B3%E3%83%AA%E3%83%A7%E3%83%BC%E3%82%AC%EF%BC%81&display=block" rel="stylesheet">
+<script>
+  /* 最初の「バクシンリョーガ！」を出すかどうかを、描画の前に決める。
+     1つのタブにつき1回だけ。動きを減らす設定のときは出さない。
+     script.js が読み込めなくても、4秒で必ず消える。 */
+  (function (root) {
+    root.classList.add('js');
+    var seen = false;
+    try { seen = sessionStorage.getItem('towhats-splash') === '1'; } catch (e) {}
+    if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+    root.classList.add('is-splash');
+    setTimeout(function () { root.classList.remove('is-splash'); }, 4000);
+  })(document.documentElement);
+</script>
 </head>
 <body>
+
+<!-- ============ Splash：最初に出る「バクシンリョーガ！」 ============ -->
+<div class="splash" id="splash" aria-hidden="true">
+  <p class="splash__word"><span style="--i:0">バ</span><span style="--i:1">ク</span><span style="--i:2">シ</span><span style="--i:3">ン</span><span style="--i:4">リ</span><span style="--i:5">ョ</span><span style="--i:6">ー</span><span style="--i:7">ガ</span><span style="--i:8">！</span></p>
+  <p class="splash__hint">TAP TO SKIP</p>
+</div>
 
 <!-- ============ Header ============ -->
 <header class="header" id="header">

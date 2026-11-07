@@ -58,6 +58,55 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* =========================================================
+   Splash: 最初に出る「バクシンリョーガ！」
+   html.is-splash のときだけ全画面に出て、約2秒で上に抜ける。
+   ========================================================= */
+.splash { display: none; }
+.is-splash .splash,
+.splash.is-leaving {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: #fff;
+  cursor: pointer;
+  overflow: hidden;
+}
+.is-splash body { overflow: hidden; }
+.splash.is-leaving { animation: splash-out .6s cubic-bezier(.7, 0, .2, 1) forwards; }
+@keyframes splash-out { to { transform: translateY(-100%); } }
+
+.splash__word {
+  font-family: "Potta One", var(--display);
+  font-weight: 400;
+  font-size: clamp(40px, 10vw, 130px);
+  line-height: 1;
+  letter-spacing: -.02em;
+  white-space: nowrap;
+  transform: skewX(-8deg) rotate(-4deg);
+  text-shadow: .05em .05em 0 var(--red);
+}
+.splash__word span {
+  display: inline-block;
+  animation: splash-pop .45s var(--spring) calc(.1s + var(--i) * .07s) both;
+}
+@keyframes splash-pop {
+  from { opacity: 0; transform: translateY(40%) scale(.3) rotate(-12deg); }
+}
+.splash__hint {
+  position: absolute;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  left: 0; right: 0;
+  text-align: center;
+  font-family: var(--latin);
+  font-size: 11px;
+  letter-spacing: .3em;
+  opacity: .5;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 16px);

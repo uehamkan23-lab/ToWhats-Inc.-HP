@@ -20,7 +20,7 @@
 <!-- フォント（Google Fonts）: 本文・見出しは Zen Kaku Gothic New、英字の小見出しは Montserrat -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Zen+Maru+Gothic:wght@700;900&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="pages.css">
 <script>document.documentElement.classList.add('js');</script>
@@ -70,6 +70,8 @@
       </div>
       <figure class="hero__visual">
         <figcaption>TOWHATS MEMBERS</figcaption>
+        <span class="badge badge--sun" data-en="From&lt;br&gt;NIT Sendai">仙台高専<br>発！</span>
+        <span class="badge badge--sea" data-en="All&lt;br&gt;engineers">全員<br>エンジニア</span>
         <div class="hero__team">
           <img src="assets/people/uehara.webp" alt="上原 貫太" width="1000" height="1000">
           <img src="assets/people/anzai.webp" alt="安齋 隼" width="1000" height="1000">
@@ -145,6 +147,77 @@
         <li class="stat reveal"><p class="stat__value"><b>54</b><span data-en="units">単元</span></p><p class="stat__label" data-en="Units NajoshiteAI will cover, from junior high to university">NajoshiteAI が対応予定の単元（中学〜大学）</p></li>
         <li class="stat reveal"><p class="stat__value"><b>4</b><span data-en="awards">冠</span></p><p class="stat__label" data-en="At SPARK!TOHOKU 2026, including the Tohoku Bureau of Telecommunications Director's Award">SPARK!TOHOKU 2026（東北総合通信局長賞を含む）</p></li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ============ Model course ============ -->
+  <section class="section course" id="course">
+    <div class="container">
+      <p class="label reveal" data-en="Model course">モデルコース</p>
+      <h2 class="title reveal" data-en="A short tour of ToWhats.">はじめての、トワツめぐり。</h2>
+      <ol class="route">
+        <li class="stop reveal">
+          <span class="stop__pin">1</span>
+          <p class="stop__tag">#アプリ</p>
+          <h3 class="stop__title" data-en="Try NajoshiteAI">NajoshiteAI をのぞく</h3>
+          <p class="stop__text" data-en="See the learning app where you teach Najimi, an AI student.">AIの生徒「なじみ」に教える学習アプリを、公式サイトで見てみる。</p>
+          <a class="stop__link" href="https://najoshiteai.pages.dev/" target="_blank" rel="noopener noreferrer"><span data-en="Open the site">サイトへ</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </li>
+        <li class="stop reveal">
+          <span class="stop__pin">2</span>
+          <p class="stop__tag">#作品</p>
+          <h3 class="stop__title" data-en="Walk the exhibition">作品展示会をまわる</h3>
+          <p class="stop__text" data-en="From works in progress to things we have made.">制作中のものから、これまでにつくったものまで。</p>
+          <a class="stop__link" href="works/"><span data-en="Exhibition">作品展示会へ</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </li>
+        <li class="stop reveal">
+          <span class="stop__pin">3</span>
+          <p class="stop__tag">#ひと</p>
+          <h3 class="stop__title" data-en="Meet the four">4人に会う</h3>
+          <p class="stop__text" data-en="Who makes what, and why.">だれが、なにを、なぜつくっているのか。</p>
+          <a class="stop__link" href="members/"><span data-en="Members">メンバーへ</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </li>
+        <li class="stop reveal">
+          <span class="stop__pin">4</span>
+          <p class="stop__tag">#いま</p>
+          <h3 class="stop__title" data-en="Catch up on the latest">最新のできごとを見る</h3>
+          <p class="stop__text" data-en="News, achievements and everyday release notes.">お知らせ・実績と、日常リリースノート。</p>
+          <a class="stop__link" href="news/"><span data-en="Update log">アップデートログへ</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ Album (みやざき観光ナビ: big, many photos) ============ -->
+  <section class="album" aria-label="活動のアルバム">
+    <div class="album__track">
+      <figure class="polaroid"><img src="assets/people/fun-pitch.webp" alt="" width="568" height="900" loading="lazy"><figcaption>Let's play!</figcaption></figure>
+      <figure class="polaroid"><img src="assets/people/fun-duo.webp" alt="" width="546" height="900" loading="lazy"><figcaption>Together</figcaption></figure>
+      <figure class="polaroid"><img src="assets/people/fun-jump.webp" alt="課題・不満を飛び越える" width="840" height="900" loading="lazy"><figcaption>Jump over it!</figcaption></figure>
+      <figure class="polaroid"><img src="assets/people/fun-silhouette.webp" alt="" width="614" height="900" loading="lazy"><figcaption>Catch!</figcaption></figure>
+      <figure class="polaroid"><img src="assets/people/fun-catch.webp" alt="" width="602" height="900" loading="lazy"><figcaption>Nice catch</figcaption></figure>
+      <figure class="polaroid"><img src="assets/people/fun-peek.webp" alt="" width="636" height="873" loading="lazy"><figcaption>Hello!</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ============ Quiz ============ -->
+  <section class="section quiz" id="quiz" data-quiz>
+    <div class="container">
+      <p class="label reveal" data-en="Find your way in">トワツ診断</p>
+      <h2 class="title reveal" data-en="What are you curious about today?">今日、気になるのはどれ？</h2>
+      <div class="quiz__choices" role="group" aria-label="気になるものを選ぶ">
+        <button type="button" class="chip" data-pick="app" aria-pressed="false" data-en="The app they are building">つくっているアプリ</button>
+        <button type="button" class="chip" data-pick="people" aria-pressed="false" data-en="The people">どんな人がいるか</button>
+        <button type="button" class="chip" data-pick="now" aria-pressed="false" data-en="What they are up to">最近の活動</button>
+        <button type="button" class="chip" data-pick="together" aria-pressed="false" data-en="Doing something together">一緒に何かしたい</button>
+      </div>
+      <div class="quiz__results" aria-live="polite">
+        <div class="answer" data-answer="app" hidden><p class="answer__tag" data-en="Our pick for you">あなたにおすすめ</p><h3 class="answer__title">NajoshiteAI</h3><p class="answer__text" data-en="A learning app where you teach Najimi, an AI student. Release planned for spring 2027.">AIの生徒「なじみ」に教える学習アプリ。2027年春 リリース予定です。</p><a class="btn" href="works/najoshiteai/"><span data-en="See NajoshiteAI">NajoshiteAI を見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></div>
+        <div class="answer" data-answer="people" hidden><p class="answer__tag" data-en="Our pick for you">あなたにおすすめ</p><h3 class="answer__title" data-en="The members">メンバー紹介</h3><p class="answer__text" data-en="Four engineers: leader, treasurer, design and strategy.">代表・会計・デザイン・戦略の、4人のエンジニアです。</p><a class="btn" href="members/"><span data-en="Meet the members">メンバーを見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></div>
+        <div class="answer" data-answer="now" hidden><p class="answer__tag" data-en="Our pick for you">あなたにおすすめ</p><h3 class="answer__title" data-en="The update log">トワツアップデートログ</h3><p class="answer__text" data-en="News and achievements, newest first.">お知らせと実績を、新しい順にまとめています。</p><a class="btn" href="news/"><span data-en="See the log">アップデートログを見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></div>
+        <div class="answer" data-answer="together" hidden><p class="answer__tag" data-en="Our pick for you">あなたにおすすめ</p><h3 class="answer__title" data-en="Work with us">共創のご相談</h3><p class="answer__text" data-en="We welcome schools, companies and the local community.">学校・企業・地域のみなさまとの共創を歓迎しています。</p><a class="btn" href="#together"><span data-en="How to reach us">相談のしかた</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></div>
+        <p class="quiz__hint" data-quiz-hint data-en="Pick one above.">上から1つ選んでください。</p>
+      </div>
     </div>
   </section>
 

@@ -2,16 +2,19 @@
 
 /* =========================================================
    トワツ（ToWhats） — style.css
-   テーマ：落ち着いた、企業らしいサイト
-   白と薄いグレーの面に、藍色の文字。差し色はロゴの赤だけを少し。
-   細い線とやわらかい影、ゆっくりした動きで全体を揃える。
+   テーマ：整っていて、遊び心のあるサイト
+   土台は白と藍色の落ち着いた構成。そこに観光サイトのような
+   丸い見出し・色つきのタグ・ピンで結ぶモデルコース・写真のアルバムを重ねる。
    ========================================================= */
 
 :root {
   --navy:    #1a2456;   /* brand: headings, buttons, footer */
   --navy-2:  #283077;
   --red:     #d70009;   /* the logo red, used sparingly as an accent */
-  --sun:     #f2b632;   /* NajoshiteAI yellow, used only around NajoshiteAI */
+  --sun:     #ffc83d;   /* sunrise yellow */
+  --sea:     #4aa3df;   /* sea blue */
+  --coral:   #ff7a59;   /* warm coral */
+  --leaf:    #3fb27f;   /* fresh green */
 
   --bg:      #ffffff;
   --bg-2:    #f5f6f8;   /* alternating sections */
@@ -34,7 +37,7 @@
      英字の小見出しは Montserrat。
      Morisawa Fonts を使う場合は、管理画面の font-family 名を先頭に足してください。
      --------------------------------------------------------- */
-  --display:   "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+  --display:   "Zen Maru Gothic", "Zen Kaku Gothic New", "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif;
   --body:      "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
   --body-bold: "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
   --latin:     "Montserrat", "Helvetica Neue", Arial, sans-serif;
@@ -284,14 +287,20 @@ main { overflow-x: clip; }
 .label {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  padding: 5px 16px 5px 12px;
+  border-radius: 999px;
+  background: var(--sun);
+  color: var(--navy);
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: .16em;
-  color: var(--red);
+  letter-spacing: .12em;
+  rotate: -2deg;
 }
-.label::before { content: ""; width: 24px; height: 2px; background: currentColor; }
-.label--light { color: #fff; }
+.label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.section:nth-of-type(3n+1) .label { background: #d9edf9; }
+.section:nth-of-type(3n+2) .label { background: #ffe1d6; }
+.label--light { background: var(--sun) !important; color: var(--navy); }
 
 .title {
   font-family: var(--display);
@@ -658,6 +667,191 @@ main { overflow-x: clip; }
   .member__photo { width: min(100%, 120px); }
   .stat { padding: 22px 14px; }
   .footer__nav { justify-content: flex-start; padding-inline: 4px; }
+}
+
+
+/* =========================================================
+   Playful layer (after tourism sites)
+   ========================================================= */
+.title, .about__lead, .card__title, .biz__title, .member__name, .cta__title, .hero__title { font-family: var(--display); }
+
+/* hero: a sunny panel with round badges */
+.hero__visual {
+  background:
+    radial-gradient(circle at 82% 18%, var(--sun) 0 11%, transparent 11.5%),
+    linear-gradient(180deg, #cfe8f8 0%, #eef6fc 62%, #fff4e8 100%);
+}
+.badge {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 1.35;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(26, 36, 86, .18);
+}
+.badge--sun { left: 18px; top: 46px; background: var(--coral); color: #fff; rotate: -8deg; }
+.badge--sea { right: 18px; top: 34%; background: var(--navy); color: #fff; rotate: 7deg; }
+
+/* round, friendly cards */
+.card, .biz__item, .member__link, .stop { border-radius: 22px; }
+.card { border-top: 0; border-radius: 22px; }
+.card::before { content: ""; display: block; height: 6px; margin: -34px -30px 28px; border-radius: 22px 22px 0 0; background: var(--sea); }
+.card:nth-child(2)::before { background: var(--coral); }
+.card:nth-child(3)::before { background: var(--sun); }
+.card, .biz__item, .member__link { transition: rotate .4s var(--out), translate .3s var(--out), box-shadow .3s ease; }
+.card:hover, .biz__item:hover { rotate: -.8deg; translate: 0 -4px; box-shadow: var(--shadow-hover); }
+.member__link:hover { rotate: .8deg; }
+.member__photo { background: #d9edf9; }
+.members li:nth-child(2) .member__photo { background: #ffe1d6; }
+.members li:nth-child(3) .member__photo { background: #fff1c4; }
+.members li:nth-child(4) .member__photo { background: #dcf3e8; }
+.biz__num { color: #fff1c4; }
+
+/* ---------- model course: stops joined by a dotted route ---------- */
+.course { background: var(--bg); }
+.route {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 28px);
+}
+.route::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 22px;
+  border-top: 3px dotted #b9c3da;
+}
+.stop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 58px 22px 22px;
+  border: var(--line);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  margin-top: 22px;
+}
+.stop__pin {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  translate: -50% 0;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  color: #fff;
+  --pin: var(--coral);
+  font-family: var(--latin);
+  font-weight: 700;
+  font-size: 18px;
+  box-shadow: 0 6px 14px rgba(255, 122, 89, .35);
+}
+.stop__pin { line-height: 1; box-shadow: none; isolation: isolate; }
+/* the pin shape sits behind the number, so only the shape is turned */
+.stop__pin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 50% 50% 50% 0;
+  rotate: -45deg;
+  background: var(--pin);
+  box-shadow: 0 6px 14px rgba(26, 36, 86, .22);
+}
+.stop:nth-child(2) .stop__pin { --pin: var(--sea); }
+.stop:nth-child(3) .stop__pin { --pin: var(--leaf); }
+.stop:nth-child(4) .stop__pin { --pin: var(--navy); }
+.stop__tag { font-weight: 700; font-size: 13px; color: var(--sea); }
+.stop__title { font-family: var(--display); font-weight: 900; font-size: 18px; line-height: 1.5; color: var(--navy); margin: 4px 0 8px; }
+.stop__text { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+.stop__link { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14px; color: var(--navy); }
+.stop__link svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- album: big photos, slightly tilted like prints ---------- */
+.album {
+  background: #fff4e8;
+  border-block: var(--line);
+  padding-block: clamp(40px, 5vw, 64px);
+  overflow: hidden;
+}
+.album__track {
+  display: flex;
+  gap: clamp(16px, 2.5vw, 32px);
+  width: max-content;
+  padding-inline: var(--gutter);
+  animation: album-drift 60s linear infinite;
+}
+.album:hover .album__track { animation-play-state: paused; }
+@keyframes album-drift { from { transform: translateX(0); } to { transform: translateX(-30%); } }
+.polaroid {
+  margin: 0;
+  flex: none;
+  width: clamp(150px, 16vw, 210px);
+  padding: 12px 12px 10px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(26, 36, 86, .14);
+  rotate: -3deg;
+}
+.polaroid:nth-child(even) { rotate: 3deg; translate: 0 14px; }
+.polaroid img { width: 100%; aspect-ratio: 3 / 4; object-fit: contain; background: #eef6fc; border-radius: 3px; }
+.polaroid:nth-child(3n+2) img { background: #ffe1d6; }
+.polaroid:nth-child(3n) img { background: #fff1c4; }
+.polaroid figcaption { margin-top: 8px; text-align: center; font-family: var(--latin); font-weight: 600; font-size: 13px; color: var(--navy); }
+
+/* ---------- quiz: pick a chip, get a suggestion ---------- */
+.quiz { background: var(--bg-2); border-block: var(--line); }
+.quiz__choices { display: flex; flex-wrap: wrap; gap: 12px; }
+.chip {
+  padding: 12px 22px;
+  border: 2px solid var(--navy);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--navy);
+  transition: background-color .2s ease, color .2s ease, translate .2s var(--out);
+}
+.chip:hover { translate: 0 -2px; background: #fff1c4; }
+.chip[aria-pressed="true"] { background: var(--navy); color: #fff; }
+.quiz__results { margin-top: 28px; }
+.answer {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  max-width: 640px;
+  padding: 28px 30px;
+  border-radius: 22px;
+  background: #fff;
+  border: var(--line);
+  box-shadow: var(--shadow);
+  animation: answer-in .45s var(--out);
+}
+@keyframes answer-in { from { opacity: 0; translate: 0 10px; } }
+.answer__tag { font-weight: 700; font-size: 13px; color: var(--coral); }
+.answer__title { font-family: var(--display); font-weight: 900; font-size: 24px; color: var(--navy); }
+.answer__text { color: var(--muted); }
+.quiz__hint { color: var(--muted); font-weight: 700; }
+
+@media (max-width: 980px) {
+  .route { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+  .route::before { display: none; }
+}
+@media (max-width: 600px) {
+  .route { grid-template-columns: 1fr; }
+  .badge { width: 74px; height: 74px; font-size: 12px; }
+  .badge--sun { left: 12px; top: 40px; }
+  .chip { flex: 1 1 calc(50% - 12px); padding: 12px 10px; font-size: 14px; }
 }
 
 /* =========================================================

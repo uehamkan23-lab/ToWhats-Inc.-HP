@@ -9,7 +9,7 @@
   'use strict';
 
   // Fixed pages, as paths from the site root.
-  var PAGES = ['', 'about/', 'works/', 'members/', 'blog/', 'news/'];
+  var PAGES = ['', 'about/', 'works/', 'members/', 'blog/', 'news/', 'contact/'];
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {

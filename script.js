@@ -2,7 +2,7 @@
    トワツ（ToWhats） — script.js  (shared by every page)
    1. Language (ja / en)
    2. Menu
-   3. Scroll: sections fade in
+   3. Scroll: the header gets a line, sections fade in
    ========================================================= */
 (function () {
   'use strict';
@@ -100,16 +100,18 @@
     if (!e.target.closest('.header__bar')) { setMenu(false); }
   });
   window.addEventListener('resize', function () {
-    if (window.innerWidth > 900) { setMenu(false); }
+    if (window.innerWidth > 960) { setMenu(false); }
   });
 
   /* =========================================================
      3. Scroll
      ========================================================= */
   var reveals = $$('.reveal');
+  var header = $('#header');
 
   function onScroll() {
     var vh = window.innerHeight;
+    if (header) { header.classList.toggle('is-scrolled', window.scrollY > 8); }
 
     // Fade sections in once they reach the lower part of the screen.
     for (var i = reveals.length - 1; i >= 0; i--) {

@@ -17,33 +17,36 @@
 <!-- Morisawa Fonts の埋め込みコードを入れるときは、トップページ（index.html）と同じものをここにも貼ってください -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../style.css">
 <link rel="stylesheet" href="../../pages.css">
 <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body id="top">
 
 <header class="header" id="header">
   <div class="header__bar">
     <a class="logo" href="../../">
-      <img src="../../assets/logo-mark.png" alt="" width="750" height="839"><span class="logo__name">トワツ</span>
+      <img src="../../assets/logo-mark.png" alt="" width="750" height="839"><span class="logo__name"><span class="logo__jp">トワツ</span><span class="logo__sub" data-en="Student group, NIT Sendai">仙台高専の学生団体</span></span>
     </a>
 
     <nav class="nav" id="nav" aria-label="メニュー">
-      <a href="../../about/"><span class="nav__en">ABOUT</span><span class="nav__jp" data-en="About">私たち</span></a>
-      <a href="../../works/" aria-current="page"><span class="nav__en">WORKS</span><span class="nav__jp" data-en="Exhibition">トワツ作品展示会</span></a>
-      <a href="../../members/"><span class="nav__en">MEMBER</span><span class="nav__jp" data-en="Members">メンバー</span></a>
-      <a href="../../blog/"><span class="nav__en">BLOG</span><span class="nav__jp" data-en="Blog">ブログ</span></a>
-      <a href="../../news/"><span class="nav__en">NEWS</span><span class="nav__jp" data-en="News">お知らせ</span></a>
-      <a href="../../about/#profile"><span class="nav__en">PROFILE</span><span class="nav__jp" data-en="Profile">団体概要</span></a>
+      <a href="../../about/" data-en="About">私たち</a>
+      <a href="../../works/" aria-current="page" data-en="Works">作品展示会</a>
+      <a href="../../members/" data-en="Members">メンバー</a>
+      <a href="../../news/" data-en="News">お知らせ</a>
+      <a href="../../blog/" data-en="Blog">ブログ</a>
+      <a href="../../about/#profile" data-en="Profile">団体概要</a>
+      <a class="nav__contact" href="../../contact/" data-en="Contact">お問い合わせ</a>
     </nav>
 
-    <button class="pill pill--lang" id="langToggle" type="button" data-en="日本語">EN</button>
-
-    <button class="burger" id="burger" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header__tools">
+      <button class="pill pill--lang" id="langToggle" type="button" data-en="日本語">EN</button>
+      <a class="header__cta" href="../../contact/"><span data-en="Contact">お問い合わせ</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg></a>
+      <button class="burger" id="burger" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -82,16 +85,36 @@
   </section>
 </main>
 
+<section class="contact-band" aria-labelledby="contactBandTitle">
+  <div class="container contact-band__inner">
+    <div>
+      <div class="heading">
+        <span class="heading__en">CONTACT</span>
+        <h2 class="heading__jp" id="contactBandTitle" data-en="Contact us">お問い合わせ</h2>
+      </div>
+      <p class="contact-band__text" data-en="We are looking for people to try our apps. Use them in class or on your own, and tell us what you think. Teachers, students and companies are all welcome.">試してくれる人を、探しています。授業や自習で使ってみて、感想を聞かせてください。先生・生徒・企業の方、どなたでも歓迎です。</p>
+    </div>
+    <a class="btn btn--white" href="../../contact/"><span data-en="Get in touch">お問い合わせはこちら</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
 <footer class="footer">
-  <img class="footer__logo" src="../../assets/logo-mark.png" alt="" width="750" height="839" loading="lazy">
-  <p class="footer__copy" data-en="The answer lies in curiosity.<br>We create what sparks it.">答えは探求心の中にある。<br>その探求心の着火剤を創る。</p>
-  <nav class="footer__nav" aria-label="サイトマップ">
-    <div><p class="footer__head" data-en="About">トワツについて</p><a href="../../about/" data-en="About us">私たち</a><a href="../../members/" data-en="Members">メンバー</a><a href="../../about/#profile" data-en="Profile">団体概要</a></div>
-    <div><p class="footer__head" data-en="Work">活動</p><a href="../../works/" data-en="Exhibition">トワツ作品展示会</a><a href="../../works/najoshiteai/" data-en="NajoshiteAI">NajoshiteAI</a></div>
-    <div><p class="footer__head" data-en="Updates">発信</p><a href="../../news/" data-en="News">お知らせ・実績</a><a href="../../blog/" data-en="Blog">ブログ</a></div>
-  </nav>
-  <p class="footer__name">トワツ</p>
-  <p class="footer__small">&copy; <span id="year">2026</span> トワツ</p>
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a class="footer__logo" href="../../"><span><img src="../../assets/logo-mark.png" alt="" width="750" height="839" loading="lazy"></span><span class="footer__name">トワツ</span></a>
+      <p class="footer__copy" data-en="The answer lies in curiosity.<br>We create what sparks it.">答えは探求心の中にある。<br>その探求心の着火剤を創る。</p>
+      <p class="footer__addr" data-en="A student group at NIT, Sendai College / Natori, Miyagi">仙台高専の学生団体／宮城県名取市</p>
+    </div>
+    <nav class="footer__nav" aria-label="サイトマップ">
+      <div><p class="footer__head">ABOUT</p><a href="../../about/" data-en="About us">私たち</a><a href="../../members/" data-en="Members">メンバー</a><a href="../../about/#profile" data-en="Profile">団体概要</a></div>
+      <div><p class="footer__head">WORKS</p><a href="../../works/" data-en="Exhibition">トワツ作品展示会</a><a href="../../works/najoshiteai/">NajoshiteAI</a></div>
+      <div><p class="footer__head">UPDATES</p><a href="../../news/" data-en="News">お知らせ・実績</a><a href="../../blog/" data-en="Blog">ブログ</a><a href="../../contact/" data-en="Contact">お問い合わせ</a></div>
+    </nav>
+  </div>
+  <div class="container footer__bottom">
+    <p class="footer__small">&copy; <span id="year">2026</span> ToWhats</p>
+    <a class="to-top" href="#top">PAGE TOP<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6"/></svg></a>
+  </div>
 </footer>
 
 <script src="../../script.js"></script>

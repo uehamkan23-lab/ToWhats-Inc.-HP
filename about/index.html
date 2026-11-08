@@ -17,33 +17,36 @@
 <!-- Morisawa Fonts の埋め込みコードを入れるときは、トップページ（index.html）と同じものをここにも貼ってください -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="../pages.css">
 <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body id="top">
 
 <header class="header" id="header">
   <div class="header__bar">
     <a class="logo" href="../">
-      <img src="../assets/logo-mark.png" alt="" width="750" height="839"><span class="logo__name">トワツ</span>
+      <img src="../assets/logo-mark.png" alt="" width="750" height="839"><span class="logo__name"><span class="logo__jp">トワツ</span><span class="logo__sub" data-en="Student group, NIT Sendai">仙台高専の学生団体</span></span>
     </a>
 
     <nav class="nav" id="nav" aria-label="メニュー">
-      <a href="../about/" aria-current="page"><span class="nav__en">ABOUT</span><span class="nav__jp" data-en="About">私たち</span></a>
-      <a href="../works/"><span class="nav__en">WORKS</span><span class="nav__jp" data-en="Exhibition">トワツ作品展示会</span></a>
-      <a href="../members/"><span class="nav__en">MEMBER</span><span class="nav__jp" data-en="Members">メンバー</span></a>
-      <a href="../blog/"><span class="nav__en">BLOG</span><span class="nav__jp" data-en="Blog">ブログ</span></a>
-      <a href="../news/"><span class="nav__en">NEWS</span><span class="nav__jp" data-en="News">お知らせ</span></a>
-      <a href="../about/#profile"><span class="nav__en">PROFILE</span><span class="nav__jp" data-en="Profile">団体概要</span></a>
+      <a href="../about/" aria-current="page" data-en="About">私たち</a>
+      <a href="../works/" data-en="Works">作品展示会</a>
+      <a href="../members/" data-en="Members">メンバー</a>
+      <a href="../news/" data-en="News">お知らせ</a>
+      <a href="../blog/" data-en="Blog">ブログ</a>
+      <a href="../about/#profile" data-en="Profile">団体概要</a>
+      <a class="nav__contact" href="../contact/" data-en="Contact">お問い合わせ</a>
     </nav>
 
-    <button class="pill pill--lang" id="langToggle" type="button" data-en="日本語">EN</button>
-
-    <button class="burger" id="burger" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header__tools">
+      <button class="pill pill--lang" id="langToggle" type="button" data-en="日本語">EN</button>
+      <a class="header__cta" href="../contact/"><span data-en="Contact">お問い合わせ</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg></a>
+      <button class="burger" id="burger" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -59,26 +62,37 @@
 
   <section class="page-body about-page">
     <div class="container">
-      <section class="about-page__lead reveal">
-        <p class="block__en">Who we are</p>
-        <p class="about__lead" data-en="Through the apps and products we build, <mark>we help each person grow a curiosity of their own.</mark>">アプリや製品の開発を通じて、<br>人それぞれの形の<mark>探求心</mark>を<br>育てていきます。</p>
+      <figure class="ph reveal" style="--ratio: 21 / 9">
+        <figcaption class="ph__text"><b>写真のお願い</b>メンバー4人の集合写真<small>横長（21:9 くらいの細長いもの）／屋外か明るい場所／全員の顔が見える</small></figcaption>
+      </figure>
+
+      <section class="block split" id="vision">
+        <div class="reveal">
+          <span class="block__en">VISION</span>
+          <h2 class="block__title" data-en="What we aim for">めざすこと</h2>
+          <p class="catch" data-en="Growing curiosity,<br>through apps and products.">アプリと製品で、<br>探求心を育てる。</p>
+        </div>
+        <div class="reveal">
+          <p class="about__lead" data-en="Through the apps and products we build, <mark>we help each person grow a curiosity of their own.</mark>">アプリや製品の開発を通じて、人それぞれの形の<mark>探求心</mark>を育てていきます。</p>
+          <p class="lead" style="margin-top:16px" data-en="Everything we make starts from something that bugged us, or something that looked fun. We are our own first users.">つくるものはどれも、自分たちが困ったことや、面白そうだと思ったことから始まっています。最初のユーザーは、いつも自分たちです。</p>
+        </div>
       </section>
 
       <section class="block" id="philosophy">
-        <p class="block__en">Philosophy</p>
-        <h2 class="block__title" data-en="Our three pillars.">大事な三本柱</h2>
+        <span class="block__en">VALUES</span>
+        <h2 class="block__title" data-en="Our three pillars">大事な三本柱</h2>
         <ol class="cards">
-          <li class="card card--sun reveal">
+          <li class="card reveal">
             <span class="card__num">01</span>
             <h3 class="card__title" data-en="We are our own first user.">自分が、<br>最初のユーザー。</h3>
             <p class="card__text" data-en="Everything starts from a frustration, or from &ldquo;that looks fun!&rdquo;">不満と「面白そう！」から、すべてが始まる。</p>
           </li>
-          <li class="card card--red reveal">
+          <li class="card reveal">
             <span class="card__num">02</span>
             <h3 class="card__title" data-en="Everyone is an engineer.">全員が、<br>エンジニア。</h3>
             <p class="card__text" data-en="Trained at KOSEN. When we think of it, we build it.">高専で学んだ技術で、思いついたら形にする。</p>
           </li>
-          <li class="card card--navy reveal">
+          <li class="card reveal">
             <span class="card__num">03</span>
             <h3 class="card__title" data-en="Hooray for engineers!">エンジニア<br>万歳な社会へ。</h3>
             <p class="card__text" data-en="A world where the people who make things have the most fun.">つくる人が、いちばん楽しい世界を。</p>
@@ -86,37 +100,88 @@
         </ol>
       </section>
 
+      <section class="block" id="message">
+        <span class="block__en">MESSAGE</span>
+        <h2 class="block__title" data-en="From our leader">代表から</h2>
+        <div class="greeting">
+          <div class="greeting__photo reveal">
+            <div class="member__photo member--sun"><img src="../assets/people/uehara.webp" alt="" width="1000" height="1000" loading="lazy"></div>
+            <p class="greeting__name"><span data-en="Leader">代表</span><b>上原 貫太</b></p>
+          </div>
+          <div class="reveal">
+            <p class="greeting__quote">覚える学びはあるのに、<br>出す学びがない。</p>
+            <div class="greeting__body">
+              <p>妹が「なぜそうなるの」と何度も聞いてくるのを見ていて、覚えるための学び方はいくらでもあるのに、覚えたことを外に出して確かめる学び方がほとんどないことに気づきました。NajoshiteAI は、そこを埋めるために作っています。</p>
+            </div>
+            <p class="greeting__note" data-en="From &ldquo;Why I am building NajoshiteAI&rdquo; on Kanta Uehara&rsquo;s page.">上原 貫太の紹介ページ「NajoshiteAI を作っている理由」より</p>
+            <p class="more-link"><a class="btn btn--ghost" href="../members/uehara/"><span data-en="Read more">続きを読む</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></p>
+          </div>
+        </div>
+      </section>
+
       <section class="block" id="profile">
-        <p class="block__en">Profile</p>
-        <h2 class="block__title" data-en="About the group.">団体概要</h2>
+        <span class="block__en">PROFILE</span>
+        <h2 class="block__title" data-en="What is ToWhats?">トワツとは？（団体概要）</h2>
         <dl class="info reveal">
           <div class="info__row"><dt data-en="Name">名称</dt><dd data-en="ToWhats">トワツ</dd></div>
           <div class="info__row"><dt data-en="Type">形態</dt><dd data-en="Student group, NIT, Sendai College">仙台高専の学生団体</dd></div>
-          <div class="info__row"><dt data-en="Location">所在地</dt><dd data-en="Natori, Miyagi, Japan">宮城県名取市</dd></div>
+          <div class="info__row"><dt data-en="Goal">目標</dt><dd data-en="The answer lies in curiosity. We create what sparks it.">答えは探求心の中にある。その探求心の着火剤を創る。</dd></div>
           <div class="info__row"><dt data-en="Representative">代表</dt><dd><a href="../members/uehara/">上原 貫太</a></dd></div>
-          <div class="info__row"><dt data-en="Activities">活動内容</dt><dd data-en="Planning and developing apps">アプリの企画・開発</dd></div>
-          <div class="info__row"><dt data-en="Members">メンバー</dt><dd><a href="../members/" data-en="4 members">4名</a></dd></div>
+          <div class="info__row"><dt data-en="Members">メンバー</dt><dd><a href="../members/" data-en="4 (leader, treasurer, design, strategy)">4名（代表・会計・デザイン・戦略）</a></dd></div>
+          <div class="info__row"><dt data-en="Location">所在地</dt><dd data-en="Natori, Miyagi, Japan">宮城県名取市</dd></div>
+          <div class="info__row"><dt data-en="Activities">活動内容</dt><dd><ul>
+            <li data-en="Planning and building learning apps (NajoshiteAI)">学びのアプリの企画・開発（NajoshiteAI）</li>
+            <li data-en="AI development and contests">AI開発とコンテストへの挑戦</li>
+            <li data-en="Projects with the local community">地域とのものづくり</li>
+          </ul></dd></div>
+          <div class="info__row"><dt data-en="Highlights">主な実績</dt><dd><ul>
+            <li data-en="SPARK!TOHOKU 2026: four awards, including the Director-General&rsquo;s Award of the Tohoku Bureau of Telecommunications">SPARK!TOHOKU 2026 東北総合通信局長賞を含む4冠</li>
+            <li data-en="High School Business Idea Contest 2025: finalist">高校生ビジネスアイディアコンテスト2025 本選出場</li>
+            <li data-en="6th AI Koshien &ldquo;JOYFUL&rdquo;: took part with WasuFinder">第6回 AI甲子園「JOYFUL」出場（WasuFinder）</li>
+            <li data-en="Natori Kodomo Fund, fiscal 2025: Milcraft adopted">令和7年度 なとりこどもファンド採択（ミルクラフト）</li>
+          </ul></dd></div>
+          <div class="info__row"><dt data-en="Contact">お問い合わせ</dt><dd><a href="../contact/" data-en="Contact page">お問い合わせページへ</a></dd></div>
         </dl>
       </section>
 
       <nav class="pager">
-        <a class="btn btn--ghost" href="../works/" data-en="ToWhats Exhibition →">トワツ作品展示会 →</a>
-        <a class="btn btn--ghost" href="../members/" data-en="Members →">メンバー →</a>
+        <a class="btn btn--ghost" href="../works/"><span data-en="ToWhats Exhibition">トワツ作品展示会</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn--ghost" href="../members/"><span data-en="Members">メンバー</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
       </nav>
     </div>
   </section>
 </main>
 
+<section class="contact-band" aria-labelledby="contactBandTitle">
+  <div class="container contact-band__inner">
+    <div>
+      <div class="heading">
+        <span class="heading__en">CONTACT</span>
+        <h2 class="heading__jp" id="contactBandTitle" data-en="Contact us">お問い合わせ</h2>
+      </div>
+      <p class="contact-band__text" data-en="We are looking for people to try our apps. Use them in class or on your own, and tell us what you think. Teachers, students and companies are all welcome.">試してくれる人を、探しています。授業や自習で使ってみて、感想を聞かせてください。先生・生徒・企業の方、どなたでも歓迎です。</p>
+    </div>
+    <a class="btn btn--white" href="../contact/"><span data-en="Get in touch">お問い合わせはこちら</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
 <footer class="footer">
-  <img class="footer__logo" src="../assets/logo-mark.png" alt="" width="750" height="839" loading="lazy">
-  <p class="footer__copy" data-en="The answer lies in curiosity.<br>We create what sparks it.">答えは探求心の中にある。<br>その探求心の着火剤を創る。</p>
-  <nav class="footer__nav" aria-label="サイトマップ">
-    <div><p class="footer__head" data-en="About">トワツについて</p><a href="../about/" data-en="About us">私たち</a><a href="../members/" data-en="Members">メンバー</a><a href="../about/#profile" data-en="Profile">団体概要</a></div>
-    <div><p class="footer__head" data-en="Work">活動</p><a href="../works/" data-en="Exhibition">トワツ作品展示会</a><a href="../works/najoshiteai/" data-en="NajoshiteAI">NajoshiteAI</a></div>
-    <div><p class="footer__head" data-en="Updates">発信</p><a href="../news/" data-en="News">お知らせ・実績</a><a href="../blog/" data-en="Blog">ブログ</a></div>
-  </nav>
-  <p class="footer__name">トワツ</p>
-  <p class="footer__small">&copy; <span id="year">2026</span> トワツ</p>
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a class="footer__logo" href="../"><span><img src="../assets/logo-mark.png" alt="" width="750" height="839" loading="lazy"></span><span class="footer__name">トワツ</span></a>
+      <p class="footer__copy" data-en="The answer lies in curiosity.<br>We create what sparks it.">答えは探求心の中にある。<br>その探求心の着火剤を創る。</p>
+      <p class="footer__addr" data-en="A student group at NIT, Sendai College / Natori, Miyagi">仙台高専の学生団体／宮城県名取市</p>
+    </div>
+    <nav class="footer__nav" aria-label="サイトマップ">
+      <div><p class="footer__head">ABOUT</p><a href="../about/" data-en="About us">私たち</a><a href="../members/" data-en="Members">メンバー</a><a href="../about/#profile" data-en="Profile">団体概要</a></div>
+      <div><p class="footer__head">WORKS</p><a href="../works/" data-en="Exhibition">トワツ作品展示会</a><a href="../works/najoshiteai/">NajoshiteAI</a></div>
+      <div><p class="footer__head">UPDATES</p><a href="../news/" data-en="News">お知らせ・実績</a><a href="../blog/" data-en="Blog">ブログ</a><a href="../contact/" data-en="Contact">お問い合わせ</a></div>
+    </nav>
+  </div>
+  <div class="container footer__bottom">
+    <p class="footer__small">&copy; <span id="year">2026</span> ToWhats</p>
+    <a class="to-top" href="#top">PAGE TOP<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6"/></svg></a>
+  </div>
 </footer>
 
 <script src="../script.js"></script>

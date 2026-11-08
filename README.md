@@ -120,7 +120,7 @@ HTML / CSS / JavaScript のみで作った静的サイトです。ビルド不�
 
 ## ページ一覧
 
-GitHub Pages で公開した場合の URL です（`https://uehamkan23-lab.github.io/ToWhats-Inc.-HP/` の後ろに付きます）。
+公開中の URL です（`https://towhats.com/` の後ろに付きます）。
 
 | URL | 内容 |
 |---|---|
@@ -253,8 +253,19 @@ https://uehamkan23-lab.github.io/ToWhats-Inc.-HP/
 ### 検索エンジンに登録する
 
 - `sitemap.xml` にサイトのページがすべて載っています。記事・作品・お知らせを公開したり消したりすると、書く画面が自動で作り直します
-- github.io の URL で公開している間は、`robots.txt` は検索エンジンに読まれません（ドメインの一番上に置いたものしか読まれないため）。[Google Search Console](https://search.google.com/search-console) にサイトを登録し、「サイトマップ」から `sitemap.xml` の URL を送ってください
-- 独自のドメイン（例：`towhats.jp`）に移したら、`blog/config.js` の `siteUrl` と `robots.txt` の `Sitemap:` の URL を新しいドメインに書き換え、書く画面で何か1つ「公開する」を押し直すと `sitemap.xml` も新しい URL になります
+- サイトは `https://towhats.com/` で公開しています。`blog/config.js` の `siteUrl`、`robots.txt` の `Sitemap:`、`sitemap.xml` は、どれもこの URL です
+- ドメインを変えたら、`blog/config.js` の `siteUrl` と `robots.txt` の `Sitemap:` の URL を新しいドメインに書き換え、書く画面で何か1つ「公開する」を押し直すと `sitemap.xml` も新しい URL になります
+
+### Google の検索結果に出る内容
+
+| 検索結果の場所 | どこで決まるか |
+|---|---|
+| サイト名（いちばん上の小さい文字） | `index.html` の `<script type="application/ld+json">` の `"name": "トワツ"` |
+| アイコン | ルートの `favicon.ico` と `assets/favicon-96.png`・`assets/favicon.png`（白い丸にトワツのマーク） |
+| タイトル（青や紫の大きい文字） | `index.html` の `<title>` |
+| 説明文 | `index.html` の `<meta name="description">` |
+
+書き換えても、Google の検索結果にはすぐには反映されません（数日〜数週間）。早めたいときは、[Google Search Console](https://search.google.com/search-console) の「URL 検査」で `https://towhats.com/` を調べ、「インデックス登録をリクエスト」を押してください。
 - 書く画面（`/blog/write/`）と404ページは、検索結果に出ないように設定しています
 
 ### 404 ページ

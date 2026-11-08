@@ -221,6 +221,16 @@ html[data-lang="en"] .page-head .label::before { font-size: clamp(40px, 6.4vw, 8
 .greeting__body p + p { margin-top: 1em; }
 .greeting__note { margin-top: 16px; font-size: 13px; color: var(--muted); }
 
+/* the philosophy on /about/: purpose, mission, vision */
+.creed { border-top: 2px solid var(--ink); }
+.creed__row { display: grid; grid-template-columns: 12em minmax(0, 1fr); gap: 16px 32px; align-items: center; padding: clamp(24px, 3vw, 36px) 4px; border-bottom: var(--line); }
+.creed__row dt { display: grid; gap: 4px; }
+.creed__row dt span:first-child { font-family: var(--en); font-weight: 700; font-size: 13px; letter-spacing: .2em; color: var(--blue); }
+.creed__row dt span:last-child { font-weight: 700; font-size: 14px; color: var(--muted); }
+.creed__row dd { font-weight: 700; font-size: clamp(18px, 2vw, 22px); line-height: 1.8; letter-spacing: .05em; }
+.creed__row--vision { background: var(--mist); padding-inline: clamp(16px, 2.4vw, 28px); }
+.creed__row--vision dd { font-size: clamp(22px, 2.8vw, 32px); line-height: 1.6; }
+
 .records { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 20px; align-items: start; }
 .record { padding: 24px 26px 26px; }
 .record h3 { font-weight: 700; font-size: 17px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
@@ -470,7 +480,7 @@ a.person:hover { border-color: var(--ink); }
 .lost__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 20px; }
 
 @media (max-width: 800px) {
-  .profile, .greeting, .contact-grid, .who { grid-template-columns: 1fr; }
+  .profile, .greeting, .contact-grid, .who, .creed__row { grid-template-columns: 1fr; }
   .greeting__photo { max-width: 280px; }
   .editor { grid-template-columns: 1fr; }
   .tabs { display: flex; }

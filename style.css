@@ -529,7 +529,13 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 .biz__text { margin-top: 16px; color: var(--muted); }
 .biz__body .arrow-link { margin-top: 24px; }
 
-/* ---------- values: three columns on navy ---------- */
+/* ---------- philosophy: the vision, then three values on navy ---------- */
+.vision { padding-bottom: clamp(48px, 6vw, 72px); }
+.vision__label, .values__label span:first-child { font-family: var(--en); font-weight: 700; font-size: 13px; letter-spacing: .2em; color: #9fc0ff; }
+.vision__text { margin-top: 14px; font-weight: 700; font-size: clamp(26px, 3.6vw, 44px); line-height: 1.6; letter-spacing: .06em; text-wrap: balance; }
+.values__label { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
+.values__label span:last-child { font-weight: 700; font-size: 14px; letter-spacing: .12em; color: rgba(255, 255, 255, .72); }
+.section--navy .more-link { margin-top: clamp(40px, 5vw, 56px); }
 .values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid rgba(255, 255, 255, .18); }
 .value { padding: clamp(28px, 3.4vw, 44px) clamp(20px, 2.6vw, 36px) 8px 0; }
 .value + .value { padding-left: clamp(20px, 2.6vw, 36px); border-left: 1px solid rgba(255, 255, 255, .18); }

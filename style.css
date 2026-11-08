@@ -551,7 +551,7 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 .card__text { margin-top: 12px; color: var(--muted); font-size: 15px; }
 
 /* ---------- members ---------- */
-.members { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2vw, 24px); }
+.members { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 24px); }
 .member__link { display: block; }
 .member__photo {
   position: relative;

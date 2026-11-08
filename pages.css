@@ -146,7 +146,7 @@ html[data-lang="en"] .page-head .label::before { font-size: clamp(40px, 6.4vw, 8
 /* ---------- member list ---------- */
 .member-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: clamp(20px, 2.5vw, 32px);
 }
 .member-card a {

@@ -442,6 +442,7 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
 .hero__visual { position: relative; }
 .hero__visual .ph { --ratio: 4 / 3.4; }
+.hero__photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); background: var(--mist-2); }
 .hero__visual::before {
   content: "";
   position: absolute;

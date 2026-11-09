@@ -57,6 +57,8 @@ html[data-lang="en"] .page-head .label::before { font-size: clamp(40px, 6.4vw, 8
 
 .page-body { padding-block: clamp(56px, 8vw, 112px); }
 
+.wide-photo img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; border-radius: var(--radius); background: var(--mist-2); }
+
 /* ---------- shared card frame ---------- */
 .post-card a,
 .work-card a,

@@ -399,12 +399,33 @@ mark { background: none; color: inherit; }
     linear-gradient(0deg, rgba(10, 20, 42, .55) 0%, rgba(10, 20, 42, 0) 35%);
 }
 /* wide screens: the photo sits on the right three quarters, so the people stay clear of the words */
+/* the Sendai skyline fills the navy area on the left, behind the words */
+.hero__city { display: none; }
 @media (min-width: 961px) {
-  .hero__bg { left: auto; right: 0; width: 76%; object-position: 50% 58%; }
+  .hero__city {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -3;
+    width: 52%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% 30%;
+    filter: saturate(.7) contrast(1.1) brightness(1.08);
+    animation: city-in 1.6s ease-out both;
+  }
+  @keyframes city-in { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+  .hero__bg {
+    left: auto; right: 0; width: 76%; object-position: 50% 58%;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 28%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 28%);
+  }
   .hero::after {
     background:
-      linear-gradient(90deg, rgba(14, 26, 52, 1) 0%, rgba(14, 26, 52, 1) 24%, rgba(14, 26, 52, .55) 40%, rgba(14, 26, 52, .1) 56%, rgba(14, 26, 52, 0) 66%),
-      linear-gradient(0deg, rgba(10, 20, 42, .45) 0%, rgba(10, 20, 42, 0) 30%);
+      linear-gradient(90deg, rgba(14, 26, 52, .7) 0%, rgba(14, 26, 52, .6) 30%, rgba(14, 26, 52, .36) 46%, rgba(14, 26, 52, .08) 60%, rgba(14, 26, 52, 0) 70%),
+      linear-gradient(0deg, rgba(10, 20, 42, .5) 0%, rgba(10, 20, 42, 0) 32%);
   }
 }
 .hero__inner {
@@ -503,6 +524,7 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 .about__lead { font-weight: 700; font-size: clamp(18px, 2vw, 22px); line-height: 2; margin-top: 24px; }
 .about__lead mark { background: linear-gradient(transparent 64%, rgba(232, 83, 74, .22) 64%); }
 .about .lead { margin-top: 16px; }
+.about__photo { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); background: var(--navy); }
 .company .split { align-items: start; }
 .company__photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); background: var(--mist-2); }
 
@@ -671,7 +693,7 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__bg, .hero__scroll::after { animation: none; }
+  .hero__bg, .hero__city, .hero__scroll::after { animation: none; }
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after { transition-duration: .01ms !important; }

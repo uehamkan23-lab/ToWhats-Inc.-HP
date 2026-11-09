@@ -6,7 +6,7 @@ summary: "公共交通機関での忘れ物を検知する AI。"
 members: "uehara"
 others: ""
 url: "https://www.sendai-nct.ac.jp/20260330-2/"
-cover: ""
+cover: "cover.webp"
 ---
 
 第6回 AI甲子園「JOYFUL」に出場したときに開発しました。

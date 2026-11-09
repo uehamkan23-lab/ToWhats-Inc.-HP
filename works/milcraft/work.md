@@ -6,7 +6,7 @@ summary: "m3lab のプロジェクト。令和7年度 なとりこどもファ�
 members: "uehara"
 others: "m3lab のメンバー"
 url: ""
-cover: "cover.webp"
+cover: "logo.webp"
 ---
 
 ミルクラフトは m3lab のプロジェクトです。トワツからは、代表の上原が m3lab の一員としてリーダーを務めました。

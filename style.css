@@ -504,6 +504,7 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 .about__lead mark { background: linear-gradient(transparent 64%, rgba(232, 83, 74, .22) 64%); }
 .about .lead { margin-top: 16px; }
 .company .split { align-items: start; }
+.company__photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); background: var(--mist-2); }
 
 /* ---------- business: three numbered rows ---------- */
 .biz { display: grid; gap: clamp(56px, 8vw, 104px); counter-reset: biz; }
@@ -516,6 +517,16 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 .biz__body .arrow-link { margin-top: 24px; }
 
 /* ---------- philosophy: the vision, then three values on navy ---------- */
+/* the town seen from the hill sits faintly behind the navy, under the words about society */
+.philosophy { position: relative; isolation: isolate; overflow: hidden; }
+.philosophy__bg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; filter: grayscale(.35); }
+.philosophy::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(19, 40, 79, .86) 0%, rgba(19, 40, 79, .78) 45%, rgba(19, 40, 79, .95) 100%);
+}
 .vision { padding-bottom: clamp(48px, 6vw, 72px); }
 .vision__label, .values__label { font-weight: 700; font-size: 14px; letter-spacing: .1em; color: #9fc0ff; }
 .vision__text { margin-top: 14px; font-weight: 700; font-size: clamp(26px, 3.6vw, 44px); line-height: 1.6; letter-spacing: .06em; text-wrap: balance; }

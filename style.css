@@ -374,6 +374,19 @@ mark { background: none; color: inherit; }
   height: 100%;
   object-fit: cover;
   object-position: 50% 55%;
+  /* on load: the photo wipes in from the left while it settles from a close-up,
+     then keeps drifting very slowly */
+  animation:
+    hero-reveal 2.4s cubic-bezier(.22, 1, .36, 1) both,
+    hero-drift 24s ease-in-out 2.4s infinite alternate;
+}
+@keyframes hero-reveal {
+  from { transform: scale(1.18); clip-path: inset(0 100% 0 0); filter: brightness(.45) saturate(.6); }
+  to   { transform: scale(1);    clip-path: inset(0 0 0 0);    filter: none; }
+}
+@keyframes hero-drift {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06) translateX(-1%); }
 }
 /* the wash keeps the words readable: strong on the left (behind the text), clear on the right (the people) */
 .hero::after {
@@ -419,6 +432,37 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 .btn--light:hover svg { stroke: var(--ink); }
 
 /* the newest item, on a strip under the hero */
+/* "SCROLL": vertical letters and a thin track with a light running down it to the bottom edge */
+.hero__scroll {
+  position: absolute;
+  left: clamp(16px, 2vw, 32px);
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--en);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: .36em;
+  color: rgba(255, 255, 255, .78);
+  pointer-events: none;
+}
+.hero__scroll span { writing-mode: vertical-rl; }
+.hero__scroll::after {
+  content: "";
+  width: 1px;
+  height: 96px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0), #fff) 0 -32px / 1px 32px no-repeat,
+    rgba(255, 255, 255, .22);
+  animation: scroll-run 2.4s cubic-bezier(.65, 0, .35, 1) infinite;
+}
+@keyframes scroll-run {
+  from { background-position: 0 -32px, 0 0; }
+  to   { background-position: 0 96px, 0 0; }
+}
+
 .hero-news { border-top: var(--line); border-bottom: var(--line); background: var(--paper); }
 .hero-news__inner { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 24px; min-height: 76px; }
 .hero-news__label { font-weight: 700; font-size: 14px; letter-spacing: .08em; white-space: nowrap; color: var(--ink); padding-right: 24px; border-right: var(--line); }
@@ -587,6 +631,7 @@ html[data-lang="en"] .hero__line { white-space: normal; }
   /* narrow screens: the people stay at the top, the words sit on a dark wash at the bottom */
   .hero__inner { align-items: flex-end; min-height: max(calc(100svh - var(--header-h) - 76px), 600px); padding-block: 220px 48px; }
   .hero__bg { object-position: 52% 30%; }
+  .hero__scroll { left: auto; right: 16px; }
   .hero::after {
     background: linear-gradient(0deg, rgba(10, 20, 42, .94) 0%, rgba(10, 20, 42, .82) 42%, rgba(10, 20, 42, .25) 70%, rgba(10, 20, 42, .1) 100%);
   }
@@ -615,6 +660,7 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero__bg, .hero__scroll::after { animation: none; }
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after { transition-duration: .01ms !important; }

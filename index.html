@@ -66,7 +66,6 @@
     <img class="hero__bg" src="assets/photos/team-gate.webp" alt="仙台高等専門学校の校門の前に立つ、トワツのメンバー3人" width="2000" height="1500" fetchpriority="high">
     <div class="container hero__inner">
       <div class="hero__copy">
-        <p class="hero__kicker">TOWHATS</p>
         <h1 class="hero__title">
           <span class="hero__line" data-en="The answer lies in curiosity.">答えは<em>探求心</em>の中にある。</span>
           <span class="hero__line" data-en="We create what sparks it.">その探求心の着火剤を創る。</span>
@@ -78,13 +77,12 @@
         </div>
       </div>
     </div>
-    <p class="hero__scroll" aria-hidden="true">SCROLL</p>
   </section>
 
   <!-- ============ Newest item ============ -->
   <section class="hero-news" aria-label="最新のお知らせ">
     <div class="container hero-news__inner">
-      <p class="hero-news__label">NEWS</p>
+      <p class="hero-news__label" data-en="News">お知らせ</p>
       <div data-news data-root="" data-limit="1"></div>
       <a class="arrow-link hero-news__more" href="news/"><span data-en="All news">一覧へ</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
     </div>
@@ -93,17 +91,15 @@
   <!-- ============ About ============ -->
   <section class="section about" id="about">
     <div class="container split">
-      <div class="reveal">
+      <div>
         <figure class="ph" style="--ratio: 3 / 2">
           <figcaption class="ph__text"><b>写真のお願い</b>活動場所（部室や教室など）で、メンバーが話し合っている様子<small>横長 3:2／自然な表情で</small></figcaption>
         </figure>
       </div>
-      <div class="reveal">
+      <div>
         <div class="heading">
-          <span class="heading__en">ABOUT US</span>
           <h2 class="heading__jp" data-en="About us">私たちについて</h2>
         </div>
-        <p class="catch" data-en="Growing curiosity,<br>through apps and products.">アプリと製品で、<br>探求心を育てる。</p>
         <p class="about__lead" data-en="Through the apps and products we build, <mark>we help each person grow a curiosity of their own.</mark>">アプリや製品の開発を通じて、人それぞれの形の<mark>探求心</mark>を育てていきます。</p>
         <p class="lead" data-en="We are a student group at NIT, Sendai College. All three of us are engineers, and each of us also looks after one more job: leading the group, sales, or admin and accounting.">仙台高専の学生団体です。メンバー3人は全員がエンジニア。そのうえで、代表・営業・事務と会計を、それぞれが受け持っています。</p>
         <p class="more-link"><a class="btn" href="about/"><span data-en="More about us">私たちのこと</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></p>
@@ -115,16 +111,14 @@
   <section class="section section--mist pickup" id="najoshiteai" aria-labelledby="pickupTitle">
     <div class="container">
       <div class="heading">
-        <span class="heading__en">PICK UP</span>
-        <p class="heading__jp" data-en="Now building">いまつくっているもの</p>
+        <h2 class="heading__jp" data-en="Now building">いまつくっているもの</h2>
       </div>
-      <div class="pickup__card reveal">
+      <div class="pickup__card">
         <a class="pickup__icon" href="https://najoshiteai.pages.dev/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/najoshiteai-icon.webp" alt="" width="480" height="480" loading="lazy"></a>
         <div>
-          <p class="pickup__tag"><span class="status-pill status-pill--dev" data-en="In progress">制作中</span></p>
-          <h2 class="pickup__title" id="pickupTitle">NajoshiteAI</h2>
+          <p class="pickup__tag"><span class="status-pill status-pill--dev" data-en="In progress">制作中</span><span data-en="Release planned for spring 2027">2027年春 リリース予定</span></p>
+          <h3 class="pickup__title" id="pickupTitle">NajoshiteAI</h3>
           <p class="pickup__lead" data-en="A learning app where you teach Najimi, an AI student.<br>The more you teach, the clearer it gets what you don&rsquo;t yet understand.">AIの生徒「なじみ」に教える学習アプリ。<br>教えるほどに、わからないところが、見えてくる。</p>
-          <p class="pickup__meta"><span data-en="Release planned for spring 2027">2027年春 リリース予定</span></p>
           <div class="pickup__actions">
             <a class="btn btn--blue" href="https://najoshiteai.pages.dev/" target="_blank" rel="noopener noreferrer"><span data-en="Visit the NajoshiteAI site">NajoshiteAI のサイトへ</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
             <a class="btn btn--ghost" href="works/najoshiteai/"><span data-en="See it in the exhibition">作品展示会で見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
@@ -138,40 +132,36 @@
   <section class="section business" id="business">
     <div class="container">
       <div class="heading">
-        <span class="heading__en">BUSINESS</span>
-        <h2 class="heading__jp" data-en="Three things we do">トワツの3つの活動</h2>
+        <h2 class="heading__jp" data-en="What we do">活動内容</h2>
       </div>
       <ol class="biz">
-        <li class="biz__item reveal">
+        <li class="biz__item">
           <div class="biz__media"><img src="works/najoshiteai/cover.webp" alt="NajoshiteAI のアプリ画面" loading="lazy"></div>
           <div class="biz__body">
-            <span class="biz__num" aria-hidden="true">01</span>
             <h3 class="biz__title" data-en="Apps for learning">学びのアプリの開発</h3>
             <p class="biz__text" data-en="We plan and build NajoshiteAI, a learning app where you teach Najimi, an AI student. Release planned for spring 2027.">AIの生徒「なじみ」に教えて学ぶ学習アプリ NajoshiteAI を、企画から開発まで自分たちで手がけています。2027年春のリリースを予定しています。</p>
             <a class="arrow-link" href="works/najoshiteai/"><span>NajoshiteAI</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
           </div>
         </li>
-        <li class="biz__item reveal">
+        <li class="biz__item">
           <div class="biz__media">
             <figure class="ph" style="--ratio: 3 / 2">
           <figcaption class="ph__text"><b>写真のお願い</b>第6回 AI甲子園での発表の様子、または WasuFinder が動いている画面<small>横長 3:2／画面ならスクリーンショットでOK</small></figcaption>
         </figure>
           </div>
           <div class="biz__body">
-            <span class="biz__num" aria-hidden="true">02</span>
             <h3 class="biz__title" data-en="AI development and contests">AI開発とコンテストへの挑戦</h3>
             <p class="biz__text" data-en="We take on contests with what we build, such as WasuFinder, an AI that detects items left behind on public transport, made for the 6th AI Koshien.">第6回 AI甲子園「JOYFUL」で、公共交通機関での忘れ物を検知する AI「WasuFinder」を開発するなど、つくったものでコンテストに挑戦しています。</p>
             <a class="arrow-link" href="works/wasufinder/"><span>WasuFinder</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
           </div>
         </li>
-        <li class="biz__item reveal">
+        <li class="biz__item">
           <div class="biz__media">
             <figure class="ph" style="--ratio: 3 / 2">
           <figcaption class="ph__text"><b>写真のお願い</b>ミルクラフトの活動の様子（地域の方と一緒に作業している場面など）<small>横長 3:2／写っている方に、掲載してよいか確認してください</small></figcaption>
         </figure>
           </div>
           <div class="biz__body">
-            <span class="biz__num" aria-hidden="true">03</span>
             <h3 class="biz__title" data-en="Projects with the local community">地域とのものづくり</h3>
             <p class="biz__text" data-en="We work with the local community in Natori, such as Milcraft, a project adopted by the Natori Kodomo Fund in fiscal 2025.">令和7年度 なとりこどもファンドに採択された「ミルクラフト」など、名取の地域とともに活動しています。</p>
             <a class="arrow-link" href="works/milcraft/"><span data-en="Milcraft">ミルクラフト</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
@@ -185,27 +175,23 @@
   <section class="section section--navy" id="philosophy">
     <div class="container">
       <div class="heading">
-        <span class="heading__en">PHILOSOPHY</span>
         <h2 class="heading__jp" data-en="Our philosophy">トワツの理念</h2>
       </div>
-      <div class="vision reveal">
-        <p class="vision__label">VISION</p>
+      <div class="vision">
+        <p class="vision__label" data-en="Where we are heading">めざす社会</p>
         <p class="vision__text" data-en="A society where people who enjoy asking &ldquo;why?&rdquo; are everywhere.">「なぜ？」を楽しめる人が、<br>あたりまえにいる社会。</p>
       </div>
-      <p class="values__label"><span>VALUES</span><span data-en="Our three pillars">大事な三本柱</span></p>
+      <p class="values__label" data-en="Our three pillars">大事な三本柱</p>
       <ol class="values">
-        <li class="value reveal">
-          <span class="value__num">01</span>
+        <li class="value">
           <h3 class="value__title" data-en="We are our own first user.">自分が、最初のユーザー。</h3>
           <p class="value__text" data-en="Everything starts from a frustration, or from &ldquo;that looks fun!&rdquo; We build what we want to use ourselves.">不満と「面白そう！」から、すべてが始まる。まず自分が使いたいものをつくる。</p>
         </li>
-        <li class="value reveal">
-          <span class="value__num">02</span>
+        <li class="value">
           <h3 class="value__title" data-en="We measure value by how much people change.">価値は、<br>相手の変化量で測る。</h3>
           <p class="value__text" data-en="How much someone changed between before and after using it. That is the value of what we made.">使う前と使った後で、相手がどれだけ変わったか。それが、つくったものの価値。</p>
         </li>
-        <li class="value reveal">
-          <span class="value__num">03</span>
+        <li class="value">
           <h3 class="value__title" data-en="Experience above all.">何よりも、経験。</h3>
           <p class="value__text" data-en="Try it rather than only read about it. What we learn by doing matters most.">調べるより、やってみる。やってみてわかったことを、いちばん大事にする。</p>
         </li>
@@ -219,7 +205,6 @@
     <div class="container">
       <div class="head-row">
         <div class="heading">
-          <span class="heading__en">WORKS</span>
           <h2 class="heading__jp" data-en="ToWhats Exhibition">トワツ作品展示会</h2>
         </div>
         <a class="arrow-link" href="works/"><span data-en="See all works">すべての作品を見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
@@ -233,13 +218,12 @@
     <div class="container">
       <div class="head-row">
         <div class="heading">
-          <span class="heading__en">MEMBER</span>
           <h2 class="heading__jp" data-en="Members">メンバー</h2>
         </div>
         <a class="arrow-link" href="members/"><span data-en="All members">メンバー紹介へ</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
       </div>
       <ul class="members">
-        <li class="member member--sun reveal">
+        <li class="member member--sun">
           <a class="member__link" href="members/uehara/">
             <div class="member__photo"><img src="assets/people/uehara.webp" alt="" width="1000" height="1000" loading="lazy"></div>
             <p class="member__role" data-en="Leader">代表</p>
@@ -247,7 +231,7 @@
             <span class="member__go" data-en="See profile →">紹介を見る →</span>
           </a>
         </li>
-        <li class="member member--orange reveal">
+        <li class="member member--orange">
           <a class="member__link" href="members/kobayashi/">
             <div class="member__photo"><img src="assets/people/kobayashi.webp" alt="" width="1000" height="1000" loading="lazy"></div>
             <p class="member__role" data-en="Admin &amp; accounting">事務・会計</p>
@@ -255,7 +239,7 @@
             <span class="member__go" data-en="See profile →">紹介を見る →</span>
           </a>
         </li>
-        <li class="member member--sky reveal">
+        <li class="member member--sky">
           <a class="member__link" href="members/yuki/">
             <div class="member__photo"><img src="assets/people/yuki.webp" alt="" width="1000" height="1000" loading="lazy"></div>
             <p class="member__role" data-en="Sales">営業</p>
@@ -272,7 +256,6 @@
     <div class="container updates">
       <div>
         <div class="heading">
-          <span class="heading__en">NEWS</span>
           <h2 class="heading__jp" data-en="ToWhats update log">トワツアップデートログ</h2>
         </div>
         <p class="lead" data-en="News, and the awards and contests we have taken part in.">お知らせと、受賞・出場などの実績です。</p>
@@ -287,7 +270,6 @@
     <div class="container">
       <div class="head-row">
         <div class="heading">
-          <span class="heading__en">BLOG</span>
           <h2 class="heading__jp" data-en="Everyday release notes">日常リリースノート</h2>
         </div>
         <a class="arrow-link" href="blog/"><span data-en="All posts">記事をすべて見る</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
@@ -300,16 +282,15 @@
   <section class="section company" id="company">
     <div class="container">
       <div class="heading">
-        <span class="heading__en">PROFILE</span>
         <h2 class="heading__jp" data-en="What is ToWhats?">トワツとは？</h2>
       </div>
       <div class="split split--rev">
-        <div class="reveal">
+        <div>
           <figure class="ph" style="--ratio: 4 / 5">
           <figcaption class="ph__text"><b>写真のお願い</b>活動している場所の外観（校舎や部室の入り口など）<small>縦長 4:5／人が写っていなくてOK</small></figcaption>
         </figure>
         </div>
-        <dl class="info reveal">
+        <dl class="info">
           <div class="info__row"><dt data-en="Name">名称</dt><dd data-en="ToWhats">トワツ</dd></div>
           <div class="info__row"><dt data-en="Type">形態</dt><dd data-en="Student group, NIT, Sendai College">仙台高専の学生団体</dd></div>
           <div class="info__row"><dt data-en="Goal">目標</dt><dd data-en="The answer lies in curiosity. We create what sparks it.">答えは探求心の中にある。その探求心の着火剤を創る。</dd></div>
@@ -339,11 +320,8 @@
 <section class="contact-band" aria-labelledby="contactBandTitle">
   <div class="container contact-band__inner">
     <div>
-      <div class="heading">
-        <span class="heading__en">CONTACT</span>
-        <h2 class="heading__jp" id="contactBandTitle" data-en="Contact us">お問い合わせ</h2>
-      </div>
-      <p class="contact-band__text" data-en="We are looking for people to try our apps. Use them in class or on your own, and tell us what you think. Teachers, students and companies are all welcome.">試してくれる人を、探しています。授業や自習で使ってみて、感想を聞かせてください。先生・生徒・企業の方、どなたでも歓迎です。</p>
+      <h2 class="contact-band__title" id="contactBandTitle" data-en="Contact">お問い合わせ</h2>
+      <p class="contact-band__text" data-en="We are looking for people to try our apps and tell us what they think. Teachers, students and companies are all welcome to get in touch.">アプリを試して、感想を聞かせてくれる人を探しています。先生、生徒、企業の方、どなたからのご連絡もお待ちしています。</p>
     </div>
     <a class="btn btn--white" href="contact/"><span data-en="Get in touch">お問い合わせはこちら</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
   </div>
@@ -357,14 +335,14 @@
       <p class="footer__addr" data-en="A student group at NIT, Sendai College / Natori, Miyagi">仙台高専の学生団体／宮城県名取市</p>
     </div>
     <nav class="footer__nav" aria-label="サイトマップ">
-      <div><p class="footer__head">ABOUT</p><a href="about/" data-en="About us">私たち</a><a href="members/" data-en="Members">メンバー</a><a href="about/#profile" data-en="Profile">団体概要</a></div>
-      <div><p class="footer__head">WORKS</p><a href="works/" data-en="Exhibition">トワツ作品展示会</a><a href="works/najoshiteai/">NajoshiteAI</a></div>
-      <div><p class="footer__head">UPDATES</p><a href="news/" data-en="News">お知らせ・実績</a><a href="blog/" data-en="Blog">ブログ</a><a href="contact/" data-en="Contact">お問い合わせ</a></div>
+      <div><p class="footer__head" data-en="About">トワツについて</p><a href="about/" data-en="About us">私たち</a><a href="members/" data-en="Members">メンバー</a><a href="about/#profile" data-en="Profile">団体概要</a></div>
+      <div><p class="footer__head" data-en="Work">活動</p><a href="works/" data-en="Exhibition">トワツ作品展示会</a><a href="works/najoshiteai/">NajoshiteAI</a></div>
+      <div><p class="footer__head" data-en="Updates">発信</p><a href="news/" data-en="News">お知らせ・実績</a><a href="blog/" data-en="Blog">ブログ</a><a href="contact/" data-en="Contact">お問い合わせ</a></div>
     </nav>
   </div>
   <div class="container footer__bottom">
     <p class="footer__small">&copy; <span id="year">2026</span> ToWhats</p>
-    <a class="to-top" href="#top">PAGE TOP<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6"/></svg></a>
+    <a class="to-top" href="#top"><span data-en="Back to top">ページの先頭へ</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6"/></svg></a>
   </div>
 </footer>
 

@@ -275,6 +275,13 @@ https://uehamkan23-lab.github.io/ToWhats-Inc.-HP/
 書き換えても、Google の検索結果にはすぐには反映されません（数日〜数週間）。早めたいときは、[Google Search Console](https://search.google.com/search-console) の「URL 検査」で `https://towhats.com/` を調べ、「インデックス登録をリクエスト」を押してください。
 - 書く画面（`/blog/write/`）と404ページは、検索結果に出ないように設定しています
 
+### CSS・JS を変えたとき（表示が崩れて見えるときも）
+
+ページから読み込む CSS と JS には、`style.css?v=20261109b` のように版の番号を付けています。
+ブラウザが古い CSS を覚えたまま新しいページを表示して、見た目が崩れるのを防ぐためです。
+`style.css` や `script.js` などを書き換えたら、エディタの「すべてのファイルで置換」で
+`?v=20261109b` を新しい番号（例：`?v=20261201a`）に置き換えてください。
+
 ### 404 ページ
 
 存在しない URL を開くと、GitHub Pages が `404.html` を表示します。どの深さの URL でもリンクや画像が正しく読み込まれるよう、ページの最初で基準の場所（github.io では `/ToWhats-Inc.-HP/`、独自のドメインでは `/`）を決めています。手元で `index.html` を直接開いたときは確認できないので、公開してから `…/ToWhats-Inc.-HP/abc/` のような URL で試してください。

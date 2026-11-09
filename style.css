@@ -244,18 +244,26 @@ mark { background: none; color: inherit; }
 .section--mist { background: var(--mist); }
 .section--navy { background: var(--navy); color: #fff; }
 
-/* section heading: the Japanese name, with a short rule under it */
+/* section heading: a big English word, the Japanese name under it */
 .heading { margin-bottom: clamp(32px, 4vw, 48px); }
-.heading__jp {
+.heading__en {
+  display: block;
+  font-family: var(--en);
   font-weight: 700;
-  font-size: clamp(24px, 2.6vw, 32px);
-  line-height: 1.5;
-  letter-spacing: .06em;
+  font-size: clamp(38px, 5.4vw, 68px);
+  line-height: 1.05;
+  letter-spacing: .02em;
   color: var(--ink);
 }
-.heading__jp::after { content: ""; display: block; width: 36px; height: 3px; margin-top: 14px; background: var(--blue); }
-.section--navy .heading__jp { color: #fff; }
-.section--navy .heading__jp::after { background: #fff; }
+.heading__jp {
+  margin-top: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: .1em;
+  color: var(--blue);
+}
+.section--navy .heading__en { color: #fff; }
+.section--navy .heading__jp { color: #9fc0ff; }
 
 /* a section's head that also has a button on the right */
 .head-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: clamp(36px, 5vw, 56px); }
@@ -528,7 +536,9 @@ html[data-lang="en"] .hero__line { white-space: normal; }
   gap: 28px 56px;
   padding-block: clamp(64px, 8vw, 104px);
 }
-.contact-band__title { font-weight: 700; font-size: clamp(22px, 2.4vw, 28px); letter-spacing: .06em; margin-bottom: 12px; }
+.contact-band .heading { margin-bottom: 16px; }
+.contact-band .heading__en { color: #fff; }
+.contact-band .heading__jp { color: #fff; }
 .contact-band__text { max-width: 34em; color: rgba(255, 255, 255, .88); }
 
 .footer { background: var(--navy); color: rgba(255, 255, 255, .78); font-size: 14px; }
@@ -563,6 +573,12 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 .to-top { display: inline-flex; align-items: center; gap: 6px; color: #fff; }
 .to-top:hover { text-decoration: underline; text-underline-offset: 3px; }
 .to-top svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* =========================================================
+   Fade up on scroll (once). Only when JS runs.
+   ========================================================= */
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--out), transform .9s var(--out); }
+.js .reveal.is-visible { opacity: 1; transform: none; }
 
 /* =========================================================
    Narrow screens
@@ -600,5 +616,6 @@ html[data-lang="en"] .hero__line { white-space: normal; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }

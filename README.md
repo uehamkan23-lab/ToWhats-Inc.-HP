@@ -37,7 +37,7 @@ AIで作ったサイトによく出る型のうち、次のものは使ってい
 写真が必要な場所には、グレーの□の枠に「写真のお願い」として、どんな写真が必要かを書いています。
 写真が用意できたら、`<figure class="ph" …>…</figure>` をまるごと `<img src="…" alt="…">` に置き換えてください。
 
-トップのいちばん上と、私たち（/about/）のいちばん上は、校門の前の3人の写真（`assets/photos/team-gate.webp`、横長に切った `team-gate-wide.webp`）に差し替え済みです。活動内容 03 は、ミルクラフトのロゴ（`works/milcraft/logo.webp`）です。ミルクラフトは m3lab のプロジェクトで、トワツからは上原だけが参加しているので、載せる場所ではそのことを書いています。トップの「私たちについて」は会議の写真（`assets/photos/meeting.webp`。小さい元写真を3倍に拡大してシャープにし、紺と青の2色に加工）、トップのいちばん上の左側の背景は仙台の街並みと山（`assets/photos/sendai-skyline.webp`）です。トワツとは？の写真は活動している建物の外観（`assets/photos/base.webp`。傾きを直し、縦長に切って色を整えたもの）、理念の帯の背景は丘から見た街並み（`assets/photos/town-view.webp`）です。活動内容 02 は、AI甲子園での発表の写真（`works/wasufinder/cover.webp`。WasuFinder の作品カードと作品ページにも使用）に差し替え済みです。
+トップのいちばん上と、私たち（/about/）のいちばん上は、校門の前の3人の写真（`assets/photos/team-gate.webp`、横長に切った `team-gate-wide.webp`）に差し替え済みです。活動内容 01 は NajoshiteAI のホーム画面（`assets/photos/najoshiteai-app.webp`。スクリーンショットを青い背景に影つきで載せたもの）、活動内容 03 は、ミルクラフトのロゴ（`works/milcraft/logo.webp`）です。ミルクラフトは m3lab のプロジェクトで、トワツからは上原だけが参加しているので、載せる場所ではそのことを書いています。トップの「私たちについて」は会議の写真（`assets/photos/meeting.webp`。小さい元写真を3倍に拡大してシャープにし、紺と青の2色に加工）、トップのいちばん上の左側の背景は仙台の街並みと山（`assets/photos/sendai-skyline.webp`）です。トワツとは？の写真は活動している建物の外観（`assets/photos/base.webp`。傾きを直し、縦長に切って色を整えたもの）、理念の帯の背景は丘から見た街並み（`assets/photos/town-view.webp`）です。活動内容 02 は、AI甲子園での発表の写真（`works/wasufinder/cover.webp`。WasuFinder の作品カードと作品ページにも使用）に差し替え済みです。
 
 | 場所 | 必要な写真 |
 |---|---|
